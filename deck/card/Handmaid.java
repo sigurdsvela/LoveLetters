@@ -1,6 +1,6 @@
 package deck.card;
 
-public class Guard extends Card{
+public class Handmaid extends Card {
 
 	@Override
 	public String getAbilityDescription() {
@@ -11,12 +11,13 @@ public class Guard extends Card{
 	@Override
 	public int getDistance() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 4;
 	}
-	
+
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return "Guard";
+		return "Handmaid";
 	}
+
 }
