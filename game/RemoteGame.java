@@ -2,6 +2,8 @@ package game;
 
 import java.util.ArrayList;
 
+import deck.card.Card;
+
 import ui.Player;
 
 /**
@@ -14,5 +16,30 @@ public class RemoteGame extends Game {
 	
 	public void playerJoin(Player player) {
 		super.playerJoin(player);
+	}
+
+	@Override
+	public void start() {
+		
+	}
+
+	@Override
+	public void init() {
+		
+	}
+
+	@Override
+	public void gameLoop() {
+		
+	}
+
+	@Override
+	public Player askPlayerForPlayer(Player player) {
+		return null;
+	}
+
+	@Override
+	public Card askPlayerForCard(Player player) {
+		return null;
 	}
 }

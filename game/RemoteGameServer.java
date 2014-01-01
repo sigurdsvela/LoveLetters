@@ -6,6 +6,6 @@ package game;
  * 
  * PS: Maybe this should not extend game, but RemoteGame, we'll figure it out
  */
-public class RemoteGameServer extends Game{
+public class RemoteGameServer {
 
 }

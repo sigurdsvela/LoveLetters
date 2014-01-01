@@ -55,4 +55,11 @@ public class Deck {
 		if (cards.isEmpty()) return null;
 		else return cards.poll();
 	}
+
+	/**
+	 * Peek at the top card, or return null if empty deck
+	 */
+	public Card peek() {
+		return cards.peek();
+	}
 }
