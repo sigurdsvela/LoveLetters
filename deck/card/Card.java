@@ -1,10 +1,12 @@
 package deck.card;
 
+import java.util.ArrayList;
+
 import ui.Player;
 import deck.card.event.CardWasDrawnEvent;
 
 public abstract class Card {
-	
+	private ArrayList<CardWasDrawnEvent> cardWasDrawnEvents;
 	
 	public abstract String getAbilityDescription();
 	public abstract byte getDistance();
@@ -15,7 +17,7 @@ public abstract class Card {
 	 * @param event
 	 */
 	protected void addActionListenerIsDrawn(CardWasDrawnEvent event) {
-		
+		cardWasDrawnEvents.add(event);
 	}
 	
 	/**
@@ -24,7 +26,9 @@ public abstract class Card {
 	 * @param player The player that drew this card.
 	 */
 	public final void triggerIsDrawn(Player player) {
-		
+		for (CardWasDrawnEvent event : cardWasDrawnEvents) {
+			event.run(player);
+		}
 	}
 	
 	/**
