@@ -115,10 +115,15 @@ public abstract class Player {
 	 * @return Card
 	 */
 	public final Card getCard(int index) {
-		if (index > NUMBER_OF_CARDS || index < 0) return null;
+		if (index >= cards.size() || index < 0) return null;
 		else return cards.get(index);
 	}
 	
+	public final Card[] getCards() {
+		Card[] toArray = new Card[ cards.size() ];
+		return cards.toArray(toArray);
+	}
+ 	
 	public final int getLettersDelivired() {
 		return lettersDelivered;
 	}
