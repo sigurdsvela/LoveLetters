@@ -1,13 +1,20 @@
 package deck.card;
 
 import ui.Player;
+import deck.card.event.CardWasDrawnEvent;
 
 public abstract class Card {
+	
+	
 	public abstract String getAbilityDescription();
 	public abstract byte getDistance();
 	public abstract String getName();
 	
-	public void addActionListenerIsDrawn() {
+	/**
+	 * Add action listener to when this card is draw
+	 * @param event
+	 */
+	protected void addActionListenerIsDrawn(CardWasDrawnEvent event) {
 		
 	}
 	
@@ -16,7 +23,7 @@ public abstract class Card {
 	 * 
 	 * @param player The player that drew this card.
 	 */
-	public void triggerIsDrawn(Player player) {
+	public final void triggerIsDrawn(Player player) {
 		
 	}
 	
@@ -26,7 +33,7 @@ public abstract class Card {
 	 * @param player The player that drew a card
 	 * @param card The card that the player drew
 	 */
-	public void triggerPlayerDrewCard(Player player, Card card) {
+	public final void triggerPlayerDrewCard(Player player, Card card) {
 		
 	}
 }
