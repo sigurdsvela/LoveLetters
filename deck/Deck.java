@@ -1,17 +1,15 @@
 package deck;
 
-import java.util.LinkedList;
-
 import deck.card.Card;
 
 public class Deck {
 	private final int NCARDS = 16;
 	private int currentCard;
-	private LinkedList<Card> cards;
+	private Card[] cards;
 	
 	public Deck() {
 		//Initialize the card array
-		cards = new LinkedList<Card>()
+		cards = new Card[ NCARDS ];
 		cards[0] = new deck.card.Guard();
 		cards[1] = new deck.card.Guard();
 		cards[2] = new deck.card.Guard();
