@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.LinkedList;
+
 import deck.card.Card;
 
 /**
@@ -8,7 +10,7 @@ public abstract class Player {
 	/**
 	 * Holds the cards of this players hand
 	 */
-	private Card[] cards;
+	private LinkedList<Card> cards;
 	
 	/**
 	 * 
@@ -24,7 +26,7 @@ public abstract class Player {
 	 * 
 	 */
 	public Player() {
-		cards = new Card[2];
+		cards = new LinkedList<Card>();
 	}
 	
 	/**
