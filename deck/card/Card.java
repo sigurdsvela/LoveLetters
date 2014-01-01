@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ui.Player;
 import deck.card.event.CardWasDrawnEvent;
+import deck.card.event.PlayerDrewCardEvent;
 
 public abstract class Card {
 	private ArrayList<CardWasDrawnEvent> cardWasDrawnEvents;
@@ -11,6 +12,10 @@ public abstract class Card {
 	public abstract String getAbilityDescription();
 	public abstract byte getDistance();
 	public abstract String getName();
+	
+	protected Card() {
+		cardWasDrawnEvents = new ArrayList<CardWasDrawnEvent>();
+	}
 	
 	/**
 	 * Add action listener to when this card is draw
