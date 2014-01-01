@@ -23,6 +23,11 @@ public abstract class Player {
 	private int lettersDelivered;
 	
 	/**
+	 * Is this player in on this round
+	 */
+	private boolean inThisRound;
+	
+	/**
 	 * This players name
 	 */
 	private String name;
@@ -39,6 +44,7 @@ public abstract class Player {
 		cards = new LinkedList<Card>();
 		this.name = name;
 		lettersDelivered = 0;
+		inThisRound = true;
 	}
 	
 	/**
@@ -105,6 +111,14 @@ public abstract class Player {
 	
 	public final void decrementLettersDelivered() {
 		lettersDelivered--;
+	}
+	
+	public final boolean isPlayerInThisRound() {
+		return inThisRound;
+	}
+	
+	public final void setIsPlayerInThisRound(boolean b) {
+		inThisRound = b;
 	}
 	
 	
