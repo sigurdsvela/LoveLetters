@@ -48,5 +48,30 @@ public abstract class Player {
 		
 	}
 	
+	/**
+	 * Check if the player has a specific card
+	 * 
+	 * @param cardName The name of the card to check if the player has
+	 * @return Do you really need an explanation expect boolean????
+	 */
+	public final boolean hasCard(String cardName) {
+		for (Card card : cards) {
+			String theCardName = card.getName();
+			if (theCardName.compareTo(cardName) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Check if the player has a specific card
+	 * 
+	 * @param card The card to check if the player has
+	 * @return
+	 */
+	public final boolean hasCard(Card card) {
+		return hasCard(card.getName());
+	}
 	
 }
