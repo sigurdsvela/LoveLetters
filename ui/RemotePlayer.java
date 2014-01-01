@@ -6,5 +6,7 @@ package ui;
  * This is the class that handles the waiting for the response of a player etc.
  */
 public class RemotePlayer extends Player{
-	
+	public RemotePlayer(String name) {
+		super(name);
+	}
 }

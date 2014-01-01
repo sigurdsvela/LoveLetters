@@ -18,6 +18,11 @@ public abstract class Player {
 	private int handSize;
 	
 	/**
+	 * This players name
+	 */
+	private String name;
+	
+	/**
 	 * Holds the max amount of cards a player can have
 	 */
 	public static final int NUMBER_OF_CARDS = 2;
@@ -25,8 +30,9 @@ public abstract class Player {
 	/**
 	 * 
 	 */
-	public Player() {
+	public Player(String name) {
 		cards = new LinkedList<Card>();
+		this.name = name;
 	}
 	
 	/**
@@ -72,6 +78,14 @@ public abstract class Player {
 	 */
 	public final boolean hasCard(Card card) {
 		return hasCard(card.getName());
+	}
+	
+	/**
+	 * Get this players name
+	 * @return The name
+	 */
+	public final String getName() {
+		return name;
 	}
 	
 }
