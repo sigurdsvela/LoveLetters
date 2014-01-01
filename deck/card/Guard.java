@@ -9,7 +9,7 @@ public class Guard extends Card{
 	}
 
 	@Override
-	public int getDistance() {
+	public byte getDistance() {
 		// TODO Auto-generated method stub
 		return 1;
 	}
