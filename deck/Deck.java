@@ -1,34 +1,32 @@
 package deck;
 
+import java.util.LinkedList;
+
 import deck.card.Card;
 
 public class Deck {
 	private final int NCARDS = 16;
-	private int currentCard;
-	private Card[] cards;
+	private LinkedList<Card> cards;
 	
 	public Deck() {
 		//Initialize the card array
-		cards = new Card[ NCARDS ];
-		cards[0] = new deck.card.Guard();
-		cards[1] = new deck.card.Guard();
-		cards[2] = new deck.card.Guard();
-		cards[3] = new deck.card.Guard();
-		cards[4] = new deck.card.Guard();
-		cards[5] = new deck.card.Priest();
-		cards[6] = new deck.card.Priest();
-		cards[7] = new deck.card.Baron();
-		cards[8] = new deck.card.Baron();
-		cards[9] = new deck.card.Handmaid();
-		cards[10] = new deck.card.Handmaid();
-		cards[11] = new deck.card.Prince();
-		cards[12] = new deck.card.Prince();
-		cards[13] = new deck.card.King();
-		cards[14] = new deck.card.Countess();
-		cards[15] = new deck.card.Princess();
-		
-		//Set current card to top of deck
-		currentCard = 0;
+		cards = new LinkedList<Card>();
+		cards.add(new deck.card.Guard());
+		cards.add(new deck.card.Guard());
+		cards.add(new deck.card.Guard());
+		cards.add(new deck.card.Guard());
+		cards.add(new deck.card.Guard());
+		cards.add(new deck.card.Priest());
+		cards.add(new deck.card.Priest());
+		cards.add(new deck.card.Baron());
+		cards.add(new deck.card.Baron());
+		cards.add(new deck.card.Handmaid());
+		cards.add(new deck.card.Handmaid());
+		cards.add(new deck.card.Prince());
+		cards.add(new deck.card.Prince());
+		cards.add(new deck.card.King());
+		cards.add(new deck.card.Countess());
+		cards.add(new deck.card.Princess());
 	}
 	
 	/**
@@ -43,13 +41,10 @@ public class Deck {
 			j = (int) ( NCARDS * Math.random() );
 			
 			// Swap the cards
-			Card tmp = cards[i];
-			cards[i] = cards[j];
-			cards[j] = tmp;
+			Card tmp = cards.get(i);
+			cards.set(i, cards.get(j));
+			cards.set(j, tmp);
 		}
-		
-		// Reset current card to deal from top
-		currentCard = 0;
 	}
 	
 	/**
@@ -57,11 +52,7 @@ public class Deck {
 	 * or return null if none left
 	 */
 	public Card draw() {
-		if ( currentCard < NCARDS ) {
-			return cards[currentCard++];
-		} else {
-			return null;
-		}
+		if (cards.isEmpty()) return null;
+		else return cards.poll();
 	}
-
 }
