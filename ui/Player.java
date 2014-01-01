@@ -18,6 +18,11 @@ public abstract class Player {
 	private int handSize;
 	
 	/**
+	 * Delivered
+	 */
+	private int lettersDelivered;
+	
+	/**
 	 * This players name
 	 */
 	private String name;
@@ -33,6 +38,7 @@ public abstract class Player {
 	public Player(String name) {
 		cards = new LinkedList<Card>();
 		this.name = name;
+		lettersDelivered = 0;
 	}
 	
 	/**
@@ -87,5 +93,20 @@ public abstract class Player {
 	public final String getName() {
 		return name;
 	}
+	
+	
+	public final int getLettersDelivired() {
+		return lettersDelivered;
+	}
+	
+	public final void incrementLettersDelivired() {
+		lettersDelivered++;
+	}
+	
+	public final void decrementLettersDelivered() {
+		lettersDelivered--;
+	}
+	
+	
 	
 }
