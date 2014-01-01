@@ -25,7 +25,7 @@ public abstract class Card {
 	 * 
 	 * @param player The player that drew this card.
 	 */
-	public final void triggerIsDrawn(Player player) {
+	public final void triggerCardWasDrawn(Player player) {
 		for (CardWasDrawnEvent event : cardWasDrawnEvents) {
 			event.run(player);
 		}
