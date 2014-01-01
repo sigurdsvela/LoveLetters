@@ -108,6 +108,16 @@ public abstract class Player {
 		cards.add(card);
 	}
 	
+	/**
+	 * Returns a card based on index.
+	 * Card are stored in a FIFO list,
+	 * so oldest card i stored first.
+	 * @return Card
+	 */
+	public final Card getCard(int index) {
+		if (index > NUMBER_OF_CARDS || index < 0) return null;
+		else return cards.get(index);
+	}
 	
 	public final int getLettersDelivired() {
 		return lettersDelivered;
