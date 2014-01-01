@@ -100,6 +100,14 @@ public abstract class Player {
 		return name;
 	}
 	
+	/**
+	 * Make a player draw a card
+	 * @param card
+	 */
+	public final void drawCard(Card card) {
+		cards.add(card);
+	}
+	
 	
 	public final int getLettersDelivired() {
 		return lettersDelivered;
@@ -120,7 +128,6 @@ public abstract class Player {
 	public final void setIsPlayerInThisRound(boolean b) {
 		inThisRound = b;
 	}
-	
 	
 	
 }
