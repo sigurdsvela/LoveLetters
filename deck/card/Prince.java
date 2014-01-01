@@ -9,7 +9,7 @@ public class Prince extends Card {
 	}
 
 	@Override
-	public int getDistance() {
+	public byte getDistance() {
 		// TODO Auto-generated method stub
 		return 5;
 	}
