@@ -48,8 +48,6 @@ public abstract class Player {
 	}
 	
 	/**
-	 * 
-	 * @param i
 	 * Plays one of the cards on this players hand.
 	 * i is the index of the card to play.
 	 * If the player has 2 cards, which it should when playing a card
@@ -62,7 +60,7 @@ public abstract class Player {
 	 * 
 	 * @throws IndexOutOfBoundsException If the card does not exist
 	 */
-	protected final void playCard(short i) {
+	public final void playCard(short i) {
 		
 	}
 	
