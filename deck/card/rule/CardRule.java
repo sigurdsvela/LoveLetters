@@ -7,22 +7,22 @@ public abstract class CardRule {
 	/**
 	 * When this card is played
 	 */
-	public final int ON_PLAY = 1;
+	public static final int ON_PLAY = 1;
 	
 	/**
 	 * When this card is discarded
 	 */
-	public final int ON_DISCARD = 2;
+	public static final int ON_DISCARD = 2;
 	
 	/**
 	 * When the owner of this card draws another card 
 	 */
-	public final int ON_PLAYER_DREW_CARD = 4;
+	public static final int ON_PLAYER_DREW_CARD = 4;
 	
 	/**
 	 * When this card is drawn
 	 */
-	public final int ON_DRAWN = 8;
+	public static final int ON_DRAWN = 8;
 	
 	/**
 	 * Discard
