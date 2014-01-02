@@ -1,5 +1,7 @@
 package deck.card;
 
+import game.Game;
+
 import java.util.ArrayList;
 
 import ui.Player;
@@ -15,6 +17,10 @@ public abstract class Card {
 	public abstract String getName();
 	
 	protected Card() {
+		onPlayRules = new ArrayList<CardRule>();
+		onDiscardRules = new ArrayList<CardRule>();
+		onPlayerDrewCardRules = new ArrayList<CardRule>();
+		onDrawnRules = new ArrayList<CardRule>();
 	}
 	
 	protected void addRule(CardRule rule) {
@@ -37,7 +43,38 @@ public abstract class Card {
 	 * 
 	 * @param player The player that drew this card.
 	 */
-	public final void triggerCardWasDrawn(Player player) {
+	public final void triggerPlay(Game game, Player cardOwner) {
+		for (CardRule rule : onPlayRules) {
+			if (rule.condition(game, cardOwner)) {
+				rule.run(game, cardOwner);
+			}
+		}
+	}
+	
+	/**
+	 * Gets triggered by the deck when this card is drawn
+	 * 
+	 * @param player The player that drew this card.
+	 */
+	public final void triggerDiscard(Game game, Player cardOwner) {
+		for (CardRule rule : onPlayRules) {
+			if (rule.condition(game, cardOwner)) {
+				rule.run(game, cardOwner);
+			}
+		}
+	}
+	
+	/**
+	 * Gets triggered by the deck when this card is drawn
+	 * 
+	 * @param player The player that drew this card.
+	 */
+	public final void triggerCardWasDrawn(Game game, Player cardOwner) {
+		for (CardRule rule : onPlayRules) {
+			if (rule.condition(game, cardOwner)) {
+				rule.run(game, cardOwner);
+			}
+		}
 	}
 	
 	/**
@@ -46,6 +83,11 @@ public abstract class Card {
 	 * @param player The player that drew a card
 	 * @param card The card that the player drew
 	 */
-	public final void triggerPlayerDrewCard(Player player, Card card) {
+	public final void triggerPlayerDrewCard(Game game, Player cardOwner) {
+		for (CardRule rule : onPlayRules) {
+			if (rule.condition(game, cardOwner)) {
+				rule.run(game, cardOwner);
+			}
+		}
 	}
 }
