@@ -112,6 +112,8 @@ public abstract class Player {
 	 * Returns a card based on index.
 	 * Card are stored in a FIFO list,
 	 * so oldest card i stored first.
+	 * 
+	 * Returns null if the card is nor found
 	 * @return Card
 	 */
 	public final Card getCard(int index) {
