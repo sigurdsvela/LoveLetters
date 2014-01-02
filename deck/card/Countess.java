@@ -1,18 +1,10 @@
 package deck.card;
 
-import deck.card.event.CardWasDrawnEvent;
 import ui.Player;
 
 public class Countess extends Card {
 
 	public Countess() {
-		this.addActionListenerIsDrawn(new CardWasDrawnEvent() {
-			@Override
-			public void run(Player player) {
-				//player.hasCard(king) || player.hasCard(prince)
-				//then print some text to the player and play countess
-			}
-		});
 	}
 	
 	@Override
