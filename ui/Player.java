@@ -77,9 +77,12 @@ public abstract class Player {
 	 * Player discards card <b>i</b>
 	 * This usually means that the card does nothing
 	 * @param i
+	 * 
+	 * @throws IndexOutOfBoundsException
 	 */
 	public final void discardCard(short i) {
-		
+		cards.get(i).triggerDiscard(game, this);
+		cards.remove(i);
 	}
 	
 	/**
