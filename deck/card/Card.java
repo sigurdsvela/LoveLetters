@@ -57,7 +57,7 @@ public abstract class Card {
 	 * @param player The player that drew this card.
 	 */
 	public final void triggerDiscard(Game game, Player cardOwner) {
-		for (CardRule rule : onPlayRules) {
+		for (CardRule rule : onDiscardRules) {
 			if (rule.condition(game, cardOwner)) {
 				rule.run(game, cardOwner);
 			}
@@ -70,7 +70,7 @@ public abstract class Card {
 	 * @param player The player that drew this card.
 	 */
 	public final void triggerCardWasDrawn(Game game, Player cardOwner) {
-		for (CardRule rule : onPlayRules) {
+		for (CardRule rule : onDrawnRules) {
 			if (rule.condition(game, cardOwner)) {
 				rule.run(game, cardOwner);
 			}
@@ -84,7 +84,7 @@ public abstract class Card {
 	 * @param card The card that the player drew
 	 */
 	public final void triggerPlayerDrewCard(Game game, Player cardOwner) {
-		for (CardRule rule : onPlayRules) {
+		for (CardRule rule : onPlayerDrewCardRules) {
 			if (rule.condition(game, cardOwner)) {
 				rule.run(game, cardOwner);
 			}
