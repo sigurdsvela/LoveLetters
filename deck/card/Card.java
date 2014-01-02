@@ -11,7 +11,6 @@ public abstract class Card {
 	private ArrayList<CardRule> onPlayerDrewCardRules;
 	private ArrayList<CardRule> onDrawnRules;
 	
-	public abstract String getAbilityDescription();
 	public abstract byte getDistance();
 	public abstract String getName();
 	

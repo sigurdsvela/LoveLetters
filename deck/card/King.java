@@ -3,12 +3,6 @@ package deck.card;
 public class King extends Card {
 
 	@Override
-	public String getAbilityDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public byte getDistance() {
 		// TODO Auto-generated method stub
 		return 6;
