@@ -86,11 +86,19 @@ public class LocalGame extends Game {
 		}
 	}
 
-	public Player askPlayerForPlayer(Player player) {
+	public Player askPlayerForPlayer(Player player, String message) {
 		return null;
 	}
+	
+	public Player askPlayerForPlayer(Player player) {
+		return askPlayerForPlayer(player, "Choose a player");
+	}
 
-	public Card askPlayerForCard(Player player) {
+	public Card askPlayerForCard(Player player, String message) {
 		return null;
+	}
+	
+	public Card askPlayerForCard(Player player) {
+		return askPlayerForCard(player, "Choose a card");
 	}
 }
