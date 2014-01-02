@@ -121,6 +121,8 @@ public abstract class Player {
 	 * @param card
 	 */
 	public final void drawCard(Card card) {
+		card.triggerCardWasDrawn(game, this);
+		cards.get(0).triggerPlayerDrewCard(game, this); //This line assumes that the player allways has atleast one card on his/her hand
 		cards.add(card);
 	}
 	
