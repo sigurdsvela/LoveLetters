@@ -65,6 +65,15 @@ public abstract class Player {
 	}
 	
 	/**
+	 * Player discards card <b>i</b>
+	 * This usually means that the card does nothing
+	 * @param i
+	 */
+	public final void discardCard(short i) {
+		
+	}
+	
+	/**
 	 * Check if the player has a specific card
 	 * 
 	 * @param cardName The name of the card to check if the player has
