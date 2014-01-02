@@ -70,7 +70,8 @@ public abstract class Player {
 	 * @throws IndexOutOfBoundsException If the card does not exist
 	 */
 	public final void playCard(short i) {
-		
+		cards.get(i).triggerPlay(game, this);
+		cards.remove(i);
 	}
 	
 	/**
