@@ -47,4 +47,12 @@ public abstract class CardRule {
 	 * @return
 	 */
 	public abstract int when();
+	
+	/**
+	 * The message to print when this rule is fulfilled
+	 * @return The message
+	 */
+	public abstract String message();
+	
+	public abstract String description();
 }
