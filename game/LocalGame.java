@@ -22,7 +22,7 @@ public class LocalGame extends Game {
 		
 		// Get name for player
 		view.setInformation("What is your name, charmer?");
-		players.add(new LocalPlayer( view.getInformation() ));
+		players.add(new LocalPlayer( view.getInformation(), this ));
 		
 		// Get number of wished opponents from view
 		while (true) {
@@ -40,7 +40,7 @@ public class LocalGame extends Game {
 		int bNameIndex;
 		for (int c = 0; c < opponents; c++) {
 			bNameIndex =  (int) (BotPlayer.NUM_BOT_NAMES * Math.random());
-			playerJoin(new BotPlayer( BotPlayer.botNames[bNameIndex] ));
+			playerJoin(new BotPlayer( BotPlayer.botNames[bNameIndex], this ));
 		}
 		
 		// Pick randomly first player
@@ -78,6 +78,7 @@ public class LocalGame extends Game {
 			// Retrieve current player and let the player draw a card.
 			currentPlayer = players.get(currentPlayerIndex);
 			currentPlayer.drawCard(currentCard = deck.draw());
+			currentCard.triggerCardWasDrawn(this, currentPlayer);
 
 			view.setInformation("");
 			view.setInformation("Players turn: " + currentPlayer.getName());

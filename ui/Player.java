@@ -1,5 +1,7 @@
 package ui;
 
+import game.Game;
+
 import java.util.LinkedList;
 
 import deck.card.Card;
@@ -7,6 +9,12 @@ import deck.card.Card;
 /**
  */
 public abstract class Player {
+	
+	/**
+	 * Holds the game this player is in
+	 */
+	private Game game;
+	
 	/**
 	 * Holds the cards of this players hand
 	 */
@@ -40,9 +48,10 @@ public abstract class Player {
 	/**
 	 * 
 	 */
-	public Player(String name) {
+	public Player(String name, Game game) {
 		cards = new LinkedList<Card>();
 		this.name = name;
+		this.game = game;
 		lettersDelivered = 0;
 		inThisRound = true;
 	}
