@@ -3,8 +3,12 @@ package deck.card;
 import java.util.ArrayList;
 
 import ui.Player;
+import deck.card.rule.CardRule;
 
 public abstract class Card {
+	private ArrayList<CardRule> onPlayRules;
+	private ArrayList<CardRule> onHandChangeRules;
+	
 	public abstract String getAbilityDescription();
 	public abstract byte getDistance();
 	public abstract String getName();
