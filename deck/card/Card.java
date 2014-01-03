@@ -43,6 +43,9 @@ public abstract class Card {
 		for (CardRule rule : rules) {
 			if (rule.condition(game, cardOwner)) {
 				rule.run(game, cardOwner);
+				if (rule.message() != null) {
+					game.getView().setInformation(rule.message());
+				}
 			}
 		}
 	}
