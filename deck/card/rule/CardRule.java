@@ -54,5 +54,9 @@ public abstract class CardRule {
 	 */
 	public String message() { return null; }
 	
+	/**
+	 * A description of this rule
+	 * @return The description
+	 */
 	public abstract String description();
 }
