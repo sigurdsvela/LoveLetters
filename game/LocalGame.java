@@ -69,6 +69,12 @@ public class LocalGame extends Game {
 						playerJoin(new BotPlayer( BotPlayer.botNames[bNameIndex], this ));
 					}
 					
+					// Print name of players
+					view.setInformation("Players in game: ");
+					for (Player p : getPlayersInThisRound()) {
+						view.setInformation("\t " + p.getName());
+					}
+					
 					// Pick randomly first player
 					currentPlayerIndex =  (int) (getNumPlayers() * Math.random());
 					view.setInformation("Player " + players.get(currentPlayerIndex).getName() + " goes first.");
