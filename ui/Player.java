@@ -57,21 +57,9 @@ public abstract class Player {
 	}
 	
 	/**
-	 * Plays one of the cards on this players hand.
-	 * i is the index of the card to play.
-	 * If the player has 2 cards, which it should when playing a card
-	 * and this method is called with 0 as i, the other card on the player hand
-	 * will get a new index of 0.
-	 * This is because the list of cards on the players hand is a LinkedList, so when
-	 * a card is removed from the players hand, the list "collapses upon itself"
-	 * 
-	 * @param i The card to play
-	 * 
-	 * @throws IndexOutOfBoundsException If the card does not exist
+	/* Play a card from players hand
 	 */
-	public final void playCard(short i) {
-		
-	}
+	public abstract Card playCard();
 	
 	/**
 	 * Player discards card <b>i</b>
