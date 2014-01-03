@@ -75,6 +75,21 @@ public abstract class Game {
 		return players.size();
 	}
 	
+	/**
+	 * Will return the winner of a round.
+	 * @return Player	is the winner of round
+	 */
+	public Player getWinner() {
+		Player winner = nextPlayer(); // Just use one player not out of round 
+		for (Player tmp : players) {
+			if( tmp.isPlayerInThisRound() 
+				&& tmp.getCard(0).getDistance() > winner.getCard(0).getDistance()) {
+					winner = tmp;
+			}
+		}
+		return winner;
+	}
+	
 	public abstract Player askPlayerForPlayer(Player player, String message);
 	public abstract Player askPlayerForPlayer(Player player);
 	public abstract Card askPlayerForCard(Player player, String message);
