@@ -2,9 +2,10 @@ package game;
 
 import java.util.ArrayList;
 
+import player.Player;
+
 import deck.card.Card;
 
-import ui.Player;
 
 /**
  * Creates a new game that joins a remote game

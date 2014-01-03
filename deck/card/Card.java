@@ -4,7 +4,8 @@ import game.Game;
 
 import java.util.ArrayList;
 
-import ui.Player;
+import player.Player;
+
 import deck.card.rule.CardRule;
 
 public abstract class Card {

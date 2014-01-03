@@ -1,7 +1,7 @@
 package deck.card.rule;
 
+import player.Player;
 import game.Game;
-import ui.Player;
 
 public abstract class CardRule {
 	/**

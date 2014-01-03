@@ -1,4 +1,4 @@
-package ui;
+package player;
 
 import game.Game;
 

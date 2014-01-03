@@ -2,7 +2,8 @@ package game;
 
 import java.util.ArrayList;
 
-import ui.Player;
+import player.Player;
+
 import view.View;
 import deck.Deck;
 import deck.card.Card;
