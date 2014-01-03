@@ -54,6 +54,10 @@ public class Deck {
 		if (cards.isEmpty()) return null;
 		else return cards.poll();
 	}
+	
+	public boolean cardExists(String cardName) {
+		return (cardName.compareToIgnoreCase("guard") == 0) || (cardName.compareToIgnoreCase("priest") == 0); //TODO Hard Coded 
+	}
 
 	/**
 	 * Peek at the top card, or return null if empty deck
