@@ -67,6 +67,16 @@ public abstract class Game {
 		return cnt;	
 	}
 	
+	public Player[] getPlayersInThisRound() {
+		ArrayList<Player> playersInThisRound = new ArrayList<Player>();
+		for (Player p: players) {
+			if (p.isPlayerInThisRound()) {
+				playersInThisRound.add(p);
+			}
+		}
+		return playersInThisRound.toArray( new Player[ playersInThisRound.size() ] );
+	}
+	
 	/**
 	 * Will return number of players in game,
 	 * wether or not active in current round.
