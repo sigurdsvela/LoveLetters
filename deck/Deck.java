@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import deck.card.Card;
 
 public class Deck {
-	private final int NCARDS = 16;
 	private LinkedList<Card> cards;
 	
 	public Deck() {
@@ -37,8 +36,8 @@ public class Deck {
 		int i, j, k;
 		for (k = 0; k < n; k++) {
 			// Generate two random numbers in between 0 <= j, i <= NCARDS
-			i = (int) ( NCARDS * Math.random() );
-			j = (int) ( NCARDS * Math.random() );
+			i = (int) ( cards.size() * Math.random() );
+			j = (int) ( cards.size() * Math.random() );
 			
 			// Swap the cards
 			Card tmp = cards.get(i);
