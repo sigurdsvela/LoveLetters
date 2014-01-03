@@ -44,6 +44,10 @@ public abstract class Game {
 		return started;
 	}
 	
+	/**
+	 * Will return current deck of game
+	 * @return Deck	is the deck being used in game
+	 */
 	public Deck getDeck() {
 		return deck;
 	}
@@ -71,6 +75,11 @@ public abstract class Game {
 		return cnt;	
 	}
 	
+	/**
+	 * Will return players still
+	 * active in current round of game.
+	 * @return Player[] active players in round
+	 */
 	public Player[] getPlayersInThisRound() {
 		ArrayList<Player> playersInThisRound = new ArrayList<Player>();
 		for (Player p: players) {
@@ -125,7 +134,20 @@ public abstract class Game {
 		return view;
 	}
 	
-	public abstract void start();
+	/**
+	 * For initializing a game, 
+	 * will be called from constructor of subclasses
+	 */
 	public abstract void init();
+	
+	/**
+	 * For starting a game.
+	 * Will call gameLoop() at end of function
+	 */
+	public abstract void start();
+	
+	/**
+	 * This is the where the game logic appear.
+	 */
 	public abstract void gameLoop();
 }
