@@ -69,6 +69,13 @@ public abstract class Player {
 	}
 	
 	/**
+	 * Will empty the hand of the player
+	 */
+	public final void emptyHand() {
+		cards.clear();
+	}
+	
+	/**
 	 * Check if the player has a specific card
 	 * 
 	 * @param cardName The name of the card to check if the player has
