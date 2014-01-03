@@ -16,11 +16,12 @@ public class LocalPlayer extends Player {
 				String card = this.game.getView().getInformation("Choose a card to play:");
 				cardToPlay = getCardIndex(card);
 				if (cardToPlay == -1) {
-					this.game.getView().getInformation("You do not have a card \""+ card +"\". Please choose another.");
+					this.game.getView().setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
 				} else {
 					break;
 				}
 			}
+			this.game.getView().setInformation("");
 			return playCard(cardToPlay);
 		}
 
@@ -37,11 +38,12 @@ public class LocalPlayer extends Player {
 				String playerName = this.game.getView().getInformation(message);
 				playerToChoose = game.getPlayer(playerName);
 				if (playerToChoose == null) {
-					this.game.getView().getInformation("No player named " + playerName);
+					this.game.getView().setInformation("\nNo player named " + playerName);
 				} else {
 					break;
 				}
 			}
+			this.game.getView().setInformation("");
 			return playerToChoose;
 		}
 
@@ -57,11 +59,12 @@ public class LocalPlayer extends Player {
 				String cardName = this.game.getView().getInformation(message);
 				cardToChoose = game.getDeck().getCard(cardName);
 				if (cardToChoose == null) {
-					this.game.getView().getInformation("No card named " + cardName);
+					this.game.getView().setInformation("\nNo card named " + cardName);
 				} else {
 					break;
 				}
 			}
+			this.game.getView().setInformation("");
 			return cardToChoose;
 		}
 
@@ -75,7 +78,8 @@ public class LocalPlayer extends Player {
 			View view = game.getView();
 			view.setInformation("Your hand:");
 			for (Card card : cards) {
-				view.setInformation("\t " + card.toString()); 
+				view.setInformation(card.toString()); 
 			}
+			view.setInformation("");
 		}
 }
