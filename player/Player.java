@@ -106,8 +106,16 @@ public abstract class Player {
 	
 	/**
 	 * Will empty the hand of the player
+	 * @param showFirst	will reveal hand before emptying it.
 	 */
-	public final void emptyHand() {
+	public final void emptyHand(boolean showFirst) {
+		if (showFirst) {
+			setInformation(getName() + " had the hand:");
+			for (Card c : cards) {
+				setInformation(c.toString());
+			}
+		}
+		
 		cards.clear();
 	}
 	
@@ -119,6 +127,19 @@ public abstract class Player {
 	 */
 	public final boolean hasCard(String cardName) {
 		return (getCard(cardName) != null);
+	}
+	
+	/**
+	 * Return card in hand with biggest distance
+	 */
+	public final Card getBiggestDistanceCard() {
+		Card biggestDistance = cards.getFirst();
+		for (Card c : cards) {
+			if (c.getDistance() > biggestDistance.getDistance()) {
+				biggestDistance = c;
+			}
+		}
+		return biggestDistance;
 	}
 	
 	/**
