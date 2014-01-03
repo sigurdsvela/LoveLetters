@@ -8,6 +8,7 @@ import deck.card.Priest;
 
 public class Deck {
 	private LinkedList<Card> cards;
+	private final Card[] typesOfCards = { new Guard(), new Priest() };
 	
 	public Deck() {
 		//Initialize the card array
@@ -48,6 +49,7 @@ public class Deck {
 		}
 	}
 	
+	
 	/**
 	 * Deal the next card in the deck
 	 * or return null if none left
@@ -55,6 +57,14 @@ public class Deck {
 	public Card draw() {
 		if (cards.isEmpty()) return null;
 		else return cards.poll();
+	}
+	
+	/**
+	 * Will return an array of the types of cards
+	 * @return
+	 */
+	public Card[] getCardTypes() {
+		return typesOfCards;
 	}
 	
 	public boolean cardExists(String cardName) {
