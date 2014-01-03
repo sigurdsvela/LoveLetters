@@ -13,7 +13,15 @@ public class Guard extends Card{
 			public boolean condition(Game game, Player cardOwner) {
 				Player affectedPlayer = cardOwner.askPlayerForPlayer("Choose a player to guess the card for.");
 				this.affectedPlayer = affectedPlayer;
-				Card cardGuess = cardOwner.askPlayerForCard("What card do you think " + affectedPlayer.getName() + " has?");
+				
+				// Loop over until we get something else than Guard
+				Card cardGuess, notAllowed = new Guard();
+				while(true) {
+					cardGuess = cardOwner.askPlayerForCard("What card do you think " + affectedPlayer.getName() + " has?");
+					if (cardGuess.getName().compareTo(notAllowed.getName()) != 0) break;
+					else cardOwner.getGame().getView().setInformation("Not allowed to guess " + notAllowed.getName());
+				}
+				
 				return affectedPlayer.hasCard(cardGuess);
 			}
 
