@@ -7,6 +7,14 @@ public abstract class View {
 	 */
 	public abstract void setInformation(String information);
 	
+	
+	/**
+	 * Will print the string on the view, and return whatever the user types in.
+	 * @param string
+	 * @return
+	 */
+	public abstract String getInformation(String string);
+	
 	/**
 	 * Will return information from view
 	 * @return
