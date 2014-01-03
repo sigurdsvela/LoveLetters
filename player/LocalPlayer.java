@@ -28,4 +28,24 @@ public class LocalPlayer extends Player {
 			game.getView().setInformation("You drew " + card.getName());
 			cards.add(card);
 		}
+
+		@Override
+		public Player askPlayerForPlayer(Player player, String message) {
+			return null;
+		}
+
+		@Override
+		public Player askPlayerForPlayer(Player player) {
+			return null;
+		}
+
+		@Override
+		public Card askPlayerForCard(Player player, String message) {
+			return null;
+		}
+
+		@Override
+		public Card askPlayerForCard(Player player) {
+			return null;
+		}
 }

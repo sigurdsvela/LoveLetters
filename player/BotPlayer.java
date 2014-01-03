@@ -18,4 +18,20 @@ public class BotPlayer extends Player{
 	public void drawCard(Card card) {
 		cards.add(card);
 	}
+	@Override
+	public Player askPlayerForPlayer(Player player, String message) {
+		return null;
+	}
+	@Override
+	public Player askPlayerForPlayer(Player player) {
+		return null;
+	}
+	@Override
+	public Card askPlayerForCard(Player player, String message) {
+		return null;
+	}
+	@Override
+	public Card askPlayerForCard(Player player) {
+		return null;
+	}
 }
