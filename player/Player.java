@@ -23,17 +23,17 @@ public abstract class Player {
 	/**
 	 * Delivered
 	 */
-	private int lettersDelivered;
+	protected int lettersDelivered;
 	
 	/**
 	 * Is this player in on this round
 	 */
-	private boolean inThisRound;
+	protected boolean inThisRound;
 	
 	/**
 	 * This players name
 	 */
-	private String name;
+	protected String name;
 	
 	/**
 	 * Holds the max amount of cards a player can have
