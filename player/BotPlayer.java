@@ -11,7 +11,8 @@ public class BotPlayer extends Player{
 	}
 	@Override
 	public Card playCard() {
-		return null;
+		int cardToPlayIndex = (int)Math.random()*cards.size();
+		return playCard(cardToPlayIndex);
 	}
 	@Override
 	public void drawCard(Card card) {
