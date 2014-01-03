@@ -75,13 +75,23 @@ public abstract class Player {
 	 * @return Do you really need an explanation expect boolean????
 	 */
 	public final boolean hasCard(String cardName) {
+		return (getCard(cardName) != null);
+	}
+	
+	/**
+	 * Returns the card object of the card name passed in.
+	 * Null if the player does not have that card.
+	 * @param cardName
+	 * @return
+	 */
+	public final Card getCard(String cardName) {
 		for (Card card : cards) {
 			String theCardName = card.getName();
 			if (theCardName.compareTo(cardName) == 0) {
-				return true;
+				return card;
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	/**
