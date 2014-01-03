@@ -95,11 +95,6 @@ public abstract class Game {
 		return view;
 	}
 	
-	public abstract Player askPlayerForPlayer(Player player, String message);
-	public abstract Player askPlayerForPlayer(Player player);
-	public abstract Card askPlayerForCard(Player player, String message);
-	public abstract Card askPlayerForCard(Player player);
-	
 	public abstract void start();
 	public abstract void init();
 	public abstract void gameLoop();

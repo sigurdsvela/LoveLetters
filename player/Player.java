@@ -141,6 +141,11 @@ public abstract class Player {
 	 * @param card
 	 */
 	public abstract void drawCard(Card card);
+	
+	public abstract Player askPlayerForPlayer(Player player, String message);
+	public abstract Player askPlayerForPlayer(Player player);
+	public abstract Card askPlayerForCard(Player player, String message);
+	public abstract Card askPlayerForCard(Player player);
 
 	/**
 	 * Returns a card based on index.
