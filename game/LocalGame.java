@@ -100,10 +100,11 @@ public class LocalGame extends Game {
 					// Each player draws a starting card
 					view.setInformation("Each player draws their card.");
 					for (Player p : players) {
+						p.setIsPlayerInThisRound(true);
 						p.drawCard(deck.draw());
 					}
 					
-					while( getNumPlayers() > 1 && deck.peek() != null ) {
+					while( getNumPlayersInRound() > 1 && deck.peek() != null ) {
 						// Retrieve current player and let the player draw a card.
 						currentPlayer = players.get(currentPlayerIndex);
 						view.setInformation("Players turn: " + currentPlayer.getName());
