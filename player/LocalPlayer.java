@@ -31,7 +31,17 @@ public class LocalPlayer extends Player {
 
 		@Override
 		public Player askPlayerForPlayer(Player player, String message) {
-			return null;
+			Player playerToChoose;
+			while (true) {
+				String playerName = this.game.getView().getInformation("Choose a player:");
+				playerToChoose = game.getPlayer(playerName);
+				if (playerToChoose == null) {
+					this.game.getView().getInformation("No player named " + playerName);
+				} else {
+					break;
+				}
+			}
+			return playerToChoose;
 		}
 
 		@Override
@@ -41,7 +51,17 @@ public class LocalPlayer extends Player {
 
 		@Override
 		public Card askPlayerForCard(Player player, String message) {
-			return null;
+			Card cardToChoose;
+			while (true) {
+				String cardName = this.game.getView().getInformation("Choose a card:");
+				cardToChoose = game.getDeck().getCard(cardName);
+				if (cardToChoose == null) {
+					this.game.getView().getInformation("No card named " + cardName);
+				} else {
+					break;
+				}
+			}
+			return cardToChoose;
 		}
 
 		@Override
