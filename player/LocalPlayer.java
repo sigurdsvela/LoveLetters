@@ -10,7 +10,17 @@ public class LocalPlayer extends Player {
 
 		@Override
 		public Card playCard() {
-			return null;
+			Card cardToPlay = null;
+			while (true) {
+				String scard = this.game.getView().getInformation("Choose a card to play:");
+				cardToPlay = getCard(scard);
+				if (cardToPlay == null) {
+					this.game.getView().getInformation("You do not have a card \""+ scard +"\". Please choose another.");
+				} else {
+					break;
+				}
+			}
+			return cardToPlay;
 		}
 
 		@Override
