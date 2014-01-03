@@ -34,4 +34,6 @@ public class BotPlayer extends Player{
 	public Card askPlayerForCard() {
 		return null;
 	}
+	@Override
+	public void showCards() {}
 }

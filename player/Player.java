@@ -142,6 +142,11 @@ public abstract class Player {
 	 */
 	public abstract void drawCard(Card card);
 	
+	/**
+	 * Will show in the players view their cards
+	 */
+	public abstract void showCards();
+	
 	public abstract Player askPlayerForPlayer(String message);
 	public abstract Player askPlayerForPlayer();
 	public abstract Card askPlayerForCard(String message);
@@ -184,6 +189,4 @@ public abstract class Player {
 	public final void setIsPlayerInThisRound(boolean b) {
 		inThisRound = b;
 	}
-	
-	
 }

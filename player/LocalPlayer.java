@@ -1,6 +1,7 @@
 package player;
 
 import game.Game;
+import view.View;
 import deck.card.Card;
 
 public class LocalPlayer extends Player {
@@ -67,5 +68,14 @@ public class LocalPlayer extends Player {
 		@Override
 		public Card askPlayerForCard() {
 			return askPlayerForCard("Choose a card:");
+		}
+
+		@Override
+		public void showCards() {
+			View view = game.getView();
+			view.setInformation("Your hand:");
+			for (Card card : cards) {
+				view.setInformation("\t " + card.toString()); 
+			}
 		}
 }
