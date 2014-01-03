@@ -13,7 +13,7 @@ public class Priest extends Card {
 			}
 
 			public void run(Game game, Player cardOwner) {
-				Player affectedPlayer = cardOwner.askPlayerForPlayer(cardOwner, "Which player do you want to see the card of?");
+				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card of?");
 				//Get view of game
 				//Print the card
 			}

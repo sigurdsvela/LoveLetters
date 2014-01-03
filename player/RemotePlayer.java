@@ -27,22 +27,22 @@ public class RemotePlayer extends Player{
 	}
 
 	@Override
-	public Player askPlayerForPlayer(Player player, String message) {
+	public Player askPlayerForPlayer(String message) {
 		return null;
 	}
 
 	@Override
-	public Player askPlayerForPlayer(Player player) {
+	public Player askPlayerForPlayer() {
 		return null;
 	}
 
 	@Override
-	public Card askPlayerForCard(Player player, String message) {
+	public Card askPlayerForCard(String message) {
 		return null;
 	}
 
 	@Override
-	public Card askPlayerForCard(Player player) {
+	public Card askPlayerForCard() {
 		return null;
 	}
 }

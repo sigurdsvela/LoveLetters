@@ -11,9 +11,9 @@ public class Guard extends Card{
 			private Player affectedPlayer;
 			
 			public boolean condition(Game game, Player cardOwner) {
-				Player affectedPlayer = cardOwner.askPlayerForPlayer(cardOwner, "Choose a player to guess the card for.");
+				Player affectedPlayer = cardOwner.askPlayerForPlayer("Choose a player to guess the card for.");
 				this.affectedPlayer = affectedPlayer;
-				Card cardGuess = cardOwner.askPlayerForCard(cardOwner, "What card do you think " + affectedPlayer.getName() + " has?");
+				Card cardGuess = cardOwner.askPlayerForCard("What card do you think " + affectedPlayer.getName() + " has?");
 				return affectedPlayer.hasCard(cardGuess);
 			}
 
