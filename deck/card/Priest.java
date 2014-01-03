@@ -13,9 +13,12 @@ public class Priest extends Card {
 			}
 
 			public void run(Game game, Player cardOwner) {
-				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card of?");
-				//Get view of game
-				//Print the card
+				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card(s) of?");
+				Card[] affectedPlayerCards = affectedPlayer.getCards();
+				cardOwner.setInformation(affectedPlayer.getName() + "  has the card(s) :");
+				for (Card c : affectedPlayerCards) {
+					cardOwner.setInformation(c.toString());
+				}
 			}
 
 			public int when() {
