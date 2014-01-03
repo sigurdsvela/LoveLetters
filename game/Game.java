@@ -78,6 +78,22 @@ public abstract class Game {
 	}
 	
 	/**
+	 * Get a player based on name
+	 * Returns null if no player with the name <i>name<i> is found
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Player getPlayer(String name) {
+		for (Player p: players) {
+			if (p.getName().compareToIgnoreCase(name) == 0) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Will return number of players in game,
 	 * wether or not active in current round.
 	 * @return int	number of players in game
