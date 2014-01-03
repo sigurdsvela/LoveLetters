@@ -44,6 +44,10 @@ public abstract class Game {
 		return started;
 	}
 	
+	public Deck getDeck() {
+		return deck;
+	}
+	
 	/**
 	 * Will update currentPlayerIndex and return next player
 	 * @return Player	is the next player in the player list
