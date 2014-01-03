@@ -86,4 +86,8 @@ public abstract class Card {
 	public final void triggerPlayerDrewCard(Game game, Player cardOwner) {
 		triggerRule(game, cardOwner, onPlayerDrewCardRules);
 	}
+	
+	public String toString() {
+		return getName() + "(" + getDistance() + ")";
+	}
 }
