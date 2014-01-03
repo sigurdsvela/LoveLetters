@@ -87,7 +87,7 @@ public abstract class Player {
 	public final Card getCard(String cardName) {
 		for (Card card : cards) {
 			String theCardName = card.getName();
-			if (theCardName.compareTo(cardName) == 0) {
+			if (theCardName.compareToIgnoreCase(cardName) == 0) {
 				return card;
 			}
 		}
