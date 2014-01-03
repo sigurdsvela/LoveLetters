@@ -1,4 +1,4 @@
-package ui;
+package player;
 
 import game.Game;
 
@@ -19,11 +19,6 @@ public abstract class Player {
 	 * Holds the cards of this players hand
 	 */
 	protected LinkedList<Card> cards;
-	
-	/**
-	 * 
-	 */
-	private int handSize;
 	
 	/**
 	 * Delivered
@@ -60,14 +55,17 @@ public abstract class Player {
 	/* Play a card from players hand
 	 */
 	public abstract Card playCard();
-	
+
 	/**
 	 * Player discards card <b>i</b>
 	 * This usually means that the card does nothing
 	 * @param i
+	 * 
+	 * @throws IndexOutOfBoundsException
 	 */
 	public final void discardCard(short i) {
-		
+		cards.get(i).triggerDiscard(game, this);
+		cards.remove(i);
 	}
 	
 	/**
@@ -109,7 +107,7 @@ public abstract class Player {
 	 * @param card
 	 */
 	public abstract void drawCard(Card card);
-	
+
 	/**
 	 * Returns a card based on index.
 	 * Card are stored in a FIFO list,

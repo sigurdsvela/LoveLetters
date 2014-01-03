@@ -1,7 +1,7 @@
 package deck.card;
 
+import player.Player;
 import game.Game;
-import ui.Player;
 import deck.card.rule.CardRule;
 
 public class Guard extends Card{

@@ -1,4 +1,6 @@
-package ui;
+package player;
+
+import game.Game;
 
 import deck.card.Card;
 import game.Game;

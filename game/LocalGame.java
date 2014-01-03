@@ -2,9 +2,9 @@ package game;
 
 import java.util.ArrayList;
 
-import ui.BotPlayer;
-import ui.LocalPlayer;
-import ui.Player;
+import player.BotPlayer;
+import player.LocalPlayer;
+import player.Player;
 import view.TerminalView;
 import deck.card.Card;
 
