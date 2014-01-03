@@ -159,13 +159,13 @@ public abstract class Game {
 	 */
 	public Player[] getWinners() {
 		Player[] playersInRound = getPlayersInThisRound();
-		LinkedList<Player> winners = new LinkedList<Player>();
+		ArrayList<Player> winners = new ArrayList<Player>();
 		
 		if (playersInRound.length == 0) return null; //  Return null if there are no players left in round (error)
  		
 		// Get biggest distance value among players
 		int biggestDistance = -1, tmpDistance;
-		for (Player p : players) {
+		for (Player p : playersInRound) {
 			tmpDistance = p.getCard(0).getDistance();
 			if (tmpDistance > biggestDistance) {
 				biggestDistance = tmpDistance;
@@ -180,8 +180,7 @@ public abstract class Game {
 		}
 		
 		// Convert back from linked list to Player array and return it
-		Player[] tmp = new Player[ winners.size() ];
-		return winners.toArray(tmp);
+		return winners.toArray( new Player[ winners.size() ] );
 	}
 
 	/**
