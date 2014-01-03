@@ -51,11 +51,42 @@ public abstract class Player {
 		inThisRound = true;
 	}
 	
+	/* ABSTRACT METHODS */
 	/**
 	/* Play a card from players hand
+	 * This method is implemented in individually in all subclasses
 	 */
 	public abstract Card playCard();
 
+	/**
+	 * Draw a card for the player.
+	 * @param card	is card to be drawn
+	 */
+	public abstract void drawCard(Card card);
+	
+	/**
+	 * Show cards in players hand
+	 */
+	public abstract void showCards();
+	
+	public abstract Player askPlayerForPlayer(String message);
+	public abstract Player askPlayerForPlayer();
+	public abstract Card askPlayerForCard(String message);
+	public abstract Card askPlayerForCard();
+
+	/**
+	 * Will be called from playCard();
+	 * Actually play the card, trigger its effect if any and remove it from hand.
+	 * @param cardIndex
+	 * @return Card	that was removed from hand
+	 */
+	protected Card playCard(int cardIndex) {
+		Card card = cards.get(cardIndex);
+		card.triggerPlay(game, this);
+		cards.remove(card);
+		return card;
+	}
+	
 	/**
 	 * Player discards card <b>i</b>
 	 * This usually means that the card does nothing
@@ -101,7 +132,19 @@ public abstract class Player {
 		return null;
 	}
 	
-	
+	/**
+	 * Returns a card based on index.
+	 * Card are stored in a FIFO list,
+	 * so oldest card i stored first.
+	 * 
+	 * Returns null if the card is nor found
+	 * @return Card
+	 */
+	public final Card getCard(int index) {
+		if (index >= cards.size() || index < 0) return null;
+		else return cards.get(index);
+	}
+		
 	/**
 	 * Returns the index of the card name passed in.
 	 * -1 if the card was not found
@@ -118,18 +161,20 @@ public abstract class Player {
 		return -1;
 	}
 	
-	protected Card playCard(int cardIndex) {
-		Card card = cards.get(cardIndex);
-		card.triggerPlay(game, this);
-		cards.remove(card);
-		return card;
+	/**
+	 * Get all cards in players hand
+	 * @return card[] is the players hand
+	 */
+	public final Card[] getCards() {
+		Card[] toArray = new Card[ cards.size() ];
+		return cards.toArray(toArray);
 	}
-	
+ 	
 	/**
 	 * Check if the player has a specific card
 	 * 
 	 * @param card The card to check if the player has
-	 * @return
+	 * @return true if card was found, false else
 	 */
 	public final boolean hasCard(Card card) {
 		return hasCard(card.getName());
@@ -143,40 +188,6 @@ public abstract class Player {
 		return name;
 	}
 	
-	/**
-	 * Make a player draw a card
-	 * @param card
-	 */
-	public abstract void drawCard(Card card);
-	
-	/**
-	 * Will show in the players view their cards
-	 */
-	public abstract void showCards();
-	
-	public abstract Player askPlayerForPlayer(String message);
-	public abstract Player askPlayerForPlayer();
-	public abstract Card askPlayerForCard(String message);
-	public abstract Card askPlayerForCard();
-
-	/**
-	 * Returns a card based on index.
-	 * Card are stored in a FIFO list,
-	 * so oldest card i stored first.
-	 * 
-	 * Returns null if the card is nor found
-	 * @return Card
-	 */
-	public final Card getCard(int index) {
-		if (index >= cards.size() || index < 0) return null;
-		else return cards.get(index);
-	}
-	
-	public final Card[] getCards() {
-		Card[] toArray = new Card[ cards.size() ];
-		return cards.toArray(toArray);
-	}
- 	
 	public final int getLettersDelivired() {
 		return lettersDelivered;
 	}
