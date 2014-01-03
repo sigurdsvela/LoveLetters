@@ -49,4 +49,8 @@ public class RemotePlayer extends Player{
 	@Override
 	public void showCards() {
 	}
+
+	@Override
+	public void setInformation(String information) {
+	}
 }

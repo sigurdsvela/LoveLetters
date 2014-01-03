@@ -53,6 +53,12 @@ public abstract class Player {
 	
 	/* ABSTRACT METHODS */
 	/**
+	 * Will call this players game.view with information
+	 * @param information
+	 */
+	public abstract void setInformation(String information);
+	
+	/**
 	/* Play a card from players hand
 	 * This method is implemented in individually in all subclasses
 	 */
@@ -81,9 +87,8 @@ public abstract class Player {
 	 * @return Card	that was removed from hand
 	 */
 	protected Card playCard(int cardIndex) {
-		Card card = cards.get(cardIndex);
+		Card card = cards.remove(cardIndex);
 		card.triggerPlay(game, this);
-		cards.remove(card);
 		return card;
 	}
 	
@@ -186,6 +191,14 @@ public abstract class Player {
 	 */
 	public final String getName() {
 		return name;
+	}
+	
+	/**
+	 * Get this players game
+	 * @return Game
+	 */
+	public final Game getGame() {
+		return game;
 	}
 	
 	public final int getLettersDelivired() {

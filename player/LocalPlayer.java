@@ -16,7 +16,7 @@ public class LocalPlayer extends Player {
 				String card = this.game.getView().getInformation("Choose a card to play:");
 				cardToPlay = getCardIndex(card);
 				if (cardToPlay == -1) {
-					this.game.getView().setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
+					setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
 				} else {
 					break;
 				}
@@ -27,7 +27,7 @@ public class LocalPlayer extends Player {
 
 		@Override
 		public void drawCard(Card card) {
-			game.getView().setInformation("You drew " + card);
+			setInformation("You drew " + card);
 			cards.add(card);
 		}
 
@@ -38,7 +38,7 @@ public class LocalPlayer extends Player {
 				String playerName = this.game.getView().getInformation(message);
 				playerToChoose = game.getPlayer(playerName);
 				if (playerToChoose == null) {
-					this.game.getView().setInformation("\nNo player named " + playerName);
+					setInformation("\nNo player named " + playerName);
 				} else {
 					break;
 				}
@@ -59,7 +59,7 @@ public class LocalPlayer extends Player {
 				String cardName = this.game.getView().getInformation(message);
 				cardToChoose = game.getDeck().getCard(cardName);
 				if (cardToChoose == null) {
-					this.game.getView().setInformation("\nNo card named " + cardName);
+					setInformation("\nNo card named " + cardName);
 				} else {
 					break;
 				}
@@ -81,5 +81,10 @@ public class LocalPlayer extends Player {
 				view.setInformation(card.toString()); 
 			}
 			view.setInformation("");
+		}
+
+		@Override
+		public void setInformation(String information) {
+			getGame().getView().setInformation(information);
 		}
 }
