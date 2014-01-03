@@ -17,15 +17,15 @@ public class Deck {
 		cards.add(new deck.card.Guard());
 		cards.add(new deck.card.Priest());
 		cards.add(new deck.card.Priest());
-		cards.add(new deck.card.Baron());
-		cards.add(new deck.card.Baron());
-		cards.add(new deck.card.Handmaid());
-		cards.add(new deck.card.Handmaid());
-		cards.add(new deck.card.Prince());
-		cards.add(new deck.card.Prince());
-		cards.add(new deck.card.King());
-		cards.add(new deck.card.Countess());
-		cards.add(new deck.card.Princess());
+//		cards.add(new deck.card.Baron());
+//		cards.add(new deck.card.Baron());
+//		cards.add(new deck.card.Handmaid());
+//		cards.add(new deck.card.Handmaid());
+//		cards.add(new deck.card.Prince());
+//		cards.add(new deck.card.Prince());
+//		cards.add(new deck.card.King());
+//		cards.add(new deck.card.Countess());
+//		cards.add(new deck.card.Princess());
 	}
 	
 	/**
