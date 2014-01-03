@@ -21,11 +21,6 @@ public abstract class Player {
 	private LinkedList<Card> cards;
 	
 	/**
-	 * 
-	 */
-	private int handSize;
-	
-	/**
 	 * Delivered
 	 */
 	private int lettersDelivered;
