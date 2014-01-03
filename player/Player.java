@@ -94,6 +94,30 @@ public abstract class Player {
 		return null;
 	}
 	
+	
+	/**
+	 * Returns the index of the card name passed in.
+	 * -1 if the card was not found
+	 * @param cardName The card to find
+	 * @return
+	 */
+	public final int getCardIndex(String cardName) {
+		for (int i = 0; i < cards.size(); i++) {
+			String theCardName = cards.get(i).getName();
+			if (theCardName.compareToIgnoreCase(cardName) == 0) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	protected Card playCard(int cardIndex) {
+		Card card = cards.get(cardIndex);
+		card.triggerPlay(game, this);
+		cards.remove(card);
+		return card;
+	}
+	
 	/**
 	 * Check if the player has a specific card
 	 * 
