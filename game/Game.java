@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import player.Player;
 
@@ -21,6 +22,9 @@ public abstract class Game {
 	protected View view;
 	protected GameState gameState;
 	
+	/**
+	 *  Enum used for deciding which part of the game is running
+	 */
 	protected enum GameState {
 		Menu, Game, Exit
 	}
@@ -30,6 +34,25 @@ public abstract class Game {
 		lettersDeliveredToWin = 4;
 	}
 	
+	/* ABSTRACT METHODS */
+	/**
+	 * For initializing a game, 
+	 * will be called from constructor of subclasses
+	 */
+	public abstract void init();
+	
+	/**
+	 * For starting a game.
+	 * Will call gameLoop() at end of function
+	 */
+	public abstract void start();
+	
+	/**
+	 * This is the where the game logic appear.
+	 */
+	public abstract void gameLoop();
+	
+	/* OTHER METHODS */
 	/**
 	 * Join a player. This can only be done if the game
 	 * has not already started
@@ -55,11 +78,25 @@ public abstract class Game {
 	/**
 	 * Will update currentPlayerIndex and return next player
 	 * @return Player	is the next player in the player list
+	 * 					OR the same player as current if only one player left in round	
+	 * 					OR null is returned if no players are left in round (this is an error)
 	 */
 	public Player nextPlayer() {
-		if (currentPlayerIndex++ >= getNumPlayersInRound() - 1) currentPlayerIndex = 0;	
-		if( !players.get(currentPlayerIndex).isPlayerInThisRound() ) return nextPlayer();
-		else return players.get(currentPlayerIndex);
+		int numPlayersInRound = getNumPlayersInRound();
+		
+		// Return null or current player if number of players in round is 0 or 1
+		if (numPlayersInRound == 0) return null;
+		else if (numPlayersInRound == 1) return players.get(currentPlayerIndex);
+		
+		// Update currentIndex pointer; increment by one
+		// AND set it to 0 if we exceeded number of players in game.
+		// (This is creating a loop abstraction to the linkedlist)
+		if (currentPlayerIndex++ >= getNumPlayers() - 1) currentPlayerIndex = 0;	
+		
+		// Return player if it's still active in this round
+		if( players.get(currentPlayerIndex).isPlayerInThisRound() ) return players.get(currentPlayerIndex);
+		// else call nextPlayer() recursive.
+		else return nextPlayer();
 	}
 	
 	/**
@@ -91,6 +128,15 @@ public abstract class Game {
 	}
 	
 	/**
+	 * Will return number of players in game,
+	 * wether or not active in current round.
+	 * @return int	number of players in game
+	 */
+	public int getNumPlayers() {
+		return players.size();
+	}
+	
+	/**
 	 * Get a player based on name
 	 * Returns null if no player with the name <i>name<i> is found
 	 * 
@@ -107,47 +153,45 @@ public abstract class Game {
 	}
 	
 	/**
-	 * Will return number of players in game,
-	 * wether or not active in current round.
-	 * @return int	number of players in game
+	 * Will return an array of the winners of a round
+	 * @return Player[]	is the winners of a round
+	 * 			OR null if no players left in round (error)
 	 */
-	public int getNumPlayers() {
-		return players.size();
-	}
-	
-	/**
-	 * Will return the winner of a round.
-	 * @return Player	is the winner of round
-	 */
-	public Player getWinner() {
-		Player winner = nextPlayer(); // Just use one player not out of round 
-		for (Player tmp : players) {
-			if( tmp.isPlayerInThisRound() 
-				&& tmp.getCard(0).getDistance() > winner.getCard(0).getDistance()) {
-					winner = tmp;
+	public Player[] getWinners() {
+		Player[] playersInRound = getPlayersInThisRound();
+		LinkedList<Player> winners = new LinkedList<Player>();
+		
+		if (playersInRound.length == 0) return null; //  Return null if there are no players left in round (error)
+ 		
+		// Get biggest distance value among players
+		int biggestDistance = -1, tmpDistance;
+		for (Player p : players) {
+			tmpDistance = p.getCard(0).getDistance();
+			if (tmpDistance > biggestDistance) {
+				biggestDistance = tmpDistance;
 			}
 		}
-		return winner;
+		
+		// Add all players onto winners array with distance equal to biggest
+		for (Player tmp : playersInRound) {
+			if (tmp.getCard(0).getDistance() == biggestDistance) {
+				winners.add(tmp);
+			}
+		}
+		
+		// Convert back from linked list to Player array and return it
+		Player[] tmp = new Player[ winners.size() ];
+		return winners.toArray(tmp);
 	}
-	
+
+	/**
+	 * Will return view of the game
+	 * For localGame this is the local players view,
+	 * but for remoteGame it's the remote player using that
+	 * remoteGames view.
+	 * @return View
+	 */
 	public final View getView() {
 		return view;
 	}
-	
-	/**
-	 * For initializing a game, 
-	 * will be called from constructor of subclasses
-	 */
-	public abstract void init();
-	
-	/**
-	 * For starting a game.
-	 * Will call gameLoop() at end of function
-	 */
-	public abstract void start();
-	
-	/**
-	 * This is the where the game logic appear.
-	 */
-	public abstract void gameLoop();
 }
