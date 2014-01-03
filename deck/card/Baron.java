@@ -8,9 +8,7 @@ public class Baron extends Card {
 
 	public Baron() {
 		this.addRule(new CardRule() {
-			Player winningPlayer;
-			Player versusPlayer;
-			Player cardOwner;
+			Player loosingPlayer, versusPlayer, cardOwner;
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
@@ -20,7 +18,21 @@ public class Baron extends Card {
 
 			@Override
 			public void run(Game game, Player cardOwner) {
-				cardOwner.askPlayerForCard("Who do you want to battle?");
+				Card versusPlayerCard, cardOwnerCard;
+				versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
+				
+				versusPlayerCard = versusPlayer.getBiggestDistanceCard();
+				cardOwnerCard = cardOwner.getBiggestDistanceCard();
+				
+				if (versusPlayerCard.getDistance() == cardOwnerCard.getDistance()) {
+					loosingPlayer = null;
+				} else if(versusPlayerCard.getDistance() > cardOwnerCard.getDistance()) {
+					loosingPlayer = cardOwner;
+					cardOwner.setIsPlayerInThisRound(false);
+				} else {
+					loosingPlayer = versusPlayer;
+					versusPlayer.setIsPlayerInThisRound(false);
+				}
 			}
 
 			@Override
@@ -30,7 +42,18 @@ public class Baron extends Card {
 
 			@Override
 			public String message() {
-				return null;
+				String msg = "";
+				
+				if(loosingPlayer == null) {
+					return "No player won.";
+				} else {
+					msg += loosingPlayer.getName() + " lost and is out of the round\n";
+					msg += loosingPlayer.getName() + " had the cards:\n";
+					for (Card c : loosingPlayer.getCards()) {
+						msg += c.toString() + "\n";
+					}
+					return msg;
+				}
 			}
 
 			@Override
@@ -43,13 +66,11 @@ public class Baron extends Card {
 	
 	@Override
 	public byte getDistance() {
-		// TODO Auto-generated method stub
 		return 3;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "Baron";
 	}
 
