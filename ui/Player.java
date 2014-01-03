@@ -13,12 +13,12 @@ public abstract class Player {
 	/**
 	 * Holds the game this player is in
 	 */
-	private Game game;
+	protected Game game;
 	
 	/**
 	 * Holds the cards of this players hand
 	 */
-	private LinkedList<Card> cards;
+	protected LinkedList<Card> cards;
 	
 	/**
 	 * 
@@ -108,9 +108,7 @@ public abstract class Player {
 	 * Make a player draw a card
 	 * @param card
 	 */
-	public final void drawCard(Card card) {
-		cards.add(card);
-	}
+	public abstract void drawCard(Card card);
 	
 	/**
 	 * Returns a card based on index.

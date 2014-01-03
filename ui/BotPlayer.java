@@ -13,4 +13,8 @@ public class BotPlayer extends Player{
 	public Card playCard() {
 		return null;
 	}
+	@Override
+	public void drawCard(Card card) {
+		cards.add(card);
+	}
 }

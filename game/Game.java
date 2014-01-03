@@ -18,6 +18,11 @@ public abstract class Game {
 	protected boolean started;
 	protected Deck deck;
 	protected View view;
+	protected GameState gameState;
+	
+	protected enum GameState {
+		Menu, Game
+	}
 	
 	public Game() {
 		started = false;
@@ -88,6 +93,10 @@ public abstract class Game {
 			}
 		}
 		return winner;
+	}
+	
+	public final View getView() {
+		return view;
 	}
 	
 	public abstract Player askPlayerForPlayer(Player player, String message);

@@ -1,7 +1,7 @@
 package ui;
 
-import deck.card.Card;
 import game.Game;
+import deck.card.Card;
 
 public class LocalPlayer extends Player {
 		public LocalPlayer(String name, Game game) {
@@ -11,5 +11,11 @@ public class LocalPlayer extends Player {
 		@Override
 		public Card playCard() {
 			return null;
+		}
+
+		@Override
+		public void drawCard(Card card) {
+			game.getView().setInformation("You draw " + card.getName());
+			cards.add(card);
 		}
 }
