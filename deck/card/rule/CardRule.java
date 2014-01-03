@@ -49,10 +49,10 @@ public abstract class CardRule {
 	public abstract int when();
 	
 	/**
-	 * The message to print when this rule is fulfilled
+	 * A message to print if this rule is fulfilled (read: condition returns true)
 	 * @return The message
 	 */
-	public abstract String message();
+	public String message() { return null; }
 	
 	public abstract String description();
 }
