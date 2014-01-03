@@ -7,7 +7,6 @@ import player.LocalPlayer;
 import player.Player;
 import view.TerminalView;
 import deck.Deck;
-import deck.card.Card;
 
 public class LocalGame extends Game {
 	
@@ -77,14 +76,14 @@ public class LocalGame extends Game {
 					}
 					
 					// Print name of players
-					view.setInformation("Players in game: ");
+					view.setInformation("\nPlayers in game: ");
 					for (Player p : getPlayersInThisRound()) {
 						view.setInformation("\t " + p.getName());
 					}
+					view.setInformation("");
 					
 					// Pick randomly first player
 					currentPlayerIndex =  (int) (getNumPlayers() * Math.random());
-					view.setInformation("Player " + players.get(currentPlayerIndex).getName() + " goes first.");
 					
 					// Update gamestate variable to Game
 					gameState = GameState.Game;
@@ -101,7 +100,7 @@ public class LocalGame extends Game {
 					deck.shuffle(10000);
 					
 					// Remove first card of shuffled deck
-					view.setInformation("Setting a card aside.");
+					view.setInformation("Setting a card aside.\n");
 					removedAtStart = deck.draw();
 					
 					// Each player draws a starting card
@@ -110,17 +109,23 @@ public class LocalGame extends Game {
 						p.setIsPlayerInThisRound(true);
 						p.drawCard(deck.draw());
 					}
+					view.setInformation("");
 					
+					// Who goes first?
+					view.setInformation("Player " + players.get(currentPlayerIndex).getName() + " goes first.\n");
+					
+					// This is main content of a round;
+					// Loop over until deck is empty or number of players in round is less than 2
 					while( getNumPlayersInRound() > 1 && deck.peek() != null ) {
 						// Retrieve current player and let the player draw a card.
 						currentPlayer = players.get(currentPlayerIndex);
-						view.setInformation("Players turn: " + currentPlayer.getName());
+						view.setInformation("===== START OF " + currentPlayer.getName() + "'s turn =====");
 						currentPlayer.drawCard(deck.draw());
 						
 						// Let current player play a card
 						currentPlayer.playCard();
 						
-						view.setInformation("");
+						view.setInformation("===== END OF" + currentPlayer.getName() + "'s turn =====");
 						nextPlayer();
 					}
 					
@@ -163,21 +168,5 @@ public class LocalGame extends Game {
 					break; // End of Exit case
 			} // End of switch
 		} // End of main loop
-	}
-
-	public Player askPlayerForPlayer(Player player, String message) {
-		return null;
-	}
-	
-	public Player askPlayerForPlayer(Player player) {
-		return askPlayerForPlayer(player, "Choose a player");
-	}
-
-	public Card askPlayerForCard(Player player, String message) {
-		return null;
-	}
-	
-	public Card askPlayerForCard(Player player) {
-		return askPlayerForCard(player, "Choose a card");
 	}
 }
