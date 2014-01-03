@@ -24,4 +24,9 @@ public class TerminalView extends View {
 	public String getInformation() {
 		return sc.nextLine();
 	}
+	
+	public String getInformation(String string) {
+		System.out.println(string);
+		return sc.nextLine();
+	}
 }

@@ -75,13 +75,47 @@ public abstract class Player {
 	 * @return Do you really need an explanation expect boolean????
 	 */
 	public final boolean hasCard(String cardName) {
+		return (getCard(cardName) != null);
+	}
+	
+	/**
+	 * Returns the card object of the card name passed in.
+	 * Null if the player does not have that card.
+	 * @param cardName
+	 * @return
+	 */
+	public final Card getCard(String cardName) {
 		for (Card card : cards) {
 			String theCardName = card.getName();
-			if (theCardName.compareTo(cardName) == 0) {
-				return true;
+			if (theCardName.compareToIgnoreCase(cardName) == 0) {
+				return card;
 			}
 		}
-		return false;
+		return null;
+	}
+	
+	
+	/**
+	 * Returns the index of the card name passed in.
+	 * -1 if the card was not found
+	 * @param cardName The card to find
+	 * @return
+	 */
+	public final int getCardIndex(String cardName) {
+		for (int i = 0; i < cards.size(); i++) {
+			String theCardName = cards.get(i).getName();
+			if (theCardName.compareToIgnoreCase(cardName) == 0) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	protected Card playCard(int cardIndex) {
+		Card card = cards.get(cardIndex);
+		card.triggerPlay(game, this);
+		cards.remove(card);
+		return card;
 	}
 	
 	/**
