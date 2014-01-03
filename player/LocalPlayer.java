@@ -15,7 +15,7 @@ public class LocalPlayer extends Player {
 
 		@Override
 		public void drawCard(Card card) {
-			game.getView().setInformation("You draw " + card.getName());
+			game.getView().setInformation("You drew " + card.getName());
 			cards.add(card);
 		}
 }

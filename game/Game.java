@@ -28,11 +28,6 @@ public abstract class Game {
 	public Game() {
 		started = false;
 		lettersDeliveredToWin = 4;
-		
-		// Initialize players and a deck. 
-		players = new ArrayList<Player>();
-		deck = new Deck();
-		deck.shuffle(10000);
 	}
 	
 	/**
