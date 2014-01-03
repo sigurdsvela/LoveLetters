@@ -3,6 +3,8 @@ package deck;
 import java.util.LinkedList;
 
 import deck.card.Card;
+import deck.card.Guard;
+import deck.card.Priest;
 
 public class Deck {
 	private LinkedList<Card> cards;
@@ -15,8 +17,8 @@ public class Deck {
 		cards.add(new deck.card.Guard());
 		cards.add(new deck.card.Guard());
 		cards.add(new deck.card.Guard());
-		cards.add(new deck.card.Priest());
-		cards.add(new deck.card.Priest());
+//		cards.add(new deck.card.Priest());
+//		cards.add(new deck.card.Priest());
 //		cards.add(new deck.card.Baron());
 //		cards.add(new deck.card.Baron());
 //		cards.add(new deck.card.Handmaid());
@@ -57,6 +59,12 @@ public class Deck {
 	
 	public boolean cardExists(String cardName) {
 		return (cardName.compareToIgnoreCase("guard") == 0) || (cardName.compareToIgnoreCase("priest") == 0); //TODO Hard Coded 
+	}
+	
+	public Card getCard(String cardName) {
+		if (cardName.compareToIgnoreCase("guard") == 0) return new Guard();
+		else if (cardName.compareToIgnoreCase("priest") == 0) return new Priest();
+		else return null;
 	}
 
 	/**
