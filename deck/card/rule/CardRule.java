@@ -43,7 +43,7 @@ public abstract class CardRule {
 	public abstract void run(Game game, Player cardOwner);
 	
 	/**
-	 * When should this rule applyed.
+	 * When should this rule applied.
 	 * @return
 	 */
 	public abstract int when();
