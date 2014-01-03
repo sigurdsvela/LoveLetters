@@ -39,17 +39,21 @@ public abstract class Card {
 		}
 	}
 	
+	private final void triggerRule(Game game, Player cardOwner, ArrayList<CardRule> rules) {
+		for (CardRule rule : rules) {
+			if (rule.condition(game, cardOwner)) {
+				rule.run(game, cardOwner);
+			}
+		}
+	}
+	
 	/**
 	 * Gets triggered by the deck when this card is drawn
 	 * 
 	 * @param player The player that drew this card.
 	 */
 	public final void triggerPlay(Game game, Player cardOwner) {
-		for (CardRule rule : onPlayRules) {
-			if (rule.condition(game, cardOwner)) {
-				rule.run(game, cardOwner);
-			}
-		}
+		triggerRule(game, cardOwner, onPlayRules);
 	}
 	
 	/**
@@ -58,11 +62,7 @@ public abstract class Card {
 	 * @param player The player that drew this card.
 	 */
 	public final void triggerDiscard(Game game, Player cardOwner) {
-		for (CardRule rule : onDiscardRules) {
-			if (rule.condition(game, cardOwner)) {
-				rule.run(game, cardOwner);
-			}
-		}
+		triggerRule(game, cardOwner, onDiscardRules);
 	}
 	
 	/**
@@ -71,11 +71,7 @@ public abstract class Card {
 	 * @param player The player that drew this card.
 	 */
 	public final void triggerCardWasDrawn(Game game, Player cardOwner) {
-		for (CardRule rule : onDrawnRules) {
-			if (rule.condition(game, cardOwner)) {
-				rule.run(game, cardOwner);
-			}
-		}
+		triggerRule(game, cardOwner, onDrawnRules);
 	}
 	
 	/**
@@ -85,10 +81,6 @@ public abstract class Card {
 	 * @param card The card that the player drew
 	 */
 	public final void triggerPlayerDrewCard(Game game, Player cardOwner) {
-		for (CardRule rule : onPlayerDrewCardRules) {
-			if (rule.condition(game, cardOwner)) {
-				rule.run(game, cardOwner);
-			}
-		}
+		triggerRule(game, cardOwner, onPlayerDrewCardRules);
 	}
 }
