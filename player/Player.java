@@ -126,7 +126,9 @@ public abstract class Player {
 	 */
 	public final void drawCard(Card card) {
 		card.triggerCardWasDrawn(game, this);
-		cards.get(0).triggerPlayerDrewCard(game, this); //This line assumes that the player allways has atleast one card on his/her hand
+		if (cards.size() > 0) {
+			cards.get(0).triggerPlayerDrewCard(game, this);
+		}
 		cards.add(card);
 	}
 	
