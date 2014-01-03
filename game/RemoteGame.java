@@ -34,25 +34,4 @@ public class RemoteGame extends Game {
 		
 	}
 
-	@Override
-	public Player askPlayerForPlayer(Player player) {
-		return null;
-	}
-
-	@Override
-	public Card askPlayerForCard(Player player) {
-		return null;
-	}
-
-	@Override
-	public Player askPlayerForPlayer(Player player, String message) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Card askPlayerForCard(Player player, String message) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
