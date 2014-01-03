@@ -75,7 +75,7 @@ public class LocalGame extends Game {
 					
 					// Update gamestate variable to Game
 					gameState = GameState.Game;
-					break;
+					break; // End of Main case
 					
 				case Game:
 					Player currentPlayer, winner;
@@ -125,13 +125,30 @@ public class LocalGame extends Game {
 						view.setInformation("Player " + winner.getName() + " won the game.");
 						view.setInformation("===== END OF GAME =====");
 						
-						// Go back to Menu when game is over
-						gameState = GameState.Menu;
+						// Do you want to play again?
+						String answer = "";
+						while (true) {
+							view.setInformation("Do you want to play again? (Y/N)");
+							answer = view.getInformation().toLowerCase();
+							if (answer.compareTo("y") == 0){
+								gameState = GameState.Menu;
+								break;
+							} else if (answer.compareTo("n") == 0){
+								gameState = GameState.Exit;
+								break;
+							} else {
+								view.setInformation("Please specify Y or N");
+							}
+						}
 					}
 					
-					break;
-			}
-		}
+					break; // End of Game case
+				case Exit:
+					view.setInformation("Thanks for playing!");
+					System.exit(0);
+					break; // End of Exit case
+			} // End of switch
+		} // End of main loop
 	}
 
 	public Player askPlayerForPlayer(Player player, String message) {

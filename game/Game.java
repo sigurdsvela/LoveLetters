@@ -22,7 +22,7 @@ public abstract class Game {
 	protected GameState gameState;
 	
 	protected enum GameState {
-		Menu, Game
+		Menu, Game, Exit
 	}
 	
 	public Game() {
