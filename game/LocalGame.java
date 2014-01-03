@@ -78,7 +78,7 @@ public class LocalGame extends Game {
 					// Print name of players
 					view.setInformation("\nPlayers in game: ");
 					for (Player p : getPlayersInThisRound()) {
-						view.setInformation("\t " + p.getName());
+						view.setInformation(p.getName());
 					}
 					view.setInformation("");
 					
@@ -90,7 +90,8 @@ public class LocalGame extends Game {
 					break; // End of Main case
 					
 				case Game:
-					Player currentPlayer, winner;
+					Player currentPlayer;
+					Player[] winners;
 					
 					// Announce new round!
 					view.setInformation("====== NEW ROUND ======");
@@ -103,9 +104,10 @@ public class LocalGame extends Game {
 					view.setInformation("Setting a card aside.\n");
 					removedAtStart = deck.draw();
 					
-					// Each player draws a starting card
+					// Empty hand, update in round flag and draw a card for each player
 					view.setInformation("Each player draws their card.");
 					for (Player p : players) {
+						p.emptyHand();
 						p.setIsPlayerInThisRound(true);
 						p.drawCard(deck.draw());
 					}
@@ -121,27 +123,51 @@ public class LocalGame extends Game {
 						currentPlayer = players.get(currentPlayerIndex);
 						view.setInformation("===== START OF " + currentPlayer.getName() + "'s turn =====");
 						currentPlayer.drawCard(deck.draw());
+						currentPlayer.showCards();
 						
 						// Let current player play a card
 						currentPlayer.playCard();
 						
-						view.setInformation("===== END OF" + currentPlayer.getName() + "'s turn =====");
-						nextPlayer();
+						view.setInformation("===== END OF " + currentPlayer.getName() + "'s turn =====");
+						
+						// Next players turn!
+						nextPlayer(); 
 					}
 					
-					// End of round - retrieve winner, update letters delivered 
-					// and announce winner of round
-					winner = getWinner();
-					winner.incrementLettersDelivired();
-					view.setInformation("Player " + winner.getName() + " won the round with Card: " 
-										+ winner.getCard(0).getName() + " (" + winner.getCard(0).getDistance() + ")");
+					// End of round - retrieve winner(s), update letters delivered 
+					// and announce winner(s) of round
+					winners = getWinners();
+					if (winners != null) {
+						for (Player winner : winners) {
+							winner.incrementLettersDelivired();
+							view.setInformation("Player " + winner.getName() + " won the round with Card: " 
+									+ winner.getCard(0).getName() + " (" + winner.getCard(0).getDistance() + ")");
+						}
+					}
 					
 					// Announce end of round
 					view.setInformation("===== END OF ROUND =====");
 					
-					if (winner.getLettersDelivired() >= lettersDeliveredToWin) {
+					// Show number of letters each player has delivered
+					for (Player p : players) {
+						view.setInformation("Player: " + p.getName() + " has delivered " + p.getLettersDelivired() + " love letter(s)");
+					}
+					
+					// Check if someone is going on a date with the princess!
+					boolean endOfGame = false;
+					if (winners != null) {
+						for (Player winner : winners) {
+							if (winner.getLettersDelivired() >= lettersDeliveredToWin) {
+								endOfGame = true;
+								
+								// Announce winner(s)
+								view.setInformation("Player " + winner.getName() + " won the game.");
+							}
+						}
+					}
+					
+					if (endOfGame) {
 						// Announce end of game
-						view.setInformation("Player " + winner.getName() + " won the game.");
 						view.setInformation("===== END OF GAME =====");
 						
 						// Do you want to play again?
