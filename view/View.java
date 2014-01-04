@@ -20,4 +20,44 @@ public abstract class View {
 	 * @return
 	 */
 	public abstract String getInformation();
+	
+	/**
+	 * see {@link #getMultipleChoiceAnswer(String, String[], String, boolean) getMultipleChoiceAnswer}
+	 * 
+	 * @param question
+	 * @param choices
+	 * @return
+	 */
+	public abstract String getMultipleChoiceAnswer(String question,
+			String[] choices);
+
+	/**
+	 * see {@link #getMultipleChoiceAnswer(String, String[]) getMultipleChoiceAnswer}
+	 * 
+	 * @param question
+	 * @param choices
+	 * @return
+	 */
+	public abstract String getMultipleChoiceAnswerIgnoreCase(String question,
+			String[] choices);
+
+	/**
+	 * see {@link #getMultipleChoiceAnswer(String, String[]) getMultipleChoiceAnswer}
+	 * 
+	 * @param question
+	 * @param choices
+	 * @return
+	 */
+	public abstract String getMultipleChoiceAnswer(String question,
+			String[] choices, String invalidAnswerMessage);
+
+	/**
+	 * see {@link #getMultipleChoiceAnswer(String, String[]) getMultipleChoiceAnswer}
+	 * 
+	 * @param question
+	 * @param choices
+	 * @return
+	 */
+	public abstract String getMultipleChoiceAnswerIgnoreCase(String question,
+			String[] choices, String invalidAnswerMessage);
 }

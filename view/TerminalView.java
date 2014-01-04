@@ -1,6 +1,9 @@
 package view;
 
+import java.io.ObjectInputStream.GetField;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class TerminalView extends View {
 	private Scanner sc; // Will be used for processing data to/from players
@@ -29,4 +32,81 @@ public class TerminalView extends View {
 		System.out.println(string);
 		return sc.nextLine();
 	}
+	
+	/* (non-Javadoc)
+	 * @see view.V#getMultipleChoiceAnswer(java.lang.String, java.lang.String[])
+	 */
+	@Override
+	public String getMultipleChoiceAnswer(String question, String[] choices) {
+		return getMultipleChoiceAnswer(question, choices, "Not a valid answer.", false);
+	}
+	
+	/* (non-Javadoc)
+	 * @see view.V#getMultipleChoiceAnswerIgnoreCase(java.lang.String, java.lang.String[])
+	 */
+	@Override
+	public String getMultipleChoiceAnswerIgnoreCase(String question, String[] choices) {
+		return getMultipleChoiceAnswer(question, choices, "Not a valid answer.", true);
+	}
+	
+	/* (non-Javadoc)
+	 * @see view.V#getMultipleChoiceAnswer(java.lang.String, java.lang.String[], java.lang.String)
+	 */
+	@Override
+	public String getMultipleChoiceAnswer(String question, String[] choices, String invalidAnswerMessage) {
+		return getMultipleChoiceAnswer(question, choices, invalidAnswerMessage, false);
+	}
+	
+	/* (non-Javadoc)
+	 * @see view.V#getMultipleChoiceAnswerIgnoreCase(java.lang.String, java.lang.String[], java.lang.String)
+	 */
+	@Override
+	public String getMultipleChoiceAnswerIgnoreCase(String question, String[] choices, String invalidAnswerMessage) {
+		return getMultipleChoiceAnswer(question, choices, invalidAnswerMessage, true);
+	}
+	
+	/**
+	 * Get the user to answer a multiple choice. For example
+	 * 
+	 * What opponent should you like to affect?
+	 *    Master
+	 *    Sigurd
+	 *    Hogaboga
+	 *    
+	 * if the user answers "Hogaboga" then String("Hogaboga") will be returned
+	 * 
+	 * @param question The question
+	 * @param choices Choices
+	 * @param invalidAnswerMessage What message to print on invalid answer. Use %a to reference the answer of the player.
+	 * @param boolean ignoreCase
+	 * @return
+	 */
+	private String getMultipleChoiceAnswer(String question, String[] choices, String invalidAnswerMessage, boolean ignoreCase) {
+		String answer = null;
+		Set<String> choiceSet = new HashSet<String>();
+		for (String choice : choices) {
+			if (ignoreCase) {
+				choiceSet.add(choice.toLowerCase());
+			} else {
+				choiceSet.add(choice);
+			}
+		}
+		while (answer == null) {
+			setInformation(question);
+			for (String choice : choices)
+				setInformation("\t" + choice);
+			answer = getInformation();
+			
+			if (ignoreCase) {
+				answer.toLowerCase();
+			}
+			if (!choiceSet.contains(answer)) {
+				setInformation(invalidAnswerMessage.replace("%a", answer) + "\n");
+				answer = null;
+			}
+		}
+		return answer;
+	}
+	
+	
 }
