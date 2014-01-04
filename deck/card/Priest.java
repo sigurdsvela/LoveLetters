@@ -8,12 +8,22 @@ public class Priest extends Card {
 
 	public Priest() {
 		this.addRule(new CardRule() {
+			Player affectedPlayer;
+			
 			public boolean condition(Game game, Player cardOwner) {
-				return true;
+				this.affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card(s) of?");
+				
+				if (affectedPlayer.getName().compareTo(cardOwner.getName()) == 0) {
+					// This can really only happen if all but cardOwner is protected
+					game.getView().setInformation("Forgotten our cards already have we, " + cardOwner.getName() + "?");
+					return false;
+				} else {
+					return true;
+				}
 			}
 
 			public void run(Game game, Player cardOwner) {
-				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card(s) of?");
+				// Loop over and show for cardOwner affectedPlayers card(s)
 				Card[] affectedPlayerCards = affectedPlayer.getCards();
 				cardOwner.getGame().getView().setInformation(affectedPlayer.getName() + "  has the card(s) :");
 				for (Card c : affectedPlayerCards) {
