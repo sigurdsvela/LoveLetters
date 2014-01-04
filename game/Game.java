@@ -75,6 +75,10 @@ public abstract class Game {
 		return deck;
 	}
 	
+	public Card getRemovedAtStart() {
+		return removedAtStart;
+	}
+	
 	/**
 	 * Will update currentPlayerIndex and return next player
 	 * @return Player	is the next player in the player list
