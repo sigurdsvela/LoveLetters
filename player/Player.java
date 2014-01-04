@@ -29,6 +29,12 @@ public abstract class Player {
 	protected int forceCardIndex;
 	
 	/**
+	 * Holds the info of wether this player
+	 * is protected against cards abilities or not.
+	 */
+	protected boolean isProtected;
+	
+	/**
 	 * Delivered
 	 */
 	protected int lettersDelivered;
@@ -274,6 +280,14 @@ public abstract class Player {
 	 */
 	public final Game getGame() {
 		return game;
+	}
+	
+	public final boolean isPlayerProtected() {
+		return isProtected;
+	}
+	
+	public final void setIsPlayerProtected(boolean b) {
+		isProtected = b;
 	}
 	
 	public final int getLettersDelivired() {
