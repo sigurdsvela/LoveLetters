@@ -13,7 +13,15 @@ public class BotPlayer extends Player{
 	
 	@Override
 	public Card playCard() {
-		int cardToPlayIndex = (int) (Math.random() * cards.size());
+		int cardToPlayIndex;
+		
+		// Choose a random card OR if set, the forced cards index
+		if (getForceCardIndex() == -1) {
+			cardToPlayIndex = (int) (Math.random() * cards.size());
+		} else {
+			cardToPlayIndex = getForceCardIndex();
+			setForceCardIndex(-1);
+		}
 		return playCard(cardToPlayIndex);
 	}
 	

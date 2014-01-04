@@ -11,16 +11,26 @@ public class LocalPlayer extends Player {
 
 		@Override
 		public Card playCard() {
-			int cardToPlay = -1;
-			while (true) {
-				String card = this.game.getView().getInformation("Choose a card to play:");
-				cardToPlay = getCardIndex(card);
-				if (cardToPlay == -1) {
-					getGame().getView().setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
-				} else {
-					break;
+			int cardToPlay = -1, forCardIndex = getForceCardIndex();
+			
+			if (forceCardIndex == -1) {
+				// Get a card selected from local player
+				while (true) {
+					String card = this.game.getView().getInformation("Choose a card to play:");
+					cardToPlay = getCardIndex(card);
+					if (cardToPlay == -1) {
+						getGame().getView().setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
+					} else {
+						break;
+					}
 				}
+			} else {
+				// Tell local player that they have a card they MUST play
+				getGame().getView().getInformation("You MUST play " + getCard(forCardIndex).toString() + " (Enter to continue...)");
+				cardToPlay = forCardIndex;
+				setForceCardIndex(-1);
 			}
+			
 			this.game.getView().setInformation("");
 			return playCard(cardToPlay);
 		}

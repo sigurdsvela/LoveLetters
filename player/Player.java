@@ -23,6 +23,12 @@ public abstract class Player {
 	protected LinkedList<Card> cards;
 	
 	/**
+	 * Holds the index of a card to be forced to play if any
+	 * -1 indicate no force, other is the index in cards to force play
+	 */
+	protected int forceCardIndex;
+	
+	/**
 	 * Delivered
 	 */
 	protected int lettersDelivered;
@@ -42,48 +48,23 @@ public abstract class Player {
 	 */
 	public static final int NUMBER_OF_CARDS = 2;
 	
-	/**
-	 * 
-	 */
+	
 	public Player(String name, Game game) {
 		cards = new LinkedList<Card>();
 		this.name = name;
 		this.game = game;
 		lettersDelivered = 0;
+		forceCardIndex = -1;
 		inThisRound = true;
 	}
 	
 	/* ABSTRACT METHODS */
-	/**
-	 * Will call this players game.view with information
-	 * @param information
-	 */
-	//public abstract void setInformation(String information);
 	
 	/**
 	/* Play a card from players hand
 	 * This method is implemented in individually in all subclasses
 	 */
 	public abstract Card playCard();
-
-	/**
-	 * Draw a card for the player.
-	 * @param card	is card to be drawn
-	 */
-	public void drawCard(Card card) {
-		getGame().getView().setInformation(getName() + " drew: " + showCard(card));
-		cards.add(card);
-		card.triggerCardWasDrawn(game, this);
-	}
-	
-	/**
-	 * Basically the same as drawCard expcept
-	 * it does not call the trigger method nor print anything.
-	 * @param card	to add to hand
-	 */
-	public void addCard(Card card) {
-		cards.add(card);
-	}
 	
 	/** 
 	 * Show a card for the player
@@ -100,6 +81,32 @@ public abstract class Player {
 	public abstract Card askPlayerForCard(String message);
 	public abstract Card askPlayerForCard();
 
+	/* OTHER METHODS */
+	
+	/**
+	 * Draw a card for the player.
+	 * @param card	is card to be drawn
+	 */
+	public void drawCard(Card card) {
+		getGame().getView().setInformation(getName() + " drew: " + showCard(card));
+		cards.add(card);
+		
+		// Trigger effect of "on drawn rule" for card AND player "drew a card" for cards in players hand.
+		card.triggerCardWasDrawn(game, this);
+		for (Card c : getCards()) {
+			c.triggerPlayerDrewCard(game, this);
+		}
+	}
+	
+	/**
+	 * Basically the same as drawCard except
+	 * it does not call the trigger method nor print anything.
+	 * @param card	to add to hand
+	 */
+	public void addCard(Card card) {
+		cards.add(card);
+	}
+	
 	/**
 	 * Will print out the cards in players hand.
 	 * If useIndividual is true, it will print the cards
@@ -122,13 +129,14 @@ public abstract class Player {
 	
 	/**
 	 * Will be called from playCard();
-	 * Actually play the card, trigger its effect if any and remove it from hand.
+	 * Actually play the card at cardIndex, trigger its effect if any and remove it from hand.
+	 * UNLESS the forceCardIndex is set, then play this card instead.
 	 * @param cardIndex
 	 * @return Card	that was removed from hand
 	 */
 	protected Card playCard(int cardIndex) {
 		Card card = cards.remove(cardIndex);
-		getGame().getView().setInformation((getName() + " played " + card.toString()));
+		getGame().getView().setInformation(getName() + " played " + card.toString());
 		card.triggerPlay(game, this);
 		return card;
 	}
@@ -165,6 +173,16 @@ public abstract class Player {
 	 */
 	public final boolean hasCard(String cardName) {
 		return (getCard(cardName) != null);
+	}
+	
+	/**
+	 * Check if the player has a specific card
+	 * 
+	 * @param card The card to check if the player has
+	 * @return true if card was found, false else
+	 */
+	public final boolean hasCard(Card card) {
+		return hasCard(card.getName());
 	}
 	
 	/**
@@ -233,15 +251,13 @@ public abstract class Player {
 		Card[] toArray = new Card[ cards.size() ];
 		return cards.toArray(toArray);
 	}
- 	
-	/**
-	 * Check if the player has a specific card
-	 * 
-	 * @param card The card to check if the player has
-	 * @return true if card was found, false else
-	 */
-	public final boolean hasCard(Card card) {
-		return hasCard(card.getName());
+	
+	public final int getForceCardIndex() {
+		return forceCardIndex;
+	}
+	
+	public final void setForceCardIndex(int index) {
+		forceCardIndex = index;
 	}
 	
 	/**
