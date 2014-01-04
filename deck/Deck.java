@@ -2,13 +2,14 @@ package deck;
 
 import java.util.LinkedList;
 
+import deck.card.Baron;
 import deck.card.Card;
 import deck.card.Guard;
 import deck.card.Priest;
 
 public class Deck {
 	private LinkedList<Card> cards;
-	private final Card[] typesOfCards = { new Guard(), new Priest() };
+	private final Card[] typesOfCards = { new Guard(), new Priest(), new Baron() };
 	
 	public Deck() {
 		//Initialize the card array
@@ -18,10 +19,10 @@ public class Deck {
 		cards.add(new deck.card.Guard());
 		cards.add(new deck.card.Guard());
 		cards.add(new deck.card.Guard());
-//		cards.add(new deck.card.Priest());
-//		cards.add(new deck.card.Priest());
-//		cards.add(new deck.card.Baron());
-//		cards.add(new deck.card.Baron());
+		cards.add(new deck.card.Priest());
+		cards.add(new deck.card.Priest());
+		cards.add(new deck.card.Baron());
+		cards.add(new deck.card.Baron());
 //		cards.add(new deck.card.Handmaid());
 //		cards.add(new deck.card.Handmaid());
 //		cards.add(new deck.card.Prince());
@@ -72,9 +73,10 @@ public class Deck {
 	}
 	
 	public Card getCard(String cardName) {
-		if (cardName.compareToIgnoreCase("guard") == 0) return new Guard();
-		else if (cardName.compareToIgnoreCase("priest") == 0) return new Priest();
-		else return null;
+		for (Card c : typesOfCards) {
+			if (c.getName().compareToIgnoreCase(cardName) == 0) return c;
+		}
+		return null;
 	}
 
 	/**
