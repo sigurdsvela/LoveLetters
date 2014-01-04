@@ -26,12 +26,6 @@ public class LocalPlayer extends Player {
 		}
 
 		@Override
-		public void drawCard(Card card) {
-			getGame().getView().setInformation("You drew " + card);
-			cards.add(card);
-		}
-
-		@Override
 		public Player askPlayerForPlayer(String message) {
 			Player playerToChoose;
 			while (true) {

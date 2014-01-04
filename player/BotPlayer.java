@@ -18,11 +18,6 @@ public class BotPlayer extends Player{
 	}
 	
 	@Override
-	public void drawCard(Card card) {
-		cards.add(card);
-	}
-	
-	@Override
 	public Player askPlayerForPlayer(String message) {
 		View view = game.getView();
 		view.setInformation(message);

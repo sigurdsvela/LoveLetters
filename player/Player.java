@@ -124,15 +124,15 @@ public abstract class Player {
 	}
 	
 	/**
-	 * Player discards card <b>i</b>
-	 * This usually means that the card does nothing
-	 * @param i
-	 * 
-	 * @throws IndexOutOfBoundsException
+	 * Player discards card at index i
+	 * @param i is the indexed card to be discarded
+	 * @return Card	is the discarded card
 	 */
-	public final void discardCard(short i) {
+	public final Card discardCard(int i) {
+		// Return null if cards is empty or i >= cards size (error)
+		if (cards.isEmpty() || i >= cards.size()) return null;
 		cards.get(i).triggerDiscard(game, this);
-		cards.remove(i);
+		return cards.remove(i);
 	}
 	
 	/**
