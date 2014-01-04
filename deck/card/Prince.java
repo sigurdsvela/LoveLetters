@@ -24,14 +24,17 @@ public class Prince extends Card {
 				while(affectedPlayer.discardCard(0) != null) affectedPlayer.discardCard(0);
 				
 				// Draw a card from deck or the removed card at start if deck is empty
-				Card toBeDrawn;
-				if (game.getDeck().peek() == null) {
-					toBeDrawn = game.getRemovedAtStart();
-				} else {
-					toBeDrawn = game.getDeck().draw();
+				// if player is not out of round
+				if (affectedPlayer.isPlayerInThisRound()) {
+					Card toBeDrawn;
+					if (game.getDeck().peek() == null) {
+						toBeDrawn = game.getRemovedAtStart();
+					} else {
+						toBeDrawn = game.getDeck().draw();
+					}
+					
+					affectedPlayer.drawCard(toBeDrawn);
 				}
-				
-				affectedPlayer.drawCard(toBeDrawn);
 			}
 			
 			@Override
