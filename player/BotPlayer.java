@@ -32,14 +32,22 @@ public class BotPlayer extends Player{
 		Player playerToChoose;
 		Player[] playersInRound = game.getPlayersInThisRound();
 		
-		while (true) {
-			int playerIndex = (int) (Math.random() * playersInRound.length);
-			playerToChoose = playersInRound[playerIndex];
-			if (playerToChoose.getName().compareTo(getName()) != 0) {
-				break;
+		// If all players except bot is protected choose bot, else choose random.
+		if ( getGame().getNumPlayersInRound() == (getGame().getNumProtectedPlayersInRound() + 1)) {
+			// All but bot is protected
+			playerToChoose = this;
+			view.setInformation(getName() + " chose himself/herself. All other players are protected!\n");
+		} else {
+			while (true) {
+				int playerIndex = (int) (Math.random() * playersInRound.length);
+				playerToChoose = playersInRound[playerIndex];
+				if (playerToChoose.getName().compareTo(getName()) != 0) {
+					break;
+				}
 			}
+			view.setInformation(getName() + " chose " + playerToChoose.getName() + ".\n");
 		}
-		view.setInformation(getName() + " chose " + playerToChoose.getName() + ".\n");
+		
 		return playerToChoose;
 	}
 	

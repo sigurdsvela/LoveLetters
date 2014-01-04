@@ -43,6 +43,10 @@ public class LocalPlayer extends Player {
 				playerToChoose = game.getPlayer(playerName);
 				if (playerToChoose == null) {
 					getGame().getView().setInformation("\nNo player named " + playerName);
+				} else if (playerToChoose.isPlayerProtected()){
+					getGame().getView().setInformation("\n" + playerToChoose.getName() + " is protected this round.");
+				} else if (!playerToChoose.isPlayerInThisRound()) {
+					getGame().getView().setInformation("\n" + playerToChoose.getName() + " is out of this round.");
 				} else {
 					break;
 				}

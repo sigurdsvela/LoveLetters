@@ -79,9 +79,6 @@ public abstract class Player {
 	 */
 	public abstract String showCard(Card card);
 	
-	/**
-	 * Show cards in players hand
-	 */
 	public abstract Player askPlayerForPlayer(String message);
 	public abstract Player askPlayerForPlayer();
 	public abstract Card askPlayerForCard(String message);
