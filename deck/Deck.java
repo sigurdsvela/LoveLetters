@@ -73,10 +73,6 @@ public class Deck {
 		return typesOfCards;
 	}
 	
-	public boolean cardExists(String cardName) {
-		return (cardName.compareToIgnoreCase("guard") == 0) || (cardName.compareToIgnoreCase("priest") == 0); //TODO Hard Coded 
-	}
-	
 	public Card getCard(String cardName) {
 		for (Card c : typesOfCards) {
 			if (c.getName().compareToIgnoreCase(cardName) == 0) return c;

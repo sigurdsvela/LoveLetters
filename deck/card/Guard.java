@@ -24,7 +24,7 @@ public class Guard extends Card{
 				Card cardGuess, notAllowed = new Guard();
 				while(true) {
 					cardGuess = cardOwner.askPlayerForCard("What card do you think " + affectedPlayer.getName() + " has?");
-					if (cardGuess.getName().compareTo(notAllowed.getName()) != 0) break;
+					if (cardGuess.compareTo(notAllowed) != 0) break;
 					else cardOwner.getGame().getView().setInformation("Not allowed to guess " + notAllowed.getName());
 				}
 				

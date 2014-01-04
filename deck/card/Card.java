@@ -8,7 +8,7 @@ import player.Player;
 
 import deck.card.rule.CardRule;
 
-public abstract class Card {
+public abstract class Card implements Comparable<Card> {
 	private ArrayList<CardRule> onPlayRules;
 	private ArrayList<CardRule> onDiscardRules;
 	private ArrayList<CardRule> onPlayerDrewCardRules;
@@ -89,5 +89,10 @@ public abstract class Card {
 	
 	public String toString() {
 		return getName() + "(" + getDistance() + ")";
+	}
+	
+	@Override
+	public int compareTo(Card other) {
+		return getName().compareToIgnoreCase(other.getName());
 	}
 }
