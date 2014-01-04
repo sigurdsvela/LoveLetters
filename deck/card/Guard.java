@@ -14,6 +14,12 @@ public class Guard extends Card{
 				Player affectedPlayer = cardOwner.askPlayerForPlayer("Choose a player to guess the card for.");
 				this.affectedPlayer = affectedPlayer;
 				
+				// If cardOwner chose itself, do nothing
+				if (affectedPlayer.getName().compareTo(cardOwner.getName()) == 0) {
+					game.getView().setInformation("Nothing happened because " + cardOwner.getName() + " chose himself/herself.");
+					return false;
+				}
+				
 				// Loop over until we get something else than Guard
 				Card cardGuess, notAllowed = new Guard();
 				while(true) {
