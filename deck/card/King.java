@@ -8,16 +8,24 @@ public class King extends Card {
 
 	public King() {
 		this.addRule(new CardRule() {
+			private Player affectedPlayer;
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
+				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to switch hand with?");
+				this.affectedPlayer = affectedPlayer;
+				
+				// If cardOwner chose itself, do nothing
+				if (affectedPlayer.compareTo(cardOwner) == 0) {
+					game.getView().setInformation("Nothing happened because" + cardOwner.getName() + " chose himself/herself.");
+					return false;
+				}
+				
 				return true;
 			}
 			
 			@Override
 			public void run(Game game, Player cardOwner) {
-				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to switch hand with?");
-				
 				// Do the switch of hands through two loops
 				Card[] tmpHand = cardOwner.getCards();
 				
