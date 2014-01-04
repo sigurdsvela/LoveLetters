@@ -10,11 +10,12 @@ public class Countess extends Card {
 		this.addRule(new CardRule() {
 
 			public boolean condition(Game game, Player cardOwner) {
-				return cardOwner.hasCard("king") || cardOwner.hasCard("prince");
+				return cardOwner.hasCard( new King() ) || cardOwner.hasCard( new Prince() );
 			}
 
 			public void run(Game game, Player cardOwner) {
-				
+				// Set players force play index to the index of Countess
+				cardOwner.setForceCardIndex( cardOwner.getCardIndex(getName()) );
 			}
 
 			public int when() {
@@ -22,29 +23,25 @@ public class Countess extends Card {
 			}
 
 			public String message() {
-				return "Contess was caught, she is running away!";
+				return null;
 			}
 
 			@Override
 			public String description() {
 				return "If you have this card on your hand whilest" +
-						"also the King or the Prine" +
+						"also the King or the Prince" +
 						"you must play contess";
 			}
-			
 		});
 	}
 	
 	@Override
 	public byte getDistance() {
-		// TODO Auto-generated method stub
 		return 7;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "Countess";
 	}
-
 }
