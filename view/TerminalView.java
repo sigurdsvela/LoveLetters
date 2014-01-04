@@ -32,6 +32,34 @@ public class TerminalView extends View {
 		return sc.nextLine();
 	}
 	
+	
+	public boolean getYesOrNo(String question) {
+		return getYesOrNo(question, "%a is not a valid answer");
+	}
+	
+	public boolean getYesOrNo(String question, String invalidAnswerMessage) {
+		boolean answer = false;
+		String sAnswer = null;
+		while (sAnswer == null) {
+			sAnswer = sc.nextLine();
+			if (sAnswer.compareToIgnoreCase("y") == 0 ||
+				sAnswer.compareToIgnoreCase("yes") == 0 ||
+				sAnswer.compareToIgnoreCase("yeah") == 0 ||
+				sAnswer.compareToIgnoreCase("yupp") == 0) {
+				answer = true;
+			} else if (sAnswer.compareToIgnoreCase("n") == 0 ||
+					sAnswer.compareToIgnoreCase("no") == 0 ||
+					sAnswer.compareToIgnoreCase("nah") == 0 ||
+					sAnswer.compareToIgnoreCase("nop") == 0) {
+				answer = false;
+			} else {
+				setInformation(invalidAnswerMessage.replace("%a", sAnswer));
+				sAnswer = null;
+			}
+		}
+		return answer;
+	}
+	
 	/**
 	 * Get int from user between <i>lowerBound<i> and <i>upperCound<i>
 	 * 
