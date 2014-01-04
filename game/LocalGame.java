@@ -109,6 +109,7 @@ public class LocalGame extends Game {
 					for (Player p : players) {
 						p.emptyHand(false);
 						p.setIsPlayerInThisRound(true);
+						p.setIsPlayerProtected(false);
 						p.drawCard(deck.draw());
 					}
 					view.setInformation("");
@@ -121,7 +122,9 @@ public class LocalGame extends Game {
 					while( getNumPlayersInRound() > 1 && deck.peek() != null ) {
 						// Retrieve current player and let the player draw a card.
 						currentPlayer = players.get(currentPlayerIndex);
+						view.getInformation("Hit enter to start " + currentPlayer.getName() + "'s turn.");
 						view.setInformation("===== START OF " + currentPlayer.getName() + "'s turn =====");
+						currentPlayer.setIsPlayerProtected(false);
 						currentPlayer.drawCard(deck.draw());
 						currentPlayer.showCards(true);
 						
