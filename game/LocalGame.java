@@ -107,7 +107,7 @@ public class LocalGame extends Game {
 					// Empty hand, update in round flag and draw a card for each player
 					view.setInformation("Each player draws their card.");
 					for (Player p : players) {
-						p.emptyHand();
+						p.emptyHand(false);
 						p.setIsPlayerInThisRound(true);
 						p.drawCard(deck.draw());
 					}
@@ -123,7 +123,7 @@ public class LocalGame extends Game {
 						currentPlayer = players.get(currentPlayerIndex);
 						view.setInformation("===== START OF " + currentPlayer.getName() + "'s turn =====");
 						currentPlayer.drawCard(deck.draw());
-						currentPlayer.showCards();
+						currentPlayer.showCards(true);
 						
 						// Let current player play a card
 						currentPlayer.playCard();
@@ -137,12 +137,10 @@ public class LocalGame extends Game {
 					// End of round - retrieve winner(s), update letters delivered 
 					// and announce winner(s) of round
 					winners = getWinners();
-					if (winners != null) {
-						for (Player winner : winners) {
-							winner.incrementLettersDelivired();
-							view.setInformation("Player " + winner.getName() + " won the round with Card: " 
-									+ winner.getCard(0).getName() + " (" + winner.getCard(0).getDistance() + ")");
-						}
+					for (Player winner : winners) {
+						winner.incrementLettersDelivired();
+						view.setInformation("Player " + winner.getName() + " won the round with Card: " 
+								+ winner.getCard(0).getName() + " (" + winner.getCard(0).getDistance() + ")");
 					}
 					
 					// Announce end of round
@@ -188,6 +186,7 @@ public class LocalGame extends Game {
 					}
 					
 					break; // End of Game case
+					
 				case Exit:
 					view.setInformation("Thanks for playing!");
 					System.exit(0);
