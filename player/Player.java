@@ -89,7 +89,7 @@ public abstract class Player {
 	public String[] getCardsAsStrings() {
 		String[] a = new String[cards.size()];
 		for (int i = 0; i < cards.size(); i++) {
-			a[i] = cards.get(i).toString();
+			a[i] = cards.get(i).getName();
 		}
 		return a;
 	}
@@ -176,7 +176,6 @@ public abstract class Player {
 		if (showFirst) {
 			showCards(false);
 		}
-		
 		cards.clear();
 	}
 	
