@@ -8,11 +8,10 @@ public class Baron extends Card {
 
 	public Baron() {
 		this.addRule(new CardRule() {
-			Player loosingPlayer, versusPlayer, cardOwner;
+			Player loosingPlayer, versusPlayer;
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
-				this.cardOwner = cardOwner;
 				return true;
 			}
 
