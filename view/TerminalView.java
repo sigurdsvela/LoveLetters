@@ -32,6 +32,64 @@ public class TerminalView extends View {
 		return sc.nextLine();
 	}
 	
+	/**
+	 * Get int from user between <i>lowerBound<i> and <i>upperCound<i>
+	 * 
+	 * @param question
+	 * @param lowerBound
+	 * @param upperBound
+	 * @param invalidAnswerMessage
+	 * @return
+	 */
+	public int getIntBetweenBoundaries(String question, int lowerBound, int upperBound, String invalidAnswerMessage) {
+		int answer = -1;
+		while (answer == -1) {
+			answer = sc.nextInt();
+			if (!(answer >= lowerBound && answer <= upperBound)) {
+				System.out.println(invalidAnswerMessage.replace("%a", "" + answer + ""));
+				answer = -1;
+			} else {
+				break;
+			}
+		}
+		return answer;
+	}
+	
+	/**
+	 * set {@link #getIntBetweenBoundaries(String, int, int, String)  }
+	 */
+	public int getIntBetweenBoundaries(String question, int lowerBound, int upperBound) {
+		return getIntBetweenBoundaries(question, lowerBound, upperBound, "\"%a\" is not a number between " + lowerBound + " and " + upperBound + "!");
+	}
+	
+	
+	/**
+	 * set {@link #getInt(String, String) }
+	 */
+	public int getInt(String question) {
+		return getInt(question, "\"%a\" is not a number.");
+	}
+	
+	
+	/**
+	 * Get a int from user
+	 * @param question
+	 * @param invalidAnswerMessage
+	 * @return
+	 */
+	public int getInt(String question, String invalidAnswerMessage) {
+		setInformation(question);
+		int answer = -1;
+		while (answer == -1) {
+			try {
+				answer = Integer.parseInt(sc.nextLine());
+			} catch (NumberFormatException e) {
+				setInformation(invalidAnswerMessage.replace("%a", "" + answer + ""));
+			}
+		}
+		return sc.nextInt();
+	}
+	
 	/* (non-Javadoc)
 	 * @see view.V#getMultipleChoiceAnswer(java.lang.String, java.lang.String[])
 	 */
