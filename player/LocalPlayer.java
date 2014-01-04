@@ -16,7 +16,7 @@ public class LocalPlayer extends Player {
 				String card = this.game.getView().getInformation("Choose a card to play:");
 				cardToPlay = getCardIndex(card);
 				if (cardToPlay == -1) {
-					setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
+					getGame().getView().setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
 				} else {
 					break;
 				}
@@ -27,7 +27,7 @@ public class LocalPlayer extends Player {
 
 		@Override
 		public void drawCard(Card card) {
-			setInformation("You drew " + card);
+			getGame().getView().setInformation("You drew " + card);
 			cards.add(card);
 		}
 
@@ -38,7 +38,7 @@ public class LocalPlayer extends Player {
 				String playerName = this.game.getView().getInformation(message);
 				playerToChoose = game.getPlayer(playerName);
 				if (playerToChoose == null) {
-					setInformation("\nNo player named " + playerName);
+					getGame().getView().setInformation("\nNo player named " + playerName);
 				} else {
 					break;
 				}
@@ -59,7 +59,7 @@ public class LocalPlayer extends Player {
 				String cardName = this.game.getView().getInformation(message);
 				cardToChoose = game.getDeck().getCard(cardName);
 				if (cardToChoose == null) {
-					setInformation("\nNo card named " + cardName);
+					getGame().getView().setInformation("\nNo card named " + cardName);
 				} else {
 					break;
 				}
@@ -74,17 +74,7 @@ public class LocalPlayer extends Player {
 		}
 
 		@Override
-		public void showCards() {
-			View view = game.getView();
-			view.setInformation("Your hand:");
-			for (Card card : cards) {
-				view.setInformation(card.toString()); 
-			}
-			view.setInformation("");
-		}
-
-		@Override
-		public void setInformation(String information) {
-			getGame().getView().setInformation(information);
+		public String showCard(Card card) {
+			return card.toString();
 		}
 }

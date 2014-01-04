@@ -4,6 +4,8 @@ import game.Game;
 
 import java.util.LinkedList;
 
+import view.View;
+
 import deck.card.Card;
 
 /**
@@ -56,7 +58,7 @@ public abstract class Player {
 	 * Will call this players game.view with information
 	 * @param information
 	 */
-	public abstract void setInformation(String information);
+	//public abstract void setInformation(String information);
 	
 	/**
 	/* Play a card from players hand
@@ -68,18 +70,46 @@ public abstract class Player {
 	 * Draw a card for the player.
 	 * @param card	is card to be drawn
 	 */
-	public abstract void drawCard(Card card);
+	public void drawCard(Card card) {
+		getGame().getView().setInformation(getName() + " drew: " + showCard(card));
+		cards.add(card);
+	}
+	
+	/** 
+	 * Show a card for the player
+	 * @param card	the card to be shown
+	 * @return String	is the card to string 
+	 */
+	public abstract String showCard(Card card);
 	
 	/**
 	 * Show cards in players hand
 	 */
-	public abstract void showCards();
-	
 	public abstract Player askPlayerForPlayer(String message);
 	public abstract Player askPlayerForPlayer();
 	public abstract Card askPlayerForCard(String message);
 	public abstract Card askPlayerForCard();
 
+	/**
+	 * Will print out the cards in players hand.
+	 * If useIndividual is true, it will print the cards
+	 * based on the subclasses showCard() method.
+	 * 
+	 * @param useIndividual		is a boolean flag
+	 */
+	public void showCards(boolean useIndividual) {
+		View view = getGame().getView();
+		view.setInformation(getName() + "'s hand:");
+		for (Card card : cards) {
+			if (useIndividual) {
+				view.setInformation(showCard(card));
+			} else {
+				view.setInformation(card.toString()); 
+			}
+		}
+		view.setInformation("");
+	}
+	
 	/**
 	 * Will be called from playCard();
 	 * Actually play the card, trigger its effect if any and remove it from hand.
@@ -88,6 +118,7 @@ public abstract class Player {
 	 */
 	protected Card playCard(int cardIndex) {
 		Card card = cards.remove(cardIndex);
+		getGame().getView().setInformation((getName() + " played " + card.toString()));
 		card.triggerPlay(game, this);
 		return card;
 	}
@@ -110,10 +141,7 @@ public abstract class Player {
 	 */
 	public final void emptyHand(boolean showFirst) {
 		if (showFirst) {
-			setInformation(getName() + " had the hand:");
-			for (Card c : cards) {
-				setInformation(c.toString());
-			}
+			showCards(false);
 		}
 		
 		cards.clear();

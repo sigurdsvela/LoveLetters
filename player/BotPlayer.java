@@ -62,10 +62,10 @@ public class BotPlayer extends Player{
 	public Card askPlayerForCard() {
 		return askPlayerForCard("Choose a card:");
 	}
-	
-	@Override
-	public void showCards() {}
 
 	@Override
-	public void setInformation(String information) {}
+	public String showCard(Card card) {
+		return "Hidden Card";
+	}
+
 }
