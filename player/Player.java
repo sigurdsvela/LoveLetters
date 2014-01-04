@@ -86,6 +86,14 @@ public abstract class Player {
 
 	/* OTHER METHODS */
 	
+	public String[] getCardsAsStrings() {
+		return (String[])cards.toArray(new String[cards.size()]);
+	}
+	
+	public Card[] getCardsAsCards() {
+		return cards.toArray(new Card[cards.size()]);
+	}
+	
 	/**
 	 * Draw a card for the player.
 	 * @param card	is card to be drawn
