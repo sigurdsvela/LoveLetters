@@ -6,6 +6,7 @@ import deck.card.Baron;
 import deck.card.Card;
 import deck.card.Countess;
 import deck.card.Guard;
+import deck.card.Handmaid;
 import deck.card.King;
 import deck.card.Priest;
 import deck.card.Prince;
@@ -13,7 +14,7 @@ import deck.card.Princess;
 
 public class Deck {
 	private LinkedList<Card> cards;
-	private final Card[] typesOfCards = { new Guard(), new Priest(), new Baron(), new Prince(), new King(), new Countess(), new Princess() };
+	private final Card[] typesOfCards = { new Guard(), new Priest(), new Baron(), new Handmaid(), new Prince(), new King(), new Countess(), new Princess() };
 	
 	public Deck() {
 		//Initialize the card array
@@ -27,8 +28,8 @@ public class Deck {
 		cards.add(new deck.card.Priest());
 		cards.add(new deck.card.Baron());
 		cards.add(new deck.card.Baron());
-//		cards.add(new deck.card.Handmaid());
-//		cards.add(new deck.card.Handmaid());
+		cards.add(new deck.card.Handmaid());
+		cards.add(new deck.card.Handmaid());
 		cards.add(new deck.card.Prince());
 		cards.add(new deck.card.Prince());
 		cards.add(new deck.card.King());
