@@ -104,6 +104,34 @@ public abstract class Game {
 	}
 	
 	/**
+	 * Will return number of protected
+	 * players in active round.
+	 * @return int	is the number of protected players
+	 */
+	public int getNumProtectedPlayersInRound() {
+		int cnt = 0;
+		for (Player p : players) {
+			if (p.isPlayerProtected() && p.isPlayerInThisRound()) cnt++;
+		}
+		return cnt;
+	}
+	
+	/**
+	 * Will return players in active round
+	 * that is protected.
+	 * @return Player[] protected players in round
+	 */
+	public Player[] getProtectedPlayersInThisRound() {
+		ArrayList<Player> playersProtectedInThisRound = new ArrayList<Player>();
+		for (Player p : players) {
+			if (p.isPlayerInThisRound() && p.isPlayerProtected()) {
+				playersProtectedInThisRound.add(p);
+			}
+		}
+		return playersProtectedInThisRound.toArray( new Player[ playersProtectedInThisRound.size() ] ); 
+	}
+	
+	/**
 	 * Will return number of players still
 	 * active in current round of game.
 	 * @return int	number of active players in round
