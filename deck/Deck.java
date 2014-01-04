@@ -5,12 +5,13 @@ import java.util.LinkedList;
 import deck.card.Baron;
 import deck.card.Card;
 import deck.card.Guard;
+import deck.card.King;
 import deck.card.Priest;
 import deck.card.Prince;
 
 public class Deck {
 	private LinkedList<Card> cards;
-	private final Card[] typesOfCards = { new Guard(), new Priest(), new Baron(), new Prince() };
+	private final Card[] typesOfCards = { new Guard(), new Priest(), new Baron(), new Prince(), new King() };
 	
 	public Deck() {
 		//Initialize the card array
@@ -28,7 +29,7 @@ public class Deck {
 //		cards.add(new deck.card.Handmaid());
 		cards.add(new deck.card.Prince());
 		cards.add(new deck.card.Prince());
-//		cards.add(new deck.card.King());
+		cards.add(new deck.card.King());
 //		cards.add(new deck.card.Countess());
 //		cards.add(new deck.card.Princess());
 	}
