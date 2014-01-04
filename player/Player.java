@@ -73,6 +73,16 @@ public abstract class Player {
 	public void drawCard(Card card) {
 		getGame().getView().setInformation(getName() + " drew: " + showCard(card));
 		cards.add(card);
+		card.triggerCardWasDrawn(game, this);
+	}
+	
+	/**
+	 * Basically the same as drawCard expcept
+	 * it does not call the trigger method nor print anything.
+	 * @param card	to add to hand
+	 */
+	public void addCard(Card card) {
+		cards.add(card);
 	}
 	
 	/** 
