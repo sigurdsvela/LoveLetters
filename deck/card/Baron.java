@@ -12,14 +12,22 @@ public class Baron extends Card {
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
-				return true;
+				this.versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
+				
+				// If cardOwner chose itself cancel battle.
+				if (versusPlayer.getName().compareTo(cardOwner.getName()) == 0) {
+					game.getView().setInformation("Battle is cancelled due to lack of opponent.");
+					return false;
+				} else {
+					return true;
+				}
 			}
 
 			@Override
 			public void run(Game game, Player cardOwner) {
+				// Run the epic battle of the history!
 				Card versusPlayerCard, cardOwnerCard;
-				versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
-				
+
 				versusPlayerCard = versusPlayer.getBiggestDistanceCard();
 				cardOwnerCard = cardOwner.getBiggestDistanceCard();
 				
@@ -32,6 +40,19 @@ public class Baron extends Card {
 					loosingPlayer = versusPlayer;
 					versusPlayer.setIsPlayerInThisRound(false);
 				}
+				
+				// Announce winner of battle!
+				String msg = "";
+				if(loosingPlayer == null) {
+					msg = "No player won.";
+				} else {
+					msg = loosingPlayer.getName() + " lost and is out of the round\n";
+					msg += loosingPlayer.getName() + " had the cards:\n";
+					for (Card c : loosingPlayer.getCards()) {
+						msg += c.toString();
+					}
+				}
+				game.getView().setInformation(msg);
 			}
 
 			@Override
@@ -41,18 +62,7 @@ public class Baron extends Card {
 
 			@Override
 			public String message() {
-				String msg = "";
-				
-				if(loosingPlayer == null) {
-					return "No player won.";
-				} else {
-					msg += loosingPlayer.getName() + " lost and is out of the round\n";
-					msg += loosingPlayer.getName() + " had the cards:\n";
-					for (Card c : loosingPlayer.getCards()) {
-						msg += c.toString() + "\n";
-					}
-					return msg;
-				}
+				return null;
 			}
 
 			@Override
