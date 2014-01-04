@@ -15,7 +15,7 @@ public class Baron extends Card {
 				this.versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
 				
 				// If cardOwner chose itself cancel battle.
-				if (versusPlayer.getName().compareTo(cardOwner.getName()) == 0) {
+				if (versusPlayer.compareTo(cardOwner) == 0) {
 					game.getView().setInformation("Battle is cancelled due to lack of opponent.");
 					return false;
 				} else {

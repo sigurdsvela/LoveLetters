@@ -15,7 +15,7 @@ public class Guard extends Card{
 				this.affectedPlayer = affectedPlayer;
 				
 				// If cardOwner chose itself, do nothing
-				if (affectedPlayer.getName().compareTo(cardOwner.getName()) == 0) {
+				if (affectedPlayer.compareTo(cardOwner) == 0) {
 					game.getView().setInformation("Nothing happened because " + cardOwner.getName() + " chose himself/herself.");
 					return false;
 				}

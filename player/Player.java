@@ -10,7 +10,7 @@ import deck.card.Card;
 
 /**
  */
-public abstract class Player {
+public abstract class Player implements Comparable<Player> {
 	
 	/**
 	 * Holds the game this player is in
@@ -305,5 +305,10 @@ public abstract class Player {
 	
 	public final void setIsPlayerInThisRound(boolean b) {
 		inThisRound = b;
+	}
+
+	@Override
+	public int compareTo(Player other) {
+		return name.compareToIgnoreCase(other.getName());
 	}
 }
