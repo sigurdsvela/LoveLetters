@@ -15,15 +15,15 @@ public class LocalPlayer extends Player {
 			
 			if (forceCardIndex == -1) {
 				// Get a card selected from local player
-				while (true) {
-					String card = this.game.getView().getInformation("Choose a card to play:");
-					cardToPlay = getCardIndex(card);
-					if (cardToPlay == -1) {
-						getGame().getView().setInformation("\nYou do not have a card \""+ card +"\". Please choose another.");
-					} else {
-						break;
-					}
-				}
+				String card = this
+						.getGame()
+						.getView()
+						.getMultipleChoiceAnswerIgnoreCase(
+								"Choose a card to play:",
+								getCardsAsStrings(),
+								"\nYou do not have a card \"%a\". Please choose another."
+						);
+				cardToPlay = getCardIndex(card);
 			} else {
 				// Tell local player that they have a card they MUST play
 				getGame().getView().getInformation("You MUST play " + getCard(forCardIndex).toString() + " (Enter to continue...)");
