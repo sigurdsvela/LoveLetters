@@ -86,6 +86,18 @@ public abstract class Player implements Comparable<Player> {
 
 	/* OTHER METHODS */
 	
+	public String[] getCardsAsStrings() {
+		String[] a = new String[cards.size()];
+		for (int i = 0; i < cards.size(); i++) {
+			a[i] = cards.get(i).toString();
+		}
+		return a;
+	}
+	
+	public Card[] getCardsAsCards() {
+		return cards.toArray(new Card[cards.size()]);
+	}
+	
 	/**
 	 * Draw a card for the player.
 	 * @param card	is card to be drawn
