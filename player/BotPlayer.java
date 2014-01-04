@@ -41,7 +41,7 @@ public class BotPlayer extends Player{
 			while (true) {
 				int playerIndex = (int) (Math.random() * playersInRound.length);
 				playerToChoose = playersInRound[playerIndex];
-				if (playerToChoose.getName().compareTo(getName()) != 0 && !playerToChoose.isPlayerProtected()) {
+				if (compareTo(playerToChoose) != 0 && !playerToChoose.isPlayerProtected()) {
 					break;
 				}
 			}

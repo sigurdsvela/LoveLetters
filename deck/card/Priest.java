@@ -13,7 +13,7 @@ public class Priest extends Card {
 			public boolean condition(Game game, Player cardOwner) {
 				this.affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card(s) of?");
 				
-				if (affectedPlayer.getName().compareTo(cardOwner.getName()) == 0) {
+				if (affectedPlayer.compareTo(cardOwner) == 0) {
 					// This can really only happen if all but cardOwner is protected
 					game.getView().setInformation("Forgotten our cards already have we, " + cardOwner.getName() + "?");
 					return false;
