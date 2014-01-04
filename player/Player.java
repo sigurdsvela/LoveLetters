@@ -87,7 +87,11 @@ public abstract class Player {
 	/* OTHER METHODS */
 	
 	public String[] getCardsAsStrings() {
-		return (String[])cards.toArray(new String[cards.size()]);
+		String[] a = new String[cards.size()];
+		for (int i = 0; i < cards.size(); i++) {
+			a[i] = cards.get(i).toString();
+		}
+		return a;
 	}
 	
 	public Card[] getCardsAsCards() {
