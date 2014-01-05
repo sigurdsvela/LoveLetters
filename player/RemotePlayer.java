@@ -3,7 +3,6 @@ package player;
 import game.Game;
 
 import deck.card.Card;
-import game.Game;
 
 /**
  * Creates a new remote player
