@@ -27,7 +27,12 @@ public class Guard extends Card{
 					else cardOwner.getGame().getView().println("Not allowed to guess " + notAllowed.getName());
 				}
 				
-				return affectedPlayer.hasCard(cardGuess);
+				if (affectedPlayer.hasCard(cardGuess)) {
+					return true;
+				} else {
+					game.getView().println(affectedPlayer.getName() + " doesn't have the card " + cardGuess.toString());
+					return false;
+				}
 			}
 
 			public void run(Game game, Player cardOwner) {
