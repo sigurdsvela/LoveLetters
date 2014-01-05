@@ -17,7 +17,7 @@ public class BotPlayer extends Player{
 		add("emily");
 		add("botonator");
 		add("thack");
-		add("jokke");
+		add("joa");
 		add("siggi");
 	}};
 	
