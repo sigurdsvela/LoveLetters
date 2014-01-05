@@ -32,16 +32,13 @@ public class Guard extends Card{
 
 			public void run(Game game, Player cardOwner) {
 				affectedPlayer.setIsPlayerInThisRound(false);
+				game.getView().println("You guessed correctly, " + affectedPlayer.getName() + " is out of this round.");
 			}
 
 			public int when() {
 				return CardRule.ON_PLAY;
 			}
-
-			public String message() {
-				return "You guessed correctly, " + affectedPlayer.getName() + " is out of this round.";
-			}
-
+			
 			public String description() {
 				return "When you play guard, you may guess the hand of one of your opponents." +
 						"If you guess correctly, that opponent is out of this round";

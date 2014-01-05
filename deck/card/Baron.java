@@ -61,11 +61,6 @@ public class Baron extends Card {
 			}
 
 			@Override
-			public String message() {
-				return null;
-			}
-
-			@Override
 			public String description() {
 				return null;
 			}

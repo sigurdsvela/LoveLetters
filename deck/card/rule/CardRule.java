@@ -47,12 +47,6 @@ public abstract class CardRule {
 	public abstract int when();
 	
 	/**
-	 * A message to print if this rule is fulfilled (read: condition returns true)
-	 * @return The message
-	 */
-	public String message() { return null; }
-	
-	/**
 	 * A description of this rule
 	 * @return The description
 	 */

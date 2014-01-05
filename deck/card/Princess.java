@@ -8,17 +8,16 @@ public class Princess extends Card {
 
 	public Princess() {
 		addRule(new CardRule() {
-			Player cardOwner;
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
-				this.cardOwner = cardOwner;
 				return true;
 			}
 			
 			@Override
 			public void run(Game game, Player cardOwner) {
 				cardOwner.setIsPlayerInThisRound(false);
+				game.getView().println(cardOwner.getName() + " put down " + getName() + " and is therefore out of round.");
 			}
 			
 			@Override
@@ -28,10 +27,6 @@ public class Princess extends Card {
 			@Override
 			public String description() {
 				return "If you either play Princess or is forced to discard it, you're out of the round.";
-			}
-			
-			public String message() {
-				return cardOwner.getName() + " put down " + getName() + " and is therefore out of round.";
 			}
 		});
 	}

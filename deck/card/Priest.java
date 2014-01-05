@@ -35,10 +35,6 @@ public class Priest extends Card {
 				return CardRule.ON_PLAY;
 			}
 
-			public String message() {
-				return null;
-			}
-
 			public String description() {
 				return "When you play priest, you may choose a player and look at his or her hand.";
 			}

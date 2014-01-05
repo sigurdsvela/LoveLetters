@@ -22,10 +22,6 @@ public class Countess extends Card {
 				return CardRule.ON_PLAYER_DREW_CARD | CardRule.ON_DRAWN;
 			}
 
-			public String message() {
-				return null;
-			}
-
 			@Override
 			public String description() {
 				return "If you have this card on your hand whilest" +
