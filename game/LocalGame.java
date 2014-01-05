@@ -56,6 +56,8 @@ public class LocalGame extends Game {
 						}
 					}
 					
+					opponents = getView().getIntBetweenBoundaries("Please specify wished number of opponents? (1-3)", 1, 3);
+					
 					// Clear player list before new game
 					players = new ArrayList<Player>();
 					
