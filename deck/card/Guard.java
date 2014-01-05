@@ -7,12 +7,11 @@ import deck.card.rule.CardRule;
 public class Guard extends Card{
 
 	public Guard() {
-		this.addRule(new CardRule() {
+		addRule(new CardRule() {
 			private Player affectedPlayer;
 			
 			public boolean condition(Game game, Player cardOwner) {
-				Player affectedPlayer = cardOwner.askPlayerForPlayer("Choose a player to guess the card for.");
-				this.affectedPlayer = affectedPlayer;
+				affectedPlayer = cardOwner.askPlayerForPlayer("Choose a player to guess the card for.");
 				
 				// If cardOwner chose itself, do nothing
 				if (affectedPlayer.compareTo(cardOwner) == 0) {
@@ -53,13 +52,11 @@ public class Guard extends Card{
 	
 	@Override
 	public byte getDistance() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return "Guard";
 	}
 }

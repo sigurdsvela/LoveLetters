@@ -7,7 +7,7 @@ import deck.card.rule.CardRule;
 public class Countess extends Card {
 
 	public Countess() {
-		this.addRule(new CardRule() {
+		addRule(new CardRule() {
 
 			public boolean condition(Game game, Player cardOwner) {
 				return cardOwner.hasCard( new King() ) || cardOwner.hasCard( new Prince() );

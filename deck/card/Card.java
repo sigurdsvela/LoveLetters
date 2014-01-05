@@ -14,8 +14,6 @@ public abstract class Card implements Comparable<Card> {
 	private ArrayList<CardRule> onPlayerDrewCardRules;
 	private ArrayList<CardRule> onDrawnRules;
 	
-	public abstract byte getDistance();
-	public abstract String getName();
 	
 	protected Card() {
 		onPlayRules = new ArrayList<CardRule>();
@@ -23,6 +21,18 @@ public abstract class Card implements Comparable<Card> {
 		onPlayerDrewCardRules = new ArrayList<CardRule>();
 		onDrawnRules = new ArrayList<CardRule>();
 	}
+	
+	/**
+	 * Get the distance of this bard
+	 * @return The distance
+	 */
+	public abstract byte getDistance();
+	
+	/**
+	 * Get the name of this card
+	 * @return
+	 */
+	public abstract String getName();
 	
 	protected void addRule(CardRule rule) {
 		if ((rule.when() & CardRule.ON_PLAY) == CardRule.ON_PLAY) {
