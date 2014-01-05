@@ -1,7 +1,6 @@
 package player;
 
 import game.Game;
-import view.View;
 import deck.card.Card;
 
 public class LocalPlayer extends Player {
@@ -26,12 +25,12 @@ public class LocalPlayer extends Player {
 				cardToPlay = getCardIndex(card);
 			} else {
 				// Tell local player that they have a card they MUST play
-				getGame().getView().getInformation("You MUST play " + getCard(forCardIndex).toString() + " (Enter to continue...)");
+				game.getView().getInformation("You MUST play " + getCard(forCardIndex).toString() + " (Enter to continue...)");
 				cardToPlay = forCardIndex;
 				setForceCardIndex(-1);
 			}
 			
-			this.game.getView().setInformation("");
+			game.getView().setInformation("");
 			return playCard(cardToPlay);
 		}
 
@@ -39,19 +38,19 @@ public class LocalPlayer extends Player {
 		public Player askPlayerForPlayer(String message) {
 			Player playerToChoose;
 			while (true) {
-				String playerName = this.game.getView().getInformation(message);
+				String playerName = game.getView().getInformation(message);
 				playerToChoose = game.getPlayer(playerName);
 				if (playerToChoose == null) {
-					getGame().getView().setInformation("\nNo player named " + playerName);
+					game.getView().setInformation("\nNo player named " + playerName);
 				} else if (playerToChoose.isPlayerProtected()){
-					getGame().getView().setInformation("\n" + playerToChoose.getName() + " is protected this round.");
+					game.getView().setInformation("\n" + playerToChoose.getName() + " is protected this round.");
 				} else if (!playerToChoose.isPlayerInThisRound()) {
-					getGame().getView().setInformation("\n" + playerToChoose.getName() + " is out of this round.");
+					game.getView().setInformation("\n" + playerToChoose.getName() + " is out of this round.");
 				} else {
 					break;
 				}
 			}
-			this.game.getView().setInformation("");
+			game.getView().setInformation("");
 			return playerToChoose;
 		}
 
@@ -64,15 +63,15 @@ public class LocalPlayer extends Player {
 		public Card askPlayerForCard(String message) {
 			Card cardToChoose;
 			while (true) {
-				String cardName = this.game.getView().getInformation(message);
+				String cardName = game.getView().getInformation(message);
 				cardToChoose = game.getDeck().getCard(cardName);
 				if (cardToChoose == null) {
-					getGame().getView().setInformation("\nNo card named " + cardName);
+					game.getView().setInformation("\nNo card named " + cardName);
 				} else {
 					break;
 				}
 			}
-			this.game.getView().setInformation("");
+			game.getView().setInformation("");
 			return cardToChoose;
 		}
 

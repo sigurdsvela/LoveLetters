@@ -6,7 +6,7 @@ import deck.card.Card;
 
 public class BotPlayer extends Player{
 	public static final int NUM_BOT_NAMES = 7;
-	public static final String[] botNames = {"Ola", "Jack", "Jon", "Master", "Vanessa", "Christy", "Emelie", "Botonator"};
+	public static final String[] botNames = {"Ola", "Jack", "Jon", "Master", "Vanessa", "Christy", "Emily", "Botonator"};
 	public BotPlayer(String name, Game game) {
 		super(name, game);
 	}
@@ -33,10 +33,10 @@ public class BotPlayer extends Player{
 		Player[] playersInRound = game.getPlayersInThisRound();
 		
 		// If all players except bot is protected choose bot, else choose random.
-		if ( getGame().getNumPlayersInRound() == (getGame().getNumProtectedPlayersInRound() + 1)) {
+		if ( game.getNumPlayersInRound() == (game.getNumProtectedPlayersInRound() + 1)) {
 			// All but bot is protected
 			playerToChoose = this;
-			view.setInformation(getName() + " chose himself/herself. All other players are protected!\n");
+			view.setInformation(name + " chose himself/herself. All other players are protected!\n");
 		} else {
 			while (true) {
 				int playerIndex = (int) (Math.random() * playersInRound.length);
@@ -45,7 +45,7 @@ public class BotPlayer extends Player{
 					break;
 				}
 			}
-			view.setInformation(getName() + " chose " + playerToChoose.getName() + ".\n");
+			view.setInformation(name + " chose " + playerToChoose.getName() + ".\n");
 		}
 		
 		return playerToChoose;
@@ -65,7 +65,7 @@ public class BotPlayer extends Player{
 	
 		int cardIndex = (int) (Math.random() * cardsToChooseFrom.length);
 		cardToChoose = cardsToChooseFrom[cardIndex];
-		view.setInformation(getName() + " chose " + cardToChoose.getName() + ".\n");
+		view.setInformation(name + " chose " + cardToChoose.getName() + ".\n");
 		return cardToChoose;
 	}
 	

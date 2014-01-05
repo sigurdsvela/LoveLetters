@@ -49,16 +49,10 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	protected String name;
 	
-	/**
-	 * Holds the max amount of cards a player can have
-	 */
-	public static final int NUMBER_OF_CARDS = 2;
-	
-	
 	public Player(String name, Game game) {
-		cards = new LinkedList<Card>();
 		this.name = name;
 		this.game = game;
+		cards = new LinkedList<Card>();
 		lettersDelivered = 0;
 		forceCardIndex = -1;
 		inThisRound = true;
@@ -93,9 +87,14 @@ public abstract class Player implements Comparable<Player> {
 		}
 		return a;
 	}
-	
-	public Card[] getCardsAsCards() {
-		return cards.toArray(new Card[cards.size()]);
+
+	/**
+	 * Get all cards in players hand
+	 * @return card[] is the players hand
+	 */
+	public final Card[] getCards() {
+		Card[] toArray = new Card[ cards.size() ];
+		return cards.toArray(toArray);
 	}
 	
 	/**
@@ -103,7 +102,7 @@ public abstract class Player implements Comparable<Player> {
 	 * @param card	is card to be drawn
 	 */
 	public void drawCard(Card card) {
-		getGame().getView().setInformation(getName() + " drew: " + showCard(card));
+		game.getView().setInformation(getName() + " drew: " + showCard(card));
 		cards.add(card);
 		
 		// Trigger effect of "on drawn rule" for card AND player "drew a card" for cards in players hand.
@@ -130,8 +129,8 @@ public abstract class Player implements Comparable<Player> {
 	 * @param useIndividual		is a boolean flag
 	 */
 	public void showCards(boolean useIndividual) {
-		View view = getGame().getView();
-		view.setInformation(getName() + "'s hand:");
+		View view = game.getView();
+		view.setInformation(name + "'s hand:");
 		for (Card card : cards) {
 			if (useIndividual) {
 				view.setInformation(showCard(card));
@@ -151,7 +150,7 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	protected Card playCard(int cardIndex) {
 		Card card = cards.remove(cardIndex);
-		getGame().getView().setInformation(getName() + " played " + card.toString());
+		game.getView().setInformation(getName() + " played " + card.toString());
 		card.triggerPlay(game, this);
 		return card;
 	}
@@ -255,15 +254,6 @@ public abstract class Player implements Comparable<Player> {
 			}
 		}
 		return -1;
-	}
-	
-	/**
-	 * Get all cards in players hand
-	 * @return card[] is the players hand
-	 */
-	public final Card[] getCards() {
-		Card[] toArray = new Card[ cards.size() ];
-		return cards.toArray(toArray);
 	}
 	
 	public final int getForceCardIndex() {
