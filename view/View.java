@@ -1,6 +1,43 @@
 package view;
 
 public abstract class View {
+	
+	public abstract boolean getYesOrNo(String question);
+
+	public abstract boolean getYesOrNo(String question,
+			String invalidAnswerMessage);
+
+	/**
+	 * Get int from user between <i>lowerBound<i> and <i>upperCound<i>
+	 * 
+	 * @param question
+	 * @param lowerBound
+	 * @param upperBound
+	 * @param invalidAnswerMessage
+	 * @return
+	 */
+	public abstract int getIntBetweenBoundaries(String question,
+			int lowerBound, int upperBound, String invalidAnswerMessage);
+
+	/**
+	 * set {@link #getIntBetweenBoundaries(String, int, int, String)  }
+	 */
+	public abstract int getIntBetweenBoundaries(String question,
+			int lowerBound, int upperBound);
+
+	/**
+	 * set {@link #getInt(String, String) }
+	 */
+	public abstract int getInt(String question);
+
+	/**
+	 * Get a int from user
+	 * @param question
+	 * @param invalidAnswerMessage
+	 * @return
+	 */
+	public abstract int getInt(String question, String invalidAnswerMessage);
+	
 	/**
 	 * Will be printing information to view.
 	 * @param information	is the text to be printed to view
