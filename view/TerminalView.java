@@ -33,10 +33,18 @@ public class TerminalView extends View {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see view.v#getYesOrNo(java.lang.String)
+	 */
+	@Override
 	public boolean getYesOrNo(String question) {
 		return getYesOrNo(question, "%a is not a valid answer");
 	}
 	
+	/* (non-Javadoc)
+	 * @see view.v#getYesOrNo(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public boolean getYesOrNo(String question, String invalidAnswerMessage) {
 		boolean answer = false;
 		String sAnswer = null;
@@ -60,15 +68,10 @@ public class TerminalView extends View {
 		return answer;
 	}
 	
-	/**
-	 * Get int from user between <i>lowerBound<i> and <i>upperCound<i>
-	 * 
-	 * @param question
-	 * @param lowerBound
-	 * @param upperBound
-	 * @param invalidAnswerMessage
-	 * @return
+	/* (non-Javadoc)
+	 * @see view.v#getIntBetweenBoundaries(java.lang.String, int, int, java.lang.String)
 	 */
+	@Override
 	public int getIntBetweenBoundaries(String question, int lowerBound, int upperBound, String invalidAnswerMessage) {
 		int answer = -1;
 		while (answer == -1) {
@@ -83,28 +86,28 @@ public class TerminalView extends View {
 		return answer;
 	}
 	
-	/**
-	 * set {@link #getIntBetweenBoundaries(String, int, int, String)  }
+	/* (non-Javadoc)
+	 * @see view.v#getIntBetweenBoundaries(java.lang.String, int, int)
 	 */
+	@Override
 	public int getIntBetweenBoundaries(String question, int lowerBound, int upperBound) {
 		return getIntBetweenBoundaries(question, lowerBound, upperBound, "\"%a\" is not a number between " + lowerBound + " and " + upperBound + "!");
 	}
 	
 	
-	/**
-	 * set {@link #getInt(String, String) }
+	/* (non-Javadoc)
+	 * @see view.v#getInt(java.lang.String)
 	 */
+	@Override
 	public int getInt(String question) {
 		return getInt(question, "\"%a\" is not a number.");
 	}
 	
 	
-	/**
-	 * Get a int from user
-	 * @param question
-	 * @param invalidAnswerMessage
-	 * @return
+	/* (non-Javadoc)
+	 * @see view.v#getInt(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public int getInt(String question, String invalidAnswerMessage) {
 		setInformation(question);
 		int answer = -1;
