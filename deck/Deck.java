@@ -11,10 +11,12 @@ import deck.card.King;
 import deck.card.Priest;
 import deck.card.Prince;
 import deck.card.Princess;
+import deck.card.custom.Jester;
 
 public class Deck {
 	private LinkedList<Card> cards;
-	private final Card[] typesOfCards = { new Guard(), new Priest(), new Baron(), new Handmaid(), new Prince(), new King(), new Countess(), new Princess() };
+	private final Card[] typesOfCards = { new Guard(), new Priest(), new Baron(), new Handmaid(), new Prince(),
+						new King(), new Countess(), new Princess(), new Jester() };
 	
 	public Deck() {
 		//Initialize the card array
@@ -35,6 +37,7 @@ public class Deck {
 		cards.add(new deck.card.King());
 		cards.add(new deck.card.Countess());
 		cards.add(new deck.card.Princess());
+		cards.add(new deck.card.custom.Jester());
 	}
 	
 	/**
