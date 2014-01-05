@@ -44,17 +44,6 @@ public class LocalGame extends Game {
 					view.println("==== NEW GAME ====");
 		
 					// Get number of wished opponents from view
-					while (true) {
-						view.println("Please specify wished number of opponents? (1-3) ");
-						try {
-							opponents = Integer.parseInt(view.getInformation());
-							if (opponents > 0 && opponents < 4) break;
-		
-						} catch (Exception e) {
-							view.println("Please specify a number.");
-						}
-					}
-					
 					opponents = getView().getIntBetweenBoundaries("Please specify wished number of opponents? (1-3)", 1, 3);
 					
 					// Clear player list before new game
