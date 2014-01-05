@@ -1,15 +1,45 @@
 package player;
 
 import game.Game;
+
+import java.util.ArrayList;
+
 import view.View;
 import deck.card.Card;
 
 public class BotPlayer extends Player{
-	public static final int NUM_BOT_NAMES = 7;
-	public static final String[] botNames = {"Ola", "Jack", "Jon", "Master", "Vanessa", "Christy", "Emily", "Botonator"};
-	public BotPlayer(String name, Game game) {
+	private static final ArrayList<String> botNames = new ArrayList<String>() {{
+		add("ola");
+		add("jack");
+		add("jon");
+		add("vanessa");
+		add("christy");
+		add("emily");
+		add("botonator");
+		add("thack");
+		add("jokke");
+		add("siggi");
+	}};
+	
+	private BotPlayer(String name, Game game) {
 		super(name, game);
 	}
+	
+	public BotPlayer(Game game) {
+		super(popRandomBotName(), game);
+	}
+	
+	/**
+	 * Remove and return a random name from the bots.
+	 * @return
+	 */
+	private static String popRandomBotName() {
+		int index = (int) Math.random() * botNames.size();
+		String name = botNames.get(index);
+		botNames.remove(index);
+		return name;
+	}
+	
 	
 	@Override
 	public Card playCard() {

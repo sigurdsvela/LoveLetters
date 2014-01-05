@@ -54,14 +54,12 @@ public class LocalGame extends Game {
 					
 					// Add wished number of BOTs to the player list
 					int c = 0, botNameIndex;
-					String botName;
+					BotPlayer player;
 					while(c < opponents) {
-						// Create a random name for BOT
-						botNameIndex =  (int) (BotPlayer.NUM_BOT_NAMES * Math.random());
-						botName = BotPlayer.botNames[botNameIndex];
-						if (getPlayer(botName) == null) {
+						player = new BotPlayer( this );
+						if (getPlayer(player.getName()) == null) {
 							// Only add bot with name if no other player in game has same name
-							playerJoin(new BotPlayer( botName, this ));
+							playerJoin(player);
 							c++;
 						}
 					}
