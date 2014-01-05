@@ -52,12 +52,15 @@ public abstract class Game {
 	/* OTHER METHODS */
 	/**
 	 * Join a player. This can only be done if the game
-	 * has not already started
+	 * has not already started or if a player with players name
+	 * already exist in game.
 	 * @param player
+	 * @return true if player is added, false otherwise
 	 */
-	public void playerJoin(Player player) {
-		if (hasStarted()) return;
+	public boolean playerJoin(Player player) {
+		if (hasStarted() || getPlayer( player.getName() ) != null) return false;
 		players.add(player);
+		return true;
 	}
 
 	public boolean hasStarted() {
