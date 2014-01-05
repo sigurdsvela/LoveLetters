@@ -53,15 +53,9 @@ public class LocalGame extends Game {
 					players.add( new LocalPlayer(localPlayerName, this));
 					
 					// Add wished number of BOTs to the player list
-					int c = 0, botNameIndex;
-					BotPlayer player;
+					int c = 0;
 					while(c < opponents) {
-						player = new BotPlayer( this );
-						if (getPlayer(player.getName()) == null) {
-							// Only add bot with name if no other player in game has same name
-							playerJoin(player);
-							c++;
-						}
+						if (playerJoin(new BotPlayer( this ))) c++;
 					}
 					
 					// Print name of players
