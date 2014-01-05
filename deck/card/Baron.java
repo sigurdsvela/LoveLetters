@@ -7,12 +7,12 @@ import deck.card.rule.CardRule;
 public class Baron extends Card {
 
 	public Baron() {
-		this.addRule(new CardRule() {
-			Player loosingPlayer, versusPlayer;
+		addRule(new CardRule() {
+			private Player loosingPlayer, versusPlayer;
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
-				this.versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
+				versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
 				
 				// If cardOwner chose itself cancel battle.
 				if (versusPlayer.compareTo(cardOwner) == 0) {

@@ -23,13 +23,12 @@ public class LocalGame extends Game {
 		view.setInformation("Welcome to LoveLetters!");
 		
 		// Get name for player
-		view.setInformation("What is your name, charmer?");
-		localPlayerName = view.getInformation();
+		localPlayerName = view.getInformation("What is your name, charmer?");
  	}
 	
 	@Override
 	public void start() {
-		gameState = GameState.Menu;
+		gameState = GameState.MENU;
 		gameLoop();
 	}
 	
@@ -38,8 +37,8 @@ public class LocalGame extends Game {
 		while(true) {
 			
 			switch(gameState) {
-				case Menu:
-					int opponents = -1, bNameIndex;
+				case MENU:
+					int opponents = -1;
 					
 					// Announce new game
 					view.setInformation("==== NEW GAME ====");
@@ -56,6 +55,8 @@ public class LocalGame extends Game {
 						}
 					}
 					
+					opponents = getView().getIntBetweenBoundaries("Please specify wished number of opponents? (1-3)", 1, 3);
+					
 					// Clear player list before new game
 					players = new ArrayList<Player>();
 					
@@ -63,14 +64,15 @@ public class LocalGame extends Game {
 					players.add( new LocalPlayer(localPlayerName, this));
 					
 					// Add wished number of BOTs to the player list
-					int c = 0; String bName;
+					int c = 0, botNameIndex;
+					String botName;
 					while(c < opponents) {
 						// Create a random name for BOT
-						bNameIndex =  (int) (BotPlayer.NUM_BOT_NAMES * Math.random());
-						bName = BotPlayer.botNames[bNameIndex];
-						if (getPlayer(bName) == null) {
+						botNameIndex =  (int) (BotPlayer.NUM_BOT_NAMES * Math.random());
+						botName = BotPlayer.botNames[botNameIndex];
+						if (getPlayer(botName) == null) {
 							// Only add bot with name if no other player in game has same name
-							playerJoin(new BotPlayer( bName, this ));
+							playerJoin(new BotPlayer( botName, this ));
 							c++;
 						}
 					}
@@ -86,10 +88,10 @@ public class LocalGame extends Game {
 					currentPlayerIndex =  (int) (getNumPlayers() * Math.random());
 					
 					// Update gamestate variable to Game
-					gameState = GameState.Game;
+					gameState = GameState.GAME;
 					break; // End of Main case
 					
-				case Game:
+				case GAME:
 					Player currentPlayer;
 					Player[] winners;
 					
@@ -172,25 +174,20 @@ public class LocalGame extends Game {
 						view.setInformation("===== END OF GAME =====");
 						
 						// Do you want to play again?
-						String answer = "";
-						while (true) {
-							view.setInformation("Do you want to play again? (Y/N)");
-							answer = view.getInformation().toLowerCase();
-							if (answer.compareTo("y") == 0){
-								gameState = GameState.Menu;
-								break;
-							} else if (answer.compareTo("n") == 0){
-								gameState = GameState.Exit;
-								break;
-							} else {
-								view.setInformation("Please specify Y or N");
-							}
+						boolean answer;
+						answer = view.getYesOrNo("Do you want to play again?");
+						if (answer){
+							gameState = GameState.MENU;
+							break;
+						} else {
+							gameState = GameState.EXIT;
+							break;
 						}
 					}
 					
 					break; // End of Game case
 					
-				case Exit:
+				case EXIT:
 					view.setInformation("Thanks for playing!");
 					System.exit(0);
 					break; // End of Exit case

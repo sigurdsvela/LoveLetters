@@ -7,13 +7,12 @@ import deck.card.rule.CardRule;
 public class King extends Card {
 
 	public King() {
-		this.addRule(new CardRule() {
+		addRule(new CardRule() {
 			private Player affectedPlayer;
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
-				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to switch hand with?");
-				this.affectedPlayer = affectedPlayer;
+				affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to switch hand with?");
 				
 				// If cardOwner chose itself, do nothing
 				if (affectedPlayer.compareTo(cardOwner) == 0) {

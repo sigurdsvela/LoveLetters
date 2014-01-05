@@ -7,7 +7,7 @@ import deck.card.rule.CardRule;
 public class Princess extends Card {
 
 	public Princess() {
-		this.addRule(new CardRule() {
+		addRule(new CardRule() {
 			Player cardOwner;
 			
 			@Override

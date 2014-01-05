@@ -9,9 +9,6 @@ import view.View;
 import deck.Deck;
 import deck.card.Card;
 
-/**
- * Starts a new Local game
- */
 public abstract class Game {
 	protected ArrayList<Player> players;
 	protected Card removedAtStart;
@@ -26,7 +23,7 @@ public abstract class Game {
 	 *  Enum used for deciding which part of the game is running
 	 */
 	protected enum GameState {
-		Menu, Game, Exit
+		MENU, GAME, EXIT
 	}
 	
 	public Game() {
@@ -65,18 +62,6 @@ public abstract class Game {
 
 	public boolean hasStarted() {
 		return started;
-	}
-	
-	/**
-	 * Will return current deck of game
-	 * @return Deck	is the deck being used in game
-	 */
-	public Deck getDeck() {
-		return deck;
-	}
-	
-	public Card getRemovedAtStart() {
-		return removedAtStart;
 	}
 	
 	/**
@@ -160,31 +145,6 @@ public abstract class Game {
 	}
 	
 	/**
-	 * Will return number of players in game,
-	 * wether or not active in current round.
-	 * @return int	number of players in game
-	 */
-	public int getNumPlayers() {
-		return players.size();
-	}
-	
-	/**
-	 * Get a player based on name
-	 * Returns null if no player with the name <i>name<i> is found
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public Player getPlayer(String name) {
-		for (Player p: players) {
-			if (p.getName().compareToIgnoreCase(name) == 0) {
-				return p;
-			}
-		}
-		return null;
-	}
-	
-	/**
 	 * Will return an array of the winners of a round
 	 * @return Player[]	is the winners of a round
 	 * 			OR null if no players left in round (error)
@@ -214,6 +174,31 @@ public abstract class Game {
 		// Convert back from linked list to Player array and return it
 		return winners.toArray( new Player[ winners.size() ] );
 	}
+	
+	/**
+	 * Will return number of players in game,
+	 * wether or not active in current round.
+	 * @return int	number of players in game
+	 */
+	public int getNumPlayers() {
+		return players.size();
+	}
+	
+	/**
+	 * Get a player based on name
+	 * Returns null if no player with the name <i>name<i> is found
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Player getPlayer(String name) {
+		for (Player p: players) {
+			if (p.getName().compareToIgnoreCase(name) == 0) {
+				return p;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Will return view of the game
@@ -224,5 +209,21 @@ public abstract class Game {
 	 */
 	public final View getView() {
 		return view;
+	}
+	
+	/**
+	 * Will return current deck of game
+	 * @return Deck	is the deck being used in game
+	 */
+	public Deck getDeck() {
+		return deck;
+	}
+	
+	/**
+	 * Get the card that was set aside at start
+	 * @return Das card
+	 */
+	public Card getRemovedAtStart() {
+		return removedAtStart;
 	}
 }

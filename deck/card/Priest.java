@@ -7,11 +7,11 @@ import deck.card.rule.CardRule;
 public class Priest extends Card {
 
 	public Priest() {
-		this.addRule(new CardRule() {
+		addRule(new CardRule() {
 			Player affectedPlayer;
 			
 			public boolean condition(Game game, Player cardOwner) {
-				this.affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card(s) of?");
+				affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card(s) of?");
 				
 				if (affectedPlayer.compareTo(cardOwner) == 0) {
 					// This can really only happen if all but cardOwner is protected

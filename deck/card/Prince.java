@@ -7,7 +7,7 @@ import deck.card.rule.CardRule;
 public class Prince extends Card {
 
 	public Prince() {
-		this.addRule(new CardRule() {
+		addRule(new CardRule() {
 			
 			@Override
 			public boolean condition(Game game, Player cardOwner) {
