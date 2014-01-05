@@ -8,7 +8,9 @@ import view.View;
 import deck.card.Card;
 
 public class BotPlayer extends Player{
-	private static final ArrayList<String> botNames = new ArrayList<String>() {{
+	private static final ArrayList<String> botNames = new ArrayList<String>() {
+		private static final long serialVersionUID = 6205065756127785845L;
+	{
 		add("ola");
 		add("jack");
 		add("jon");
