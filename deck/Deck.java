@@ -66,6 +66,13 @@ public class Deck {
 	}
 	
 	/**
+	 * Peek at the top card, or return null if empty deck
+	 */
+	public Card peek() {
+		return cards.peek();
+	}
+	
+	/**
 	 * Will return an array of the types of cards
 	 * @return
 	 */
@@ -73,17 +80,16 @@ public class Deck {
 		return typesOfCards;
 	}
 	
+	/**
+	 * Will return a Card with given cardName
+	 * if one exists in types of cards array
+	 * @param cardName
+	 * @return Card
+	 */
 	public Card getCard(String cardName) {
 		for (Card c : typesOfCards) {
 			if (c.getName().compareToIgnoreCase(cardName) == 0) return c;
 		}
 		return null;
-	}
-
-	/**
-	 * Peek at the top card, or return null if empty deck
-	 */
-	public Card peek() {
-		return cards.peek();
 	}
 }

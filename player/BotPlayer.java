@@ -6,7 +6,7 @@ import deck.card.Card;
 
 public class BotPlayer extends Player{
 	public static final int NUM_BOT_NAMES = 7;
-	public static final String[] botNames = {"Ola", "Jack", "Jon", "Master", "Vanessa", "Christy", "Emelie", "Botonator"};
+	public static final String[] botNames = {"Ola", "Jack", "Jon", "Master", "Vanessa", "Christy", "Emily", "Botonator"};
 	public BotPlayer(String name, Game game) {
 		super(name, game);
 	}
@@ -33,7 +33,7 @@ public class BotPlayer extends Player{
 		Player[] playersInRound = game.getPlayersInThisRound();
 		
 		// If all players except bot is protected choose bot, else choose random.
-		if ( getGame().getNumPlayersInRound() == (getGame().getNumProtectedPlayersInRound() + 1)) {
+		if ( game.getNumPlayersInRound() == (game.getNumProtectedPlayersInRound() + 1)) {
 			// All but bot is protected
 			playerToChoose = this;
 			view.println(getName() + " chose himself/herself. All other players are protected!\n");

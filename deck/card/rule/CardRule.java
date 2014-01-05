@@ -25,8 +25,6 @@ public abstract class CardRule {
 	public static final int ON_DRAWN = 8;
 	
 	/**
-	 * Discard
-	 * 
 	 * The condition for this rule
 	 * @param game The game in which this card was played
 	 * @param cardOwner The owner of this card

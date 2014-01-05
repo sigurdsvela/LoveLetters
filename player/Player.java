@@ -49,16 +49,10 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	protected String name;
 	
-	/**
-	 * Holds the max amount of cards a player can have
-	 */
-	public static final int NUMBER_OF_CARDS = 2;
-	
-	
 	public Player(String name, Game game) {
-		cards = new LinkedList<Card>();
 		this.name = name;
 		this.game = game;
+		cards = new LinkedList<Card>();
 		lettersDelivered = 0;
 		forceCardIndex = -1;
 		inThisRound = true;
@@ -93,9 +87,14 @@ public abstract class Player implements Comparable<Player> {
 		}
 		return a;
 	}
-	
-	public Card[] getCardsAsCards() {
-		return cards.toArray(new Card[cards.size()]);
+
+	/**
+	 * Get all cards in players hand
+	 * @return card[] is the players hand
+	 */
+	public final Card[] getCards() {
+		Card[] toArray = new Card[ cards.size() ];
+		return cards.toArray(toArray);
 	}
 	
 	/**
@@ -255,15 +254,6 @@ public abstract class Player implements Comparable<Player> {
 			}
 		}
 		return -1;
-	}
-	
-	/**
-	 * Get all cards in players hand
-	 * @return card[] is the players hand
-	 */
-	public final Card[] getCards() {
-		Card[] toArray = new Card[ cards.size() ];
-		return cards.toArray(toArray);
 	}
 	
 	public final int getForceCardIndex() {
