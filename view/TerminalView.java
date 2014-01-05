@@ -83,6 +83,7 @@ public class TerminalView extends View {
 	@Override
 	public int getIntBetweenBoundaries(String question, int lowerBound, int upperBound, String invalidAnswerMessage) {
 		int answer = -1;
+		print(question);
 		while (answer == -1) {
 			answer = sc.nextInt();
 			if (!(answer >= lowerBound && answer <= upperBound)) {
