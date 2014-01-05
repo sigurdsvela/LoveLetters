@@ -31,7 +31,7 @@ public class LocalPlayer extends Player {
 				setForceCardIndex(-1);
 			}
 			
-			this.game.getView().setInformation("");
+			this.game.getView().println("");
 			return playCard(cardToPlay);
 		}
 
@@ -42,16 +42,16 @@ public class LocalPlayer extends Player {
 				String playerName = this.game.getView().getInformation(message);
 				playerToChoose = game.getPlayer(playerName);
 				if (playerToChoose == null) {
-					getGame().getView().setInformation("\nNo player named " + playerName);
+					getGame().getView().println("\nNo player named " + playerName);
 				} else if (playerToChoose.isPlayerProtected()){
-					getGame().getView().setInformation("\n" + playerToChoose.getName() + " is protected this round.");
+					getGame().getView().println("\n" + playerToChoose.getName() + " is protected this round.");
 				} else if (!playerToChoose.isPlayerInThisRound()) {
-					getGame().getView().setInformation("\n" + playerToChoose.getName() + " is out of this round.");
+					getGame().getView().println("\n" + playerToChoose.getName() + " is out of this round.");
 				} else {
 					break;
 				}
 			}
-			this.game.getView().setInformation("");
+			this.game.getView().println("");
 			return playerToChoose;
 		}
 
@@ -67,12 +67,12 @@ public class LocalPlayer extends Player {
 				String cardName = this.game.getView().getInformation(message);
 				cardToChoose = game.getDeck().getCard(cardName);
 				if (cardToChoose == null) {
-					getGame().getView().setInformation("\nNo card named " + cardName);
+					getGame().getView().println("\nNo card named " + cardName);
 				} else {
 					break;
 				}
 			}
-			this.game.getView().setInformation("");
+			this.game.getView().println("");
 			return cardToChoose;
 		}
 

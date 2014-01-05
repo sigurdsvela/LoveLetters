@@ -15,7 +15,7 @@ public class Priest extends Card {
 				
 				if (affectedPlayer.compareTo(cardOwner) == 0) {
 					// This can really only happen if all but cardOwner is protected
-					game.getView().setInformation("Forgotten our cards already have we, " + cardOwner.getName() + "?");
+					game.getView().println("Forgotten our cards already have we, " + cardOwner.getName() + "?");
 					return false;
 				} else {
 					return true;
@@ -25,9 +25,9 @@ public class Priest extends Card {
 			public void run(Game game, Player cardOwner) {
 				// Loop over and show for cardOwner affectedPlayers card(s)
 				Card[] affectedPlayerCards = affectedPlayer.getCards();
-				cardOwner.getGame().getView().setInformation(affectedPlayer.getName() + "  has the card(s) :");
+				cardOwner.getGame().getView().println(affectedPlayer.getName() + "  has the card(s) :");
 				for (Card c : affectedPlayerCards) {
-					cardOwner.getGame().getView().setInformation(cardOwner.showCard(c));
+					cardOwner.getGame().getView().println(cardOwner.showCard(c));
 				}
 			}
 

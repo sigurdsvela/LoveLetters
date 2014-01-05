@@ -12,11 +12,20 @@ public class TerminalView extends View {
 	}
 
 	/**
-	 * Will be printing information to view.
-	 * @param information	is the text to be printed to view
+	 * Print line to view
+	 * @param message	is the text to be printed to view
 	 */
-	public void setInformation(String information) {
-		System.out.println(information);
+	public void println(String message) {
+		System.out.println(message);
+	}
+	
+	
+	/**
+	 * Print message to view
+	 * @param message
+	 */
+	public void print(String message) {
+		System.out.println(message);
 	}
 	
 	/**
@@ -61,7 +70,7 @@ public class TerminalView extends View {
 					sAnswer.compareToIgnoreCase("nop") == 0) {
 				answer = false;
 			} else {
-				setInformation(invalidAnswerMessage.replace("%a", sAnswer));
+				println(invalidAnswerMessage.replace("%a", sAnswer));
 				sAnswer = null;
 			}
 		}
@@ -109,13 +118,13 @@ public class TerminalView extends View {
 	 */
 	@Override
 	public int getInt(String question, String invalidAnswerMessage) {
-		setInformation(question);
+		println(question);
 		int answer = -1;
 		while (answer == -1) {
 			try {
 				answer = Integer.parseInt(sc.nextLine());
 			} catch (NumberFormatException e) {
-				setInformation(invalidAnswerMessage.replace("%a", "" + answer + ""));
+				println(invalidAnswerMessage.replace("%a", "" + answer + ""));
 			}
 		}
 		return sc.nextInt();
@@ -180,16 +189,16 @@ public class TerminalView extends View {
 			}
 		}
 		while (answer == null) {
-			setInformation(question);
+			println(question);
 			for (String choice : choices)
-				setInformation("\t" + choice);
+				println("\t" + choice);
 			answer = getInformation();
 			
 			if (ignoreCase) {
 				answer.toLowerCase();
 			}
 			if (!choiceSet.contains(answer)) {
-				setInformation(invalidAnswerMessage.replace("%a", answer) + "\n");
+				println(invalidAnswerMessage.replace("%a", answer) + "\n");
 				answer = null;
 			}
 		}

@@ -17,7 +17,7 @@ public class Prince extends Card {
 			@Override
 			public void run(Game game, Player cardOwner) {
 				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to discard their hand?");
-				game.getView().setInformation(affectedPlayer.getName() + " must discard their hand:");
+				game.getView().println(affectedPlayer.getName() + " must discard their hand:");
 				affectedPlayer.showCards(false);
 				
 				// Discard cards in hand

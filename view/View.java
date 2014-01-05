@@ -1,9 +1,18 @@
 package view;
 
 public abstract class View {
-	
+
+	/**
+	 * see {@link #getInt(String, String)}
+	 */
 	public abstract boolean getYesOrNo(String question);
 
+	/**
+	 * Get yes or no answer from user
+	 * @param question
+	 * @param invalidAnswerMessage
+	 * @return
+	 */
 	public abstract boolean getYesOrNo(String question,
 			String invalidAnswerMessage);
 
@@ -20,13 +29,13 @@ public abstract class View {
 			int lowerBound, int upperBound, String invalidAnswerMessage);
 
 	/**
-	 * set {@link #getIntBetweenBoundaries(String, int, int, String)  }
+	 * see {@link #getIntBetweenBoundaries(String, int, int, String)  }
 	 */
 	public abstract int getIntBetweenBoundaries(String question,
 			int lowerBound, int upperBound);
 
 	/**
-	 * set {@link #getInt(String, String) }
+	 * see {@link #getInt(String, String) }
 	 */
 	public abstract int getInt(String question);
 
@@ -39,10 +48,16 @@ public abstract class View {
 	public abstract int getInt(String question, String invalidAnswerMessage);
 	
 	/**
+	 * Print message to view
+	 * @param message
+	 */
+	public abstract void print(String message);
+	
+	/**
 	 * Will be printing information to view.
 	 * @param information	is the text to be printed to view
 	 */
-	public abstract void setInformation(String information);
+	public abstract void println(String information);
 	
 	
 	/**

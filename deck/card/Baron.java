@@ -16,7 +16,7 @@ public class Baron extends Card {
 				
 				// If cardOwner chose itself cancel battle.
 				if (versusPlayer.compareTo(cardOwner) == 0) {
-					game.getView().setInformation("Battle is cancelled due to lack of opponent.");
+					game.getView().println("Battle is cancelled due to lack of opponent.");
 					return false;
 				} else {
 					return true;
@@ -52,7 +52,7 @@ public class Baron extends Card {
 						msg += c.toString();
 					}
 				}
-				game.getView().setInformation(msg);
+				game.getView().println(msg);
 			}
 
 			@Override

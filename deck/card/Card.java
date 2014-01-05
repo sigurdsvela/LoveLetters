@@ -54,7 +54,7 @@ public abstract class Card implements Comparable<Card> {
 			if (rule.condition(game, cardOwner)) {
 				rule.run(game, cardOwner);
 				if (rule.message() != null) {
-					game.getView().setInformation(rule.message());
+					game.getView().println(rule.message());
 				}
 			}
 		}

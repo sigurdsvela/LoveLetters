@@ -16,7 +16,7 @@ public class King extends Card {
 				
 				// If cardOwner chose itself, do nothing
 				if (affectedPlayer.compareTo(cardOwner) == 0) {
-					game.getView().setInformation("Nothing happened because" + cardOwner.getName() + " chose himself/herself.");
+					game.getView().println("Nothing happened because" + cardOwner.getName() + " chose himself/herself.");
 					return false;
 				}
 				
@@ -39,9 +39,9 @@ public class King extends Card {
 				}
 				
 				// "Reveal the cards"
-				game.getView().setInformation(cardOwner.getName() + "'s new hand:");
+				game.getView().println(cardOwner.getName() + "'s new hand:");
 				cardOwner.showCards(true);
-				game.getView().setInformation(affectedPlayer.getName() + "'s new hand:");
+				game.getView().println(affectedPlayer.getName() + "'s new hand:");
 				affectedPlayer.showCards(true);
 				
 			}

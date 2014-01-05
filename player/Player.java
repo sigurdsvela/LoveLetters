@@ -103,7 +103,7 @@ public abstract class Player implements Comparable<Player> {
 	 * @param card	is card to be drawn
 	 */
 	public void drawCard(Card card) {
-		getGame().getView().setInformation(getName() + " drew: " + showCard(card));
+		getGame().getView().println(getName() + " drew: " + showCard(card));
 		cards.add(card);
 		
 		// Trigger effect of "on drawn rule" for card AND player "drew a card" for cards in players hand.
@@ -131,15 +131,15 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	public void showCards(boolean useIndividual) {
 		View view = getGame().getView();
-		view.setInformation(getName() + "'s hand:");
+		view.println(getName() + "'s hand:");
 		for (Card card : cards) {
 			if (useIndividual) {
-				view.setInformation(showCard(card));
+				view.println(showCard(card));
 			} else {
-				view.setInformation(card.toString()); 
+				view.println(card.toString()); 
 			}
 		}
-		view.setInformation("");
+		view.println("");
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	protected Card playCard(int cardIndex) {
 		Card card = cards.remove(cardIndex);
-		getGame().getView().setInformation(getName() + " played " + card.toString());
+		getGame().getView().println(getName() + " played " + card.toString());
 		card.triggerPlay(game, this);
 		return card;
 	}
