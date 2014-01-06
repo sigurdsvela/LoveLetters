@@ -1,115 +1,96 @@
 package view;
 
-public abstract class View {
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-	/**
-	 * see {@link #getInt(String, String)}
-	 */
-	public abstract boolean getYesOrNo(String question);
-
-	/**
-	 * Get yes or no answer from user
-	 * @param question
-	 * @param invalidAnswerMessage
-	 * @return
-	 */
-	public abstract boolean getYesOrNo(String question,
-			String invalidAnswerMessage);
-
-	/**
-	 * Get int from user between <i>lowerBound<i> and <i>upperCound<i>
-	 * 
-	 * @param question
-	 * @param lowerBound
-	 * @param upperBound
-	 * @param invalidAnswerMessage
-	 * @return
-	 */
-	public abstract int getIntBetweenBoundaries(String question,
-			int lowerBound, int upperBound, String invalidAnswerMessage);
-
-	/**
-	 * see {@link #getIntBetweenBoundaries(String, int, int, String)  }
-	 */
-	public abstract int getIntBetweenBoundaries(String question,
-			int lowerBound, int upperBound);
-
-	/**
-	 * see {@link #getInt(String, String) }
-	 */
-	public abstract int getInt(String question);
-
-	/**
-	 * Get a int from user
-	 * @param question
-	 * @param invalidAnswerMessage
-	 * @return
-	 */
-	public abstract int getInt(String question, String invalidAnswerMessage);
+public class View {
+	private ArrayList<View> subviews;
+	private double x;
+	private double y;
+	private double width;
+	private double height;
+	private Color backgroundColor;
+	private View superView;
+	
+	public View() {
+		x = 0;
+		y = 0;
+		width = 0;
+		height = 0;
+		subviews = new ArrayList<View>();
+		backgroundColor = new Color(255, 255, 255, 0);
+	}
 	
 	/**
-	 * Print message to view
-	 * @param message
-	 */
-	public abstract void print(String message);
-	
-	/**
-	 * Will be printing information to view.
-	 * @param information	is the text to be printed to view
-	 */
-	public abstract void println(String information);
-	
-	
-	/**
-	 * Will print the string on the view, and return whatever the user types in.
-	 * @param string
+	 * @param delta
+	 * @param canvas
 	 * @return
 	 */
-	public abstract String getInformation(String string);
+	public final void draw(double delta, Graphics2D canvas) {
+		canvas.setColor(backgroundColor);
+		canvas.fillRect(0, 0, (int)width, (int)height);
+		
+		Graphics2D graphicsBuffer;
+		BufferedImage imageGraphicsBuffer;
+		for (View view : subviews) {
+			//Create image to draw on
+			imageGraphicsBuffer = new BufferedImage((int) view.getWidth(), (int) view.getHeight(), BufferedImage.TYPE_INT_ARGB);
+			
+			//Create a graphics context
+			graphicsBuffer = (Graphics2D) imageGraphicsBuffer.createGraphics();
+			view.draw( delta, graphicsBuffer );
+			
+			//Draw the graphics context onto the old one
+			canvas.drawImage(imageGraphicsBuffer, null, (int)view.getX(), (int)view.getY());
+		}
+	}
 	
-	/**
-	 * Will return information from view
-	 * @return
-	 */
-	public abstract String getInformation();
+	public void addSubView(View subView) {
+		subviews.add(subView);
+		subView.superView = this;
+	}
 	
-	/**
-	 * see {@link #getMultipleChoiceAnswer(String, String[], String, boolean) getMultipleChoiceAnswer}
-	 * 
-	 * @param question
-	 * @param choices
-	 * @return
-	 */
-	public abstract String getMultipleChoiceAnswer(String question,
-			String[] choices);
+	public void setBackgroundColor(Color backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	
+	public View superView() {
+		return superView;
+	}
 
-	/**
-	 * see {@link #getMultipleChoiceAnswer(String, String[]) getMultipleChoiceAnswer}
-	 * 
-	 * @param question
-	 * @param choices
-	 * @return
-	 */
-	public abstract String getMultipleChoiceAnswerIgnoreCase(String question,
-			String[] choices);
+	public double getX() {
+		return x;
+	}
 
-	/**
-	 * see {@link #getMultipleChoiceAnswer(String, String[]) getMultipleChoiceAnswer}
-	 * 
-	 * @param question
-	 * @param choices
-	 * @return
-	 */
-	public abstract String getMultipleChoiceAnswer(String question,
-			String[] choices, String invalidAnswerMessage);
+	public void setX(double x) {
+		this.x = x;
+	}
 
-	/**
-	 * see {@link #getMultipleChoiceAnswer(String, String[]) getMultipleChoiceAnswer}
-	 * 
-	 * @param question
-	 * @param choices
-	 * @return
-	 */
-	public abstract String getMultipleChoiceAnswerIgnoreCase(String question,
-			String[] choices, String invalidAnswerMessage);
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	
 }

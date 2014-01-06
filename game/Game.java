@@ -1,10 +1,12 @@
 package game;
 
+import game.state.GameState;
+
+import java.awt.Color;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import player.Player;
-
+import view.Window;
 import view.View;
 import deck.Deck;
 import deck.card.Card;
@@ -17,37 +19,49 @@ public abstract class Game {
 	protected boolean started;
 	protected Deck deck;
 	protected View view;
-	protected GameState gameState;
-	
-	/**
-	 *  Enum used for deciding which part of the game is running
-	 */
-	protected enum GameState {
-		MENU, GAME, EXIT
-	}
+	private GameState state;
+	private Window window;
 	
 	public Game() {
 		started = false;
 		lettersDeliveredToWin = 4;
+		//TODO To frame setup
+		window = new Window(5);
+		
+		
+		View view = new View();
+		view.setHeight(100);
+		view.setWidth(100);
+		view.setX(30);
+		view.setY(30);
+		view.setBackgroundColor(new Color(255, 255, 0));
+		window.addView(view);
+		
+		View viewSub = new View();
+		view.addSubView(viewSub);
+		viewSub.setHeight(50);
+		viewSub.setWidth(50);
+		viewSub.setBackgroundColor(Color.GRAY);
+	}
+	
+	protected Window window() {
+		return window;
+	}
+	
+	protected void setGameState(GameState gameState) {
+		if (state != null) { //Did we have a state before?
+			state.end();
+		}
+		state = gameState;
+		state.init();
 	}
 	
 	/* ABSTRACT METHODS */
-	/**
-	 * For initializing a game, 
-	 * will be called from constructor of subclasses
-	 */
-	public abstract void init();
-	
 	/**
 	 * For starting a game.
 	 * Will call gameLoop() at end of function
 	 */
 	public abstract void start();
-	
-	/**
-	 * This is the where the game logic appear.
-	 */
-	public abstract void gameLoop();
 	
 	/* OTHER METHODS */
 	/**

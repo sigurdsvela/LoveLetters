@@ -2,6 +2,6 @@ import game.LocalGame;
 
 public class Main {
 	public static void main(String[] args) {
-		new LocalGame();
+		new LocalGame(60);
 	}
 }
