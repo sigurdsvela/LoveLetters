@@ -6,8 +6,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import player.Player;
-import view.Window;
+import view.LogView;
 import view.View;
+import view.Window;
 import deck.Deck;
 import deck.card.Card;
 
@@ -26,7 +27,7 @@ public abstract class Game {
 		started = false;
 		lettersDeliveredToWin = 4;
 		//TODO To frame setup
-		window = new Window(5);
+		window = new Window(60);
 		
 		
 		View view = new View();
@@ -42,6 +43,18 @@ public abstract class Game {
 		viewSub.setHeight(50);
 		viewSub.setWidth(viewSub.superView().getWidth());
 		viewSub.setBackgroundColor(Color.GRAY);
+		
+		LogView log = new LogView((double)0, (double)100, (double)200, (double)200);
+		window.addView(log);
+		log.setBackgroundColor(Color.BLACK);
+		log.setFontColor(Color.WHITE);
+		log.setLineHeight(15);
+		log.setPadding(10);
+		log.println("Halla");
+		log.println("Halla");
+		log.println("Halla");
+		log.println("Halla");
+		log.println("Halla");
 	}
 	
 	protected Window window() {

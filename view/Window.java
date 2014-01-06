@@ -48,11 +48,17 @@ public class Window extends JFrame{
 	 */
 	private double FPS;
 	
+	/**
+	 * Target FPS. How many FPS to we want?
+	 */
+	private int targetFPS;
+	
 	private ArrayList<View> views;
 	
-	public Window(int maxFPS) {
+	public Window(int targetFPS) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.targetTime = 1000000 / maxFPS;
+		this.targetTime = 1000000 / targetFPS;
+		this.targetFPS = targetFPS;
 		views = new ArrayList<View>();
 		addWindowListener(new GameWindowListener());
 		setLocationRelativeTo(null);
@@ -79,13 +85,22 @@ public class Window extends JFrame{
 		return FPS;
 	}
 	
+	/**
+	 * Get FPS rounded in nearest multiple of <i>round</i>
+	 * @param round
+	 * @return
+	 */
+	public int getFPS(int round) {
+		return (int)((getFPS() / round) + (getFPS() % round > 0 ? 1 : 0)) * round;
+	}
+	
 	private class Panel extends JPanel implements ActionListener{
 		private static final long serialVersionUID = 6118343586368646652L;
 		private long start = -1;
 		private Timer timer;
 		
 		public Panel() {
-			timer = new Timer(100, this);
+			timer = new Timer(1000/targetFPS, this);
 		}
 		
 		public void start() {
@@ -101,12 +116,14 @@ public class Window extends JFrame{
 			Graphics2D graphicsBuffer;
 			BufferedImage imageGraphicsBuffer;
 			for (View view : views) {
+				if (view.getHeight() == 0 || view.getWidth() == 0) continue; //If hidden, don't draw it
+				
 				//Create image to draw on
 				imageGraphicsBuffer = new BufferedImage((int) view.getWidth(), (int) view.getHeight(), BufferedImage.TYPE_INT_ARGB);
 				
 				//Create a graphics context
 				graphicsBuffer = (Graphics2D) imageGraphicsBuffer.createGraphics();
-				view.draw( delta, graphicsBuffer );
+				view.update( delta, graphicsBuffer );
 				
 				//Draw the graphics context onto the old one
 				g2d.drawImage(imageGraphicsBuffer, null, (int)view.getX(), (int)view.getY());
@@ -127,7 +144,7 @@ public class Window extends JFrame{
 			}
 			
 			g2d.setColor(Color.GRAY);
-			g2d.drawString("fps:" + getFPS(), 10, 10);
+			g2d.drawString("fps:" + Math.round(getFPS(1)), 10, 10);
 		}
 
 		@Override
