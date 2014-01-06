@@ -110,6 +110,8 @@ public class Window extends JFrame{
 				
 				//Draw the graphics context onto the old one
 				g2d.drawImage(imageGraphicsBuffer, null, (int)view.getX(), (int)view.getY());
+				
+				graphicsBuffer.dispose();
 			}
 			
 			if (start == -1) {

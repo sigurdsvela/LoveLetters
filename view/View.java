@@ -45,6 +45,7 @@ public class View {
 			
 			//Draw the graphics context onto the old one
 			canvas.drawImage(imageGraphicsBuffer, null, (int)view.getX(), (int)view.getY());
+			graphicsBuffer.dispose();
 		}
 	}
 	
