@@ -40,7 +40,7 @@ public abstract class Game {
 		View viewSub = new View();
 		view.addSubView(viewSub);
 		viewSub.setHeight(50);
-		viewSub.setWidth(50);
+		viewSub.setWidth(viewSub.superView().getWidth());
 		viewSub.setBackgroundColor(Color.GRAY);
 	}
 	
