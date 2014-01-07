@@ -1,9 +1,10 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -16,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Window extends JFrame{
+	private static final int HEIGHT = 600;
+	private static final int WIDTH = 900;
+	
 	/**
 	 * Target time between each redraw, in nanoseconds
 	 */
@@ -29,7 +33,9 @@ public class Window extends JFrame{
 	/**
 	 * A Panel
 	 */
-	private Panel panel;
+	private GamePanel gamePanel;
+	
+	private ChatPanel chatPanel;
 	
 	/**
 	 * The difference between the elapsed time and 60fps.
@@ -59,14 +65,29 @@ public class Window extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.targetTime = 1000000 / targetFPS;
 		this.targetFPS = targetFPS;
+		
 		views = new ArrayList<View>();
+		
 		addWindowListener(new GameWindowListener());
+		
 		setLocationRelativeTo(null);
-		panel = new Panel();
-		add(panel);
-		setSize(200, 200); //TODO
+
+		setSize(WIDTH, HEIGHT); //TODO
+		
+		setLayout(new BorderLayout());
+		
+		gamePanel = new GamePanel();
+		chatPanel = new ChatPanel();
+		
+		chatPanel.setPreferredSize(new Dimension((int)(WIDTH * 0.2), HEIGHT));
+		gamePanel.setPreferredSize(new Dimension((int)(WIDTH * 0.8), HEIGHT));
+		
+		add(chatPanel, BorderLayout.EAST);
+		add(gamePanel, BorderLayout.CENTER);
+		
+		pack();
 		setVisible(true);
-		panel.start();
+		gamePanel.start();
 	}
 	
 	/**
@@ -94,13 +115,14 @@ public class Window extends JFrame{
 		return (int)((getFPS() / round) + (getFPS() % round > 0 ? 1 : 0)) * round;
 	}
 	
-	private class Panel extends JPanel implements ActionListener{
+	private class GamePanel extends JPanel implements ActionListener{
 		private static final long serialVersionUID = 6118343586368646652L;
 		private long start = -1;
 		private Timer timer;
 		
-		public Panel() {
+		public GamePanel() {
 			timer = new Timer(1000/targetFPS, this);
+			setBackground(Color.WHITE);
 		}
 		
 		public void start() {
