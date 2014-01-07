@@ -76,6 +76,14 @@ public class View {
 		this.backgroundColor = backgroundColor;
 	}
 	
+	public void setBorderRadius(int topLeft, int topRight, int bottomRight, int bottonLeft) {
+		
+	}
+	
+	public void setBorderRadius(int radius) {
+		setBorderRadius(radius, radius, radius, radius);
+	}
+	
 	public View superView() {
 		return superView;
 	}
