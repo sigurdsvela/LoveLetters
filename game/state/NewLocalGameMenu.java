@@ -7,8 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import view.Window;
+import view.component.MenuButton;
+import view.component.MenuSlider;
 
-public class MainMenu extends GameState{
+public class NewLocalGameMenu extends GameState{
 	Window window;
 	MainMenuPanel mainMenuPanel;
 	
@@ -28,33 +30,21 @@ public class MainMenu extends GameState{
 		private static final long serialVersionUID = -4928674309987758601L;
 		
 		public MainMenuPanel() {
-			add(new MainMenuButton("New Game", new ActionListener() {
+			add(new MenuButton("Back", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					game().setGameState(new NewLocalGameMenu());
+					game().setGameState(new MainMenu());
 				}
 			}));
 			
-			add(new MainMenuButton("New Remote Game", new ActionListener() {
+			add(new MenuButton("Play", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("New Remote Game");
+					System.out.println("New Game");
 				}
 			}));
 			
-			add(new MainMenuButton("Join Remote Game", new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					System.out.println("Join Remote Game");
-				}
-			}));
-		}
-		
-		private class MainMenuButton extends JButton {
-			public MainMenuButton(String text, ActionListener actionListener) {
-				setText(text);
-				addActionListener(actionListener);
-			}
+			add(new MenuSlider());
 		}
 	}
 }

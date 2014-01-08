@@ -33,7 +33,7 @@ public abstract class Game {
 		return window;
 	}
 	
-	protected void setGameState(GameState gameState) {
+	public void setGameState(GameState gameState) {
 		if (state != null) { //Did we have a state before?
 			state.end();
 			state.setGame(null);
