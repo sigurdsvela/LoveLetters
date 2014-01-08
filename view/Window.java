@@ -25,7 +25,7 @@ public class Window extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new GameWindowListener());
 		setLocationRelativeTo(null);
-		setSize(WIDTH, HEIGHT);
+		setMinimumSize(new Dimension(WIDTH, HEIGHT));
 	}
 	
 	private class GameWindowListener implements WindowListener {
