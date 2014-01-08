@@ -104,6 +104,15 @@ public class View {
 	}
 	
 	/**
+	 * Will return the rootView for a given view system.
+	 * The root view can for instance be the view that GamePanel use.
+	 * @return View 	is the root view for view cluster.
+	 */
+	public View rootView() {
+		return superView == null? this : superView.rootView();
+	}
+	
+	/**
 	 * Get views that intersects with a point
 	 * @return
 	 */
