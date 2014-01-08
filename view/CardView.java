@@ -69,7 +69,7 @@ public class CardView extends View{
 	
 	@Override
 	protected void draw(double delta, Graphics2D canvas) {
-		if (isHidden) {
+		if (!isHidden) {
 			canvas.drawImage(image, 10, 0, imageWidth - 20, imageHeight, null);
 			canvas.setColor(Color.BLACK);
 			
@@ -86,8 +86,6 @@ public class CardView extends View{
 			for (int i = 0; i < description.size(); i++) {
 				canvas.drawString(description.get(i), 15, 150 + (i * 10));
 			}
-		} else {
-			
 		}
 	}
 	
