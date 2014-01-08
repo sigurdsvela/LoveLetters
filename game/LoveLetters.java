@@ -1,11 +1,11 @@
 package game;
 
-import game.state.MainMenu;
+import game.state.Name;
 
 public class LoveLetters extends Game {
 	
 	public LoveLetters(int players) {
-		setGameState(new MainMenu());
+		setGameState(new Name());
 	}
 	
 }
