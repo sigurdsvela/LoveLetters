@@ -47,24 +47,6 @@ public class CardView extends View{
 		setBackgroundColor(new Color(175,135,73));
 		imageHeight = (int)(image.getHeight(null) * (getWidth()/image.getWidth(null)));
 		imageWidth = (int) getWidth();
-		
-		View view = new View(0, 0, getWidth(), getWidth());
-		view.setBackgroundColor(Color.BLACK);
-		view.addMouseAdapter(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.out.println("Clicked Sub-Card");
-			}
-		});
-		addSubView(view);
-		
-		addMouseAdapter(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.out.println("Clicked Card");
-			}
-		});
-		
 	}
 	
 	@Override
