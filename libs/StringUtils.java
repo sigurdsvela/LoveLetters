@@ -163,5 +163,34 @@ public class StringUtils {
 
     return strings;
   }
+  
+  /**
+   * Will return the width in pixels of a given string
+   * @param str is the string to find width of
+   * @param fm is the font metrics used with string
+   * @return int 	number of pixels
+   */
+  public static int getStringWidth(String str, FontMetrics fm) {
+	  return fm.stringWidth(str);
+  }
+  
+  /** Will return the height in pixels of a given string
+  * @param str is the string to find height of
+  * @param fm is the font metrics used with string
+  * @return int 	number of pixels
+  */
+  public static int getStringHeight(String str, FontMetrics fm) {
+	  int fontHeight = fm.getMaxAscent() + fm.getMaxDescent() + fm.getLeading();
+	  int numLines = getNewLines(str);
+	  return numLines * fontHeight;
+	  
+  }
+  
+  public static int getNewLines(String str) {
+	  String[] lines = str.split("\r\n|\r|\n");
+	  return  lines.length;
+  }
+  
+  
 
 }
