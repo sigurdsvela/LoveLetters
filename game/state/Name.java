@@ -41,8 +41,10 @@ public class Name extends GameState {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if( menuTextfield.getText().isEmpty() ) {
+					String text = menuTextfield.getText().trim();
+					if( text.isEmpty() ) {
 						menuLabel.setText("Name cannot be empty, please enter name:");
+						menuTextfield.setText("");
 					} else {
 						game().setPlayerName(menuTextfield.getText());
 						game().setGameState(new MainMenu());
@@ -51,5 +53,4 @@ public class Name extends GameState {
 			}));
 		}
 	}
-
 }
