@@ -37,14 +37,6 @@ public class Window extends JFrame{
 		return targetFPS;
 	}
 	
-	/**
-	 * Add a view to this window
-	 * @param view
-	 */
-	public void add(JPanel panel) {
-		add(panel);
-	}
-	
 	private class GameWindowListener implements WindowListener {
 
 		@Override
