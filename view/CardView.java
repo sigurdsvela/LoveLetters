@@ -47,29 +47,11 @@ public class CardView extends View{
 		setBackgroundColor(new Color(175,135,73));
 		imageHeight = (int)(image.getHeight(null) * (getWidth()/image.getWidth(null)));
 		imageWidth = (int) getWidth();
-		
-		View view = new View(0, 0, getWidth(), getWidth());
-		view.setBackgroundColor(Color.BLACK);
-		view.addMouseAdapter(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.out.println("Clicked Sub-Card");
-			}
-		});
-		addSubView(view);
-		
-		addMouseAdapter(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.out.println("Clicked Card");
-			}
-		});
-		
 	}
 	
 	@Override
 	protected void draw(double delta, Graphics2D canvas) {
-		if (isHidden) {
+		if (!isHidden) {
 			canvas.drawImage(image, 10, 0, imageWidth - 20, imageHeight, null);
 			canvas.setColor(Color.BLACK);
 			
@@ -86,8 +68,6 @@ public class CardView extends View{
 			for (int i = 0; i < description.size(); i++) {
 				canvas.drawString(description.get(i), 15, 150 + (i * 10));
 			}
-		} else {
-			
 		}
 	}
 	
