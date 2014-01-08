@@ -20,21 +20,12 @@ public class Window extends JFrame{
 	private static final long serialVersionUID = -7832040277685497512L;
 	public static final int HEIGHT = 600;
 	public static final int WIDTH = 900;
-	
-	/**
-	 * Target FPS. How many FPS to we want?
-	 */
-	private int targetFPS;
-	
+			
 	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new GameWindowListener());
 		setLocationRelativeTo(null);
 		setSize(WIDTH, HEIGHT);
-	}
-	
-	public int getTargetFPS() {
-		return targetFPS;
 	}
 	
 	private class GameWindowListener implements WindowListener {
