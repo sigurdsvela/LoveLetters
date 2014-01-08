@@ -1,7 +1,7 @@
-import game.LocalGame;
+import game.LoveLetters;
 
 public class Main {
 	public static void main(String[] args) {
-		new LocalGame(60);
+		new LoveLetters(60);
 	}
 }

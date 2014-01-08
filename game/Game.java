@@ -26,27 +26,22 @@ public abstract class Game {
 	public Game() {
 		started = false;
 		lettersDeliveredToWin = 4;
-		window = new Window(60);
+		window = new Window();
 	}
 	
-	protected Window window() {
+	public Window window() {
 		return window;
 	}
 	
 	protected void setGameState(GameState gameState) {
 		if (state != null) { //Did we have a state before?
 			state.end();
+			state.setGame(null);
 		}
 		state = gameState;
+		state.setGame(this);
 		state.init();
 	}
-	
-	/* ABSTRACT METHODS */
-	/**
-	 * For starting a game.
-	 * Will call gameLoop() at end of function
-	 */
-	public abstract void start();
 	
 	/* OTHER METHODS */
 	/**

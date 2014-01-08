@@ -17,45 +17,20 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Window extends JFrame{
-	private static final int HEIGHT = 600;
-	private static final int WIDTH = 900;
-	
-	/**
-	 * A Panel
-	 */
-	private GamePanel gamePanel;
-	
-	private ChatPanel chatPanel;
+	private static final long serialVersionUID = -7832040277685497512L;
+	public static final int HEIGHT = 600;
+	public static final int WIDTH = 900;
 	
 	/**
 	 * Target FPS. How many FPS to we want?
 	 */
 	private int targetFPS;
 	
-	public Window(int targetFPS) {
+	public Window() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.targetFPS = targetFPS;
-		
 		addWindowListener(new GameWindowListener());
-		
 		setLocationRelativeTo(null);
-
-		setSize(WIDTH, HEIGHT); //TODO
-		
-		setLayout(new BorderLayout());
-		
-		gamePanel = new GamePanel(targetFPS);
-		chatPanel = new ChatPanel();
-		
-		chatPanel.setPreferredSize(new Dimension((int)(WIDTH * 0.2), HEIGHT));
-		gamePanel.setPreferredSize(new Dimension((int)(WIDTH * 0.8), HEIGHT));
-		
-		add(chatPanel, BorderLayout.EAST);
-		add(gamePanel, BorderLayout.CENTER);
-		
-		pack();
-		setVisible(true);
-		gamePanel.start();
+		setSize(WIDTH, HEIGHT);
 	}
 	
 	public int getTargetFPS() {
