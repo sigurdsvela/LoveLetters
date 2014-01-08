@@ -29,8 +29,8 @@ public class LocalGame extends GameState{
 		gamePanel = new GamePanel(60);
 		chatPanel = new ChatPanel();
 		
-		chatPanel.setPreferredSize(new Dimension((int)(Window.WIDTH * 0.2), Window.HEIGHT));
-		gamePanel.setPreferredSize(new Dimension((int)(Window.WIDTH * 0.8), Window.HEIGHT));
+		chatPanel.setPreferredSize(new Dimension((int)(Window.WIDTH * 0.3), Window.HEIGHT));
+		gamePanel.setPreferredSize(new Dimension((int)(Window.WIDTH * 0.7), Window.HEIGHT));
 		
 		chatPanel.addMessageListener(new MessageEventListener() {
 			public void actionPerformed(MessageEvent message) {
