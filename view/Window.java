@@ -26,6 +26,7 @@ public class Window extends JFrame{
 		addWindowListener(new GameWindowListener());
 		setLocationRelativeTo(null);
 		setMinimumSize(new Dimension(WIDTH, HEIGHT));
+		setFocusable(true);
 	}
 	
 	private class GameWindowListener implements WindowListener {
