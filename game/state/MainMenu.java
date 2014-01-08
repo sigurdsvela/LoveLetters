@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import view.Window;
+import view.component.MenuLabel;
 
 public class MainMenu extends GameState{
 	Window window;
@@ -28,6 +29,8 @@ public class MainMenu extends GameState{
 		private static final long serialVersionUID = -4928674309987758601L;
 		
 		public MainMenuPanel() {
+			add(new MenuLabel("Hello, " + game().getPlayerName() + "!" ));
+			
 			add(new MainMenuButton("New Game", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

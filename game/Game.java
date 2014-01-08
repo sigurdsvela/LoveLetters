@@ -14,6 +14,7 @@ import deck.card.Card;
 
 public abstract class Game {
 	protected ArrayList<Player> players;
+	protected String playerName;
 	protected Card removedAtStart;
 	protected int currentPlayerIndex;
 	protected int lettersDeliveredToWin;
@@ -223,5 +224,13 @@ public abstract class Game {
 	 */
 	public Card getRemovedAtStart() {
 		return removedAtStart;
+	}
+	
+	public String getPlayerName() {
+		return playerName;
+	}
+	
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
 	}
 }
