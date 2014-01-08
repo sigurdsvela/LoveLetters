@@ -40,6 +40,7 @@ public abstract class Game {
 		}
 		state = gameState;
 		state.setGame(this);
+		window.removeAll();
 		state.init();
 	}
 	
