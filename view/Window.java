@@ -59,14 +59,10 @@ public class Window extends JFrame{
 	 */
 	private int targetFPS;
 	
-	private ArrayList<View> views;
-	
 	public Window(int targetFPS) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.targetTime = 1000000 / targetFPS;
 		this.targetFPS = targetFPS;
-		
-		views = new ArrayList<View>();
 		
 		addWindowListener(new GameWindowListener());
 		
@@ -94,8 +90,8 @@ public class Window extends JFrame{
 	 * Add a view to this window
 	 * @param view
 	 */
-	public void addView(View view) {
-		views.add(view);
+	public void add(JPanel panel) {
+		add(panel);
 	}
 	
 	/**
@@ -115,14 +111,23 @@ public class Window extends JFrame{
 		return (int)((getFPS() / round) + (getFPS() % round > 0 ? 1 : 0)) * round;
 	}
 	
-	private class GamePanel extends JPanel implements ActionListener{
+	/**
+	 * A panel that can contain views
+	 */
+	public class GamePanel extends JPanel implements ActionListener{
 		private static final long serialVersionUID = 6118343586368646652L;
 		private long start = -1;
 		private Timer timer;
+		private ArrayList<View> views;
 		
 		public GamePanel() {
 			timer = new Timer(1000/targetFPS, this);
 			setBackground(Color.WHITE);
+			views = new ArrayList<View>();
+		}
+		
+		public void addView(View view) {
+			views.add(view);
 		}
 		
 		public void start() {
