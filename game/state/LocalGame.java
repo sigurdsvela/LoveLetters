@@ -35,7 +35,7 @@ public class LocalGame extends GameState{
 		
 		chatPanel.addMessageListener(new MessageEventListener() {
 			public void actionPerformed(MessageEvent message) {
-				chatPanel.addChatMessage("Some dude", message.getMessage(), ChatItem.ItemType.LOCAL_PLAYER_CHAT_MSG);
+				chatPanel.addChatMessage(game().getPlayerName(), message.getMessage(), ChatItem.ItemType.LOCAL_PLAYER_CHAT_MSG);
 			}
 		});
 
