@@ -41,6 +41,7 @@ public class NewLocalGameMenu extends GameState{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("New Game");
+					game().setGameState(new LocalGame());
 				}
 			}));
 			
