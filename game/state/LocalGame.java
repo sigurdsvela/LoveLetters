@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import view.CardView;
 import view.ChatPanel;
 import view.ChatPanel.ChatItem;
 import view.GamePanel;
@@ -45,9 +46,8 @@ public class LocalGame extends GameState{
 		
 		gamePanel.start();
 		
-		View testView = new View(100, 100, 100, 100);
-		testView.setBackgroundColor(Color.black);
-		gamePanel.addView(testView);
+		CardView cardView = new CardView("Prince", 5, "Choose any player (including yourself) to discard his or her hand and draw a new car.", 200, 200);
+		gamePanel.addView(cardView);
 	}
 
 	@Override
