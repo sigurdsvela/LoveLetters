@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -38,7 +39,7 @@ public class ChatPanel extends JPanel{
 		textField.setPreferredSize(new Dimension(getWidth(), 30));
 		textField.addKeyListener(new ChatTextFieldListener(textField));
 		
-		add(textArea, BorderLayout.CENTER);
+		add(new JScrollPane(textArea), BorderLayout.CENTER);
 		add(textField, BorderLayout.SOUTH);
 	}
 	
