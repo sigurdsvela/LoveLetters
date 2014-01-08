@@ -32,6 +32,7 @@ public class ChatPanel extends JPanel{
 		
 		textArea = new JTextArea();
 		textArea.setEditable(false);
+		textArea.setLineWrap(true);
 		
 		textField = new JTextField();
 		textField.setPreferredSize(new Dimension(getWidth(), 30));
@@ -42,7 +43,9 @@ public class ChatPanel extends JPanel{
 	}
 	
 	public void addChatMessage(String from, String message, ChatItem.ItemType type) {
-		
+		ChatItem item = new ChatItem(from, message, type);
+		messages.add(item);
+		textArea.setText(textArea.getText() + "\n" + item);
 	}
 	
 	/*Event Methods*/
@@ -106,18 +109,28 @@ public class ChatPanel extends JPanel{
 		}
 		
 		private String message;
+		private String from;
 		private ItemType type;
 		
-		public ChatItem (String message, ItemType type) {
+		public ChatItem (String from, String message, ItemType type) {
 			this.message = message;
 			this.type = type;
+			this.from = from;
 		}
 		
-		String getMessage() {
+		public String toString() {
+			return from + ": " + message;
+		}
+		
+		public String getMessage() {
 			return message;
 		}
 		
-		ItemType getType() {
+		public String getFrom() {
+			return from;
+		}
+		
+		public ItemType getType() {
 			return type;
 		}
 	}
