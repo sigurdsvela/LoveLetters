@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 6118343586368646652L;
 	private long start = -1;
 	private Timer timer;
-	private ArrayList<View> views;
+	private View rootView;
 	
 	/**
 	 * The difference between the elapsed time and 60fps.
@@ -63,7 +63,8 @@ public class GamePanel extends JPanel implements ActionListener{
 		this.targetFPS = targetFPS;
 		timer = new Timer(1000/targetFPS, this);
 		setBackground(Color.WHITE);
-		views = new ArrayList<View>();
+		
+		rootView = new View();
 		
 		addMouseListener(new GamePanelMouseListener());
 		addMouseMotionListener(new GamePanelMouseMotionListener());
@@ -72,31 +73,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	
 	public void addView(View view) {
 		if (view == null) throw new NullPointerException();
-		views.add(view);
-	}
-	
-	/**
-	 * Get views that intersects with a point
-	 * @return
-	 */
-	private ArrayList<View> getIntersectingViews(int x, int y) {
-		ArrayList<View> intercectingViews = new ArrayList<View>();
-		int viewX;
-		int viewY;
-		int viewWidth;
-		int viewHeight;
-		for (View view : views) {
-			viewX = (int)view.getX();
-			viewY = (int)view.getY();
-			viewWidth = (int)view.getWidth();
-			viewHeight = (int)view.getHeight();
-			if (viewX <= x && viewX + viewWidth >= x) {
-				if (viewY <= y && viewY + viewHeight >= y) {
-					intercectingViews.add(view);
-				}
-			}
-		}
-		return intercectingViews;
+		rootView.addSubView(view);
 	}
 	
 	public void start() {
@@ -109,23 +86,9 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
-		Graphics2D graphicsBuffer;
-		BufferedImage imageGraphicsBuffer;
-		for (View view : views) {
-			if (view.getHeight() == 0 || view.getWidth() == 0) continue; //If hidden, don't draw it
-			
-			//Create image to draw on
-			imageGraphicsBuffer = new BufferedImage((int) view.getWidth(), (int) view.getHeight(), BufferedImage.TYPE_INT_ARGB);
-			
-			//Create a graphics context
-			graphicsBuffer = (Graphics2D) imageGraphicsBuffer.createGraphics();
-			view.update( delta, graphicsBuffer );
-			
-			//Draw the graphics context onto the old one
-			g2d.drawImage(imageGraphicsBuffer, null, (int)view.getX(), (int)view.getY());
-			
-			graphicsBuffer.dispose();
-		}
+		rootView.update(delta, g2d);
+		rootView.setWidth(getWidth());
+		rootView.setHeight(getHeight());
 		
 		if (start == -1) {
 			elapsed = 0;
@@ -159,46 +122,36 @@ public class GamePanel extends JPanel implements ActionListener{
 	private class GamePanelMouseListener implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX(), e.getY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseClicked(e);
-				}
+			for (MouseAdapter ma : rootView.getMouseAdapters()) {
+				ma.mouseClicked(e);
 			}
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX(), e.getY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseEntered(e);
-				}
+			for (MouseAdapter ma : rootView.getMouseAdapters()) {
+				ma.mouseEntered(e);
 			}
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX(), e.getY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseExited(e);
-				}
+			for (MouseAdapter ma : rootView.getMouseAdapters()) {
+				ma.mouseExited(e);
 			}
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX(), e.getY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mousePressed(e);
-				}
+			for (MouseAdapter ma : rootView.getMouseAdapters()) {
+				ma.mousePressed(e);
 			}
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX(), e.getY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseReleased(e);
-				}
+			for (MouseAdapter ma : rootView.getMouseAdapters()) {
+				ma.mouseReleased(e);
 			}
 		}
 
@@ -207,19 +160,15 @@ public class GamePanel extends JPanel implements ActionListener{
 	private class GamePanelMouseMotionListener implements MouseMotionListener {
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX(), e.getY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseDragged(e);
-				}
+			for (MouseAdapter ma : rootView.getMouseAdapters()) {
+				ma.mouseDragged(e);
 			}
 		}
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX(), e.getY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseMoved(e);
-				}
+			for (MouseAdapter ma : rootView.getMouseAdapters()) {
+				ma.mouseMoved(e);
 			}
 		}
 	}
