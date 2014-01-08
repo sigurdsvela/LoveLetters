@@ -26,35 +26,7 @@ public abstract class Game {
 	public Game() {
 		started = false;
 		lettersDeliveredToWin = 4;
-		//TODO To frame setup
 		window = new Window(60);
-		
-		
-		View view = new View();
-		view.setHeight(100);
-		view.setWidth(100);
-		view.setX(30);
-		view.setY(30);
-		view.setBackgroundColor(new Color(255, 255, 0));
-		window.addView(view);
-		
-		View viewSub = new View();
-		view.addSubView(viewSub);
-		viewSub.setHeight(50);
-		viewSub.setWidth(viewSub.superView().getWidth());
-		viewSub.setBackgroundColor(Color.GRAY);
-		
-		LogView log = new LogView((double)0, (double)100, (double)200, (double)200);
-		window.addView(log);
-		log.setBackgroundColor(Color.BLACK);
-		log.setFontColor(Color.WHITE);
-		log.setLineHeight(15);
-		log.setPadding(10);
-		log.println("Halla");
-		log.println("Halla");
-		log.println("Halla");
-		log.println("Halla");
-		log.println("Halla");
 	}
 	
 	protected Window window() {
