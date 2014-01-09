@@ -8,6 +8,7 @@ import view.CardView;
 import view.ChatPanel;
 import view.ChatPanel.ChatItem;
 import view.GamePanel;
+import view.PlayerView;
 import view.View;
 import view.Window;
 import view.event.MessageEvent;
@@ -46,8 +47,16 @@ public class LocalGame extends GameState{
 		
 		gamePanel.start();
 		
-		CardView cardView = new CardView("Prince", 5, "Choose any player (including yourself) to discard his or her hand and draw a new card.", 200, 200);
-		gamePanel.addView(cardView);
+		//CardView cardView = new CardView("Prince", 5, "Choose any player (including yourself) to discard his or her hand and draw a new card.", 200, 200);
+		PlayerView pw = new PlayerView("Joakim", 150, 60);
+		PlayerView pw2 = new PlayerView("Joakim", 150, 60);
+		PlayerView pw3 = new PlayerView("Joakim", 150, 60);
+		PlayerView pw4 = new PlayerView("Joakim", 150, 60);
+		gamePanel.addView(pw);
+		gamePanel.addView(pw2);
+		gamePanel.addView(pw3);
+		gamePanel.addView(pw4);
+		//gamePanel.addView(cardView);
 	}
 
 	@Override
