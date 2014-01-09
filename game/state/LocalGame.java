@@ -35,7 +35,7 @@ public class LocalGame extends GameState{
 		
 		chatPanel.addMessageListener(new MessageEventListener() {
 			public void actionPerformed(MessageEvent message) {
-				chatPanel.addChatMessage("Some dude", message.getMessage(), ChatItem.ItemType.LOCAL_PLAYER_CHAT_MSG);
+				chatPanel.addChatMessage(game().getPlayerName(), message.getMessage(), ChatItem.ItemType.LOCAL_PLAYER_CHAT_MSG);
 			}
 		});
 
@@ -46,7 +46,7 @@ public class LocalGame extends GameState{
 		
 		gamePanel.start();
 		
-		CardView cardView = new CardView("Prince", 5, "Choose any player (including yourself) to discard his or her hand and draw a new car.", 200, 200);
+		CardView cardView = new CardView("Prince", 5, "Choose any player (including yourself) to discard his or her hand and draw a new card.", 200, 200);
 		gamePanel.addView(cardView);
 	}
 

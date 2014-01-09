@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class View {
-	private ArrayList<View> subviews;
+	private ArrayList<ViewRep> subviews;
 	private ArrayList<MouseAdapter> mouseAdapters;
 	private double x;
 	private double y;
@@ -26,7 +26,7 @@ public class View {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		subviews = new ArrayList<View>();
+		subviews = new ArrayList<ViewRep>();
 		mouseAdapters = new ArrayList<MouseAdapter>();
 		backgroundColor = new Color(255, 255, 255, 0);
 		addMouseAdapter(new StdViewMouseAdapter());
@@ -51,7 +51,9 @@ public class View {
 		
 		Graphics2D graphicsBuffer;
 		BufferedImage imageGraphicsBuffer;
-		for (View view : subviews) {
+		View view;
+		for (ViewRep viewRep : subviews) {
+			view = viewRep.view();
 			if (view.getHeight() == 0 || view.getWidth() == 0) continue; //If hidden, don't draw it
 			
 			//Create image to draw on
@@ -75,7 +77,7 @@ public class View {
 	protected void draw(double delta, Graphics2D canvas) {}
 	
 	public void addSubView(View subView) {
-		subviews.add(subView);
+		subviews.add(new ViewRep(subView));
 		subView.superView = this;
 	}
 	
@@ -116,25 +118,85 @@ public class View {
 	 * Get views that intersects with a point
 	 * @return
 	 */
-	private ArrayList<View> getIntersectingViews(int x, int y) {
-		ArrayList<View> intercectingViews = new ArrayList<View>();
+	private ArrayList<ViewRep> getIntersectingViewReps(int x, int y) {
+		ArrayList<ViewRep> intercectingViews = new ArrayList<ViewRep>();
 		int viewX;
 		int viewY;
 		int viewWidth;
 		int viewHeight;
-		for (View view : subviews) {
+		View view;
+		for (ViewRep viewRep : subviews) {
+			view = viewRep.view();
 			viewX = (int)view.getX();
 			viewY = (int)view.getY();
 			viewWidth = (int)view.getWidth();
 			viewHeight = (int)view.getHeight();
 			if (viewX <= x && viewX + viewWidth >= x) {
 				if (viewY <= y && viewY + viewHeight >= y) {
-					intercectingViews.add(view);
+					intercectingViews.add(viewRep);
 				}
 			}
 		}
 		return intercectingViews;
 	}
+	
+	/**
+	 * Get views that does not intersects with the point
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private ArrayList<ViewRep> getNonIntersectingViewReps(int x, int y) {
+		ArrayList<ViewRep> intercectingViews = new ArrayList<ViewRep>();
+		int viewX;
+		int viewY;
+		int viewWidth;
+		int viewHeight;
+		View view;
+		for (ViewRep viewRep : subviews) {
+			view = viewRep.view();
+			viewX = (int)view.getX();
+			viewY = (int)view.getY();
+			viewWidth = (int)view.getWidth();
+			viewHeight = (int)view.getHeight();
+			if (viewX >= x || viewX + viewWidth <= x) {
+				if (viewY >= y || viewY + viewHeight <= y) {
+					intercectingViews.add(viewRep);
+				}
+			}
+		}
+		return intercectingViews;
+	}
+	
+	/**
+	 * Get views that does, and do not intersects with the point
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private IntersectingViewRep getBothIntersectingViewReps(int x, int y) {
+		IntersectingViewRep intercectingViews = new IntersectingViewRep();
+		int viewX;
+		int viewY;
+		int viewWidth;
+		int viewHeight;
+		View view;
+		for (ViewRep viewRep : subviews) {
+			view = viewRep.view();
+			viewX = (int)view.getX();
+			viewY = (int)view.getY();
+			viewWidth = (int)view.getWidth();
+			viewHeight = (int)view.getHeight();
+			if ((viewX <= x && viewX + viewWidth >= x) && (viewY <= y && viewY + viewHeight >= y)) {
+				intercectingViews.addIntersecting(viewRep);
+			} else {
+				intercectingViews.addNonIntersecting(viewRep);
+			}
+		}
+		return intercectingViews;
+	}
+	
+	
 
 	public double getX() {
 		return x;
@@ -198,7 +260,9 @@ public class View {
 	private class StdViewMouseAdapter extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+			View view;
+			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+				view = viewRep.view();
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mouseClicked(e);
 				}
@@ -206,26 +270,10 @@ public class View {
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseEntered(e);
-				}
-			}
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
-				for (MouseAdapter ma : view.getMouseAdapters()) {
-					ma.mouseExited(e);
-				}
-			}
-		}
-
-		@Override
 		public void mousePressed(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+			View view;
+			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+				view = viewRep.view();
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mousePressed(e);
 				}
@@ -234,7 +282,9 @@ public class View {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+			View view;
+			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+				view = viewRep.view();
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mouseReleased(e);
 				}
@@ -243,7 +293,9 @@ public class View {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+			View view;
+			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+				view = viewRep.view();
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mouseDragged(e);
 				}
@@ -252,9 +304,31 @@ public class View {
 		
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			for (View view : getIntersectingViews(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
+			View view;
+			
+			//Performance, this happend on every mousemove, so its kinda cirtical
+			IntersectingViewRep viewReps = getBothIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY());
+			
+			for (ViewRep viewRep : viewReps.getIntersecting()) {
+				view = viewRep.view();
+				if (!viewRep.getHasEntered()) { //Call Mouse Entered
+					viewRep.setHasEntered(true);
+					for (MouseAdapter a : view.getMouseAdapters()) {
+						a.mouseEntered(e);
+					}
+				}
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mouseMoved(e);
+				}
+			}
+			
+			for (ViewRep viewRep : viewReps.getNonIntersecting()) { //Call Mouse Exited
+				view = viewRep.view();
+				if (viewRep.getHasEntered()) {
+					viewRep.setHasEntered(false);
+					for (MouseAdapter a : view.getMouseAdapters()) {
+						a.mouseExited(e);
+					}
 				}
 			}
 		}
@@ -263,6 +337,70 @@ public class View {
 		public void mouseWheelMoved(MouseWheelEvent arg0) {
 			// TODO Auto-generated method stub
 		}
+	}
+	
+	/**
+	 * Represents a view.
+	 * This class is here to allow for meta data for each view
+	 */
+	private class ViewRep {
+		private View view;
+		private boolean hasEntered;
+		
+		public ViewRep(View view) {
+			this.view = view;
+			hasEntered = false;
+		}
+		
+		public View view() {
+			return view;
+		}
+		
+		/**
+		 * Used to calculate when the mouseEntered and mouseExit should be called
+		 * @param b
+		 * @return
+		 */
+		public void setHasEntered(boolean b) {
+			hasEntered = b;
+		}
+		
+		/**
+		 * Used to calculate when the mouseEntered and mouseExit should be called
+		 * @return
+		 */
+		public boolean getHasEntered() {
+			return hasEntered;
+		}
+		
+	}
+	
+	private class IntersectingViewRep {
+		
+		ArrayList<ViewRep> intersecting;
+		ArrayList<ViewRep> nonIntersecting;
+		
+		public IntersectingViewRep() {
+			intersecting = new ArrayList<ViewRep>();
+			nonIntersecting = new ArrayList<ViewRep>();
+		}
+		
+		public void addIntersecting(ViewRep viewRep) {
+			intersecting.add(viewRep);
+		}
+		
+		public void addNonIntersecting(ViewRep viewRep) {
+			nonIntersecting.add(viewRep);
+		}
+		
+		public ArrayList<ViewRep> getNonIntersecting() {
+			return nonIntersecting;
+		}
+		
+		public ArrayList<ViewRep> getIntersecting() {
+			return intersecting;
+		}
+		
 	}
 	
 }
