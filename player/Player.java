@@ -4,13 +4,17 @@ import game.Game;
 
 import java.util.LinkedList;
 
-import view.View;
-
+import view.PlayerView;
 import deck.card.Card;
 
 /**
  */
 public abstract class Player implements Comparable<Player> {
+	
+	/**
+	 * Holds the view to represent this player on screen
+	 */
+	protected PlayerView playerView;
 	
 	/**
 	 * Holds the game this player is in
@@ -52,6 +56,7 @@ public abstract class Player implements Comparable<Player> {
 	public Player(String name, Game game) {
 		this.name = name;
 		this.game = game;
+		playerView = new PlayerView(name, 100, 100);
 		cards = new LinkedList<Card>();
 		lettersDelivered = 0;
 		forceCardIndex = -1;
@@ -295,6 +300,14 @@ public abstract class Player implements Comparable<Player> {
 	
 	public final void setIsPlayerInThisRound(boolean b) {
 		inThisRound = b;
+	}
+	
+	public PlayerView getPlayerView() {
+		return playerView;
+	}
+
+	public void setPlayerView(PlayerView playerView) {
+		this.playerView = playerView;
 	}
 
 	@Override
