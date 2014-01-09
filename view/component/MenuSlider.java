@@ -15,28 +15,28 @@ public class MenuSlider extends JPanel{
 	private JSlider slider;
 	
 	public MenuSlider() {
-		this(1, 3, 2);
+		this(1, 3, 2, "");
 	}
 	
-	public MenuSlider(int min, int max, int defaultValue) {
+	public MenuSlider(int min, int max, int defaultValue, final String str) {
 		setLayout(new BorderLayout());
 		
 		// Create the Slider for the MenuSlider
 		slider = new JSlider();
-		slider.setMinimum(1);
-		slider.setMaximum(3);
+		slider.setMinimum(min);
+		slider.setMaximum(max);
 		slider.setValue(defaultValue);
 		slider.addChangeListener(new ChangeListener() {
 			
 			@Override
 			public void stateChanged(ChangeEvent ce) {
 				JSlider slider = (JSlider)ce.getSource();
-				label.setText("Number of opponents: " + slider.getValue());
+				label.setText(str + " " + slider.getValue());
 			}
 		});
 		
 		// Create the Label that displays the value for the slider
-		label = new JLabel("Number of opponents: " + slider.getValue());
+		label = new JLabel(str + "  " + slider.getValue());
 		
 		// Add the components to the panel
 		add(slider, BorderLayout.CENTER);

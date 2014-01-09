@@ -27,9 +27,11 @@ public class NewLocalGameMenu extends ApplicationState{
 	
 	private class MainMenuPanel extends JPanel {
 		private static final long serialVersionUID = -4928674309987758601L;
-		private MenuSlider slider;
+		private MenuSlider botOppponents;
+		private MenuSlider lettersToWin;
 		
 		public MainMenuPanel() {
+			
 			add(new MenuButton("Back", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -42,12 +44,15 @@ public class NewLocalGameMenu extends ApplicationState{
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("New Game");
 					// Let game setup players, then go to LocalGame game state
-					application().setApplicationState(new LocalGame( slider.getValue() ));
+					application().setApplicationState(new LocalGame( botOppponents.getValue(), lettersToWin.getValue() ));
 				}
 			}));
 			
-			slider = new MenuSlider();
-			add(slider);
+			botOppponents = new MenuSlider(1, 3, 2, "Number of opponents");
+			lettersToWin = new MenuSlider(1, 5, 3, "How hard to get is your princess?");
+			add(botOppponents);
+			add(lettersToWin);
+			
 		}
 	}
 }

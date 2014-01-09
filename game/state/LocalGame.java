@@ -36,8 +36,9 @@ public class LocalGame extends Game{
 	 */
 	private int botOpponents;
 	
-	public LocalGame(int botOpponents) {
+	public LocalGame(int botOpponents, int numLettersToWin) {
 		this.botOpponents = botOpponents;
+		this.numLettersToWin = numLettersToWin;
 	}	
 	
 	/* LOCAL GAME METHODS */
@@ -93,80 +94,79 @@ public class LocalGame extends Game{
 		Player[] winners;
 		
         while(true) {
-                chatPanel.addChatMessage(dealerString, "=== NEW ROUND ===", dealerItem);
+    		chatPanel.addChatMessage(dealerString, "=== NEW ROUND ===", dealerItem);
+            
+            // Shuffle up deck and get ready to play! 
+            deck = new Deck();
+            deck.shuffle(10000);
+            
+            // Remove first card of shuffled deck
+            chatPanel.addChatMessage(dealerString, "Setting a card aside.", dealerItem);
+            removedAtStart = deck.draw();
+            
+            // Empty hand, update in round flag and draw a card for each player
+            chatPanel.addChatMessage(dealerString, "Each player draws their card.", dealerItem);
+            for (Player p : getPlayers() ) {
+            	p.emptyHand(false);
+                p.setIsPlayerInThisRound(true);
+                p.setIsPlayerProtected(false);
+                p.drawCard(deck.draw());
+            }
+            
+            // Who goes first?
+            chatPanel.addChatMessage(dealerString, "Player " + players.get(currentPlayerIndex).getName() + " goes first.", dealerItem);
+            
+            // This is main content of a round;
+            // Loop over until deck is empty or number of players in round is less than 2
+            while( getNumPlayersInRound() > 1 && deck.peek() != null ) {
+                // Retrieve current player and let the player draw a card.
+                currentPlayer = players.get(currentPlayerIndex);
                 
-                // Shuffle up deck and get ready to play! 
-                deck = new Deck();
-                deck.shuffle(10000);
+                chatPanel.addChatMessage(dealerString, "=== " + currentPlayer.getName() + "'s turn ===", dealerItem);
+                currentPlayer.setIsPlayerProtected(false);
+                currentPlayer.drawCard(deck.draw());
+                currentPlayer.showCards(true);
                 
-                // Remove first card of shuffled deck
-                chatPanel.addChatMessage(dealerString, "Setting a card aside.", dealerItem);
-                removedAtStart = deck.draw();
+                // Let current player play a card
+                currentPlayer.playCard();
                 
-                // Empty hand, update in round flag and draw a card for each player
-                chatPanel.addChatMessage(dealerString, "Each player draws their card.", dealerItem);
-                for (Player p : getPlayers() ) {
-                	p.emptyHand(false);
-                    p.setIsPlayerInThisRound(true);
-                    p.setIsPlayerProtected(false);
-                    p.drawCard(deck.draw());
-                }
-                
-                // Who goes first?
-                chatPanel.addChatMessage(dealerString, "Player " + players.get(currentPlayerIndex).getName() + " goes first.", dealerItem);
-                
-                // This is main content of a round;
-                // Loop over until deck is empty or number of players in round is less than 2
-                while( getNumPlayersInRound() > 1 && deck.peek() != null ) {
-                    // Retrieve current player and let the player draw a card.
-                    currentPlayer = players.get(currentPlayerIndex);
-                    
-                    chatPanel.addChatMessage(dealerString, "=== " + currentPlayer.getName() + "'s turn ===", dealerItem);
-                    currentPlayer.setIsPlayerProtected(false);
-                    currentPlayer.drawCard(deck.draw());
-                    currentPlayer.showCards(true);
-                    
-                    // Let current player play a card
-                    currentPlayer.playCard();
-                    
-                    // Next players turn!
-                    nextPlayer(); 
-                }
-                
-                // End of round - retrieve winner(s), update letters delivered 
-                // and announce winner(s) of round
-                winners = getWinners();
+                // Next players turn!
+                nextPlayer(); 
+            }
+            
+            // End of round - retrieve winner(s), update letters delivered 
+            // and announce winner(s) of round
+            winners = getWinners();
+            for (Player winner : winners) {
+                winner.incrementLettersDelivired();
+                chatPanel.addChatMessage(dealerString,"Player " + winner.getName() + " won the round with Card: " 
+                        + winner.getCard(0).getName() + " (" + winner.getCard(0).getDistance() + ")", dealerItem);
+            }
+            
+            // Announce end of round
+            chatPanel.addChatMessage(dealerString,"=== END OF ROUND ===", dealerItem);
+            
+            // Show number of letters each player has delivered
+            for (Player p : getPlayers()) {
+            	chatPanel.addChatMessage(dealerString,"Player: " + p.getName() + " has delivered " + p.getLettersDelivired() + " love letter(s)", dealerItem);
+            }
+            
+            // Check if someone is going on a date with the princess!
+            boolean endOfGame = false;
+            if (winners != null) {
+            	// Announce winner(s)
                 for (Player winner : winners) {
-                    winner.incrementLettersDelivired();
-                    chatPanel.addChatMessage(dealerString,"Player " + winner.getName() + " won the round with Card: " 
-                            + winner.getCard(0).getName() + " (" + winner.getCard(0).getDistance() + ")", dealerItem);
-                }
-                
-                // Announce end of round
-                chatPanel.addChatMessage(dealerString,"=== END OF ROUND ===", dealerItem);
-                
-                // Show number of letters each player has delivered
-                for (Player p : getPlayers()) {
-                	chatPanel.addChatMessage(dealerString,"Player: " + p.getName() + " has delivered " + p.getLettersDelivired() + " love letter(s)", dealerItem);
-                }
-                
-                // Check if someone is going on a date with the princess!
-                boolean endOfGame = false;
-                if (winners != null) {
-                	// Announce winner(s)
-                    for (Player winner : winners) {
-                        if (winner.getLettersDelivired() >= numLettersToWin) {
-                        	endOfGame = true;
-                            chatPanel.addChatMessage(dealerString,"Player " + winner.getName() + " won the game.", dealerItem);
-                        }
+                    if (winner.getLettersDelivired() >= numLettersToWin) {
+                    	endOfGame = true;
+                        chatPanel.addChatMessage(dealerString,"Player " + winner.getName() + " won the game.", dealerItem);
                     }
                 }
-                
-                if (endOfGame) {
-                    // Announce end of game
-                	chatPanel.addChatMessage(dealerString,"=== END OF GAME ===", dealerItem);
-                }
-
+            }
+            
+            if (endOfGame) {
+                // Announce end of game
+            	chatPanel.addChatMessage(dealerString,"=== END OF GAME ===", dealerItem);
+            }
         }
 	}
 	
