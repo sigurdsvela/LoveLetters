@@ -2,10 +2,10 @@ package game;
 
 import game.state.Name;
 
-public class LoveLetters extends Game {
+public class LoveLetters extends Application {
 	
 	public LoveLetters(int players) {
-		setGameState(new Name());
+		setApplicationState(new Name());
 	}
 	
 }

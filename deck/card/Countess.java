@@ -1,7 +1,7 @@
 package deck.card;
 
 import player.Player;
-import game.Game;
+import game.Application;
 import deck.card.rule.CardRule;
 
 public class Countess extends Card {
@@ -9,11 +9,11 @@ public class Countess extends Card {
 	public Countess() {
 		addRule(new CardRule() {
 
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				return cardOwner.hasCard( new King() ) || cardOwner.hasCard( new Prince() );
 			}
 
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				// Set players force play index to the index of Countess
 				cardOwner.setForceCardIndex( cardOwner.getCardIndex(getName()) );
 			}

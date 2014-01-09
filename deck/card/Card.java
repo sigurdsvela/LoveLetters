@@ -1,11 +1,10 @@
 package deck.card;
 
-import game.Game;
+import game.state.Game;
 
 import java.util.ArrayList;
 
 import player.Player;
-
 import deck.card.rule.CardRule;
 
 public abstract class Card implements Comparable<Card> {

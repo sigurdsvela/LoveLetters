@@ -1,53 +1,45 @@
-package game;
+package game.state;
 
-import game.state.GameState;
-
-import java.awt.Color;
 import java.util.ArrayList;
 
 import player.Player;
-import view.LogView;
-import view.View;
-import view.Window;
 import deck.Deck;
 import deck.card.Card;
 
-public abstract class Game {
+public abstract class Game extends ApplicationState {
+	
+	/**
+	 * Holds the players in this game
+	 */
 	protected ArrayList<Player> players;
-	protected String playerName;
-	protected Card removedAtStart;
-	protected int currentPlayerIndex;
-	protected int lettersDeliveredToWin;
-	protected int botPlayers;
-	protected boolean started;
+	
+	/**
+	 * The deck used in this game
+	 */
 	protected Deck deck;
-	protected View view;
-	private GameState state;
-	private Window window;
+	
+	/**
+	 * The card removed at start of each round
+	 */
+	protected Card removedAtStart;
+	
+	/**
+	 * Holds the index of current players turn in players array
+	 */
+	protected int currentPlayerIndex;
+	
+	/**
+	 * Number of letters required to win this game
+	 */
+	protected int numLettersToWin;
 	
 	public Game() {
-		started = false;
-		lettersDeliveredToWin = 4;
 		players = new ArrayList<Player>();
-		window = new Window();
+		numLettersToWin = 4;
 	}
 	
-	public Window window() {
-		return window;
-	}
+	/* ABSTRACT METHODS */
 	
-	public void setGameState(GameState gameState) {
-		if (state != null) { //Did we have a state before?
-			state.end();
-			state.setGame(null);
-		}
-		state = gameState;
-		state.setGame(this);
-		window.getContentPane().removeAll();
-		state.init();
-	}
-	
-	/* OTHER METHODS */
 	/**
 	 * Join a player. This can only be done if the game
 	 * has not already started or if a player with players name
@@ -55,15 +47,9 @@ public abstract class Game {
 	 * @param player
 	 * @return true if player is added, false otherwise
 	 */
-	public boolean playerJoin(Player player) {
-		if (hasStarted() || getPlayer( player.getName() ) != null) return false;
-		players.add(player);
-		return true;
-	}
-
-	public boolean hasStarted() {
-		return started;
-	}
+	public abstract boolean playerJoin(Player player);
+	
+	/* GAME METHODS */
 	
 	/**
 	 * Will update currentPlayerIndex and return next player
@@ -89,9 +75,25 @@ public abstract class Game {
 		else return nextPlayer();
 	}
 	
+	/* CUSTOM GETTERS AND SETTERS */
 	/**
-	 * Will return number of players in game,
-	 * wether or not active in current round.
+	 * Get a player based on name
+	 * Returns null if no player with the name <i>name<i> is found
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Player getPlayer(String name) {
+		for (Player p: players) {
+			if (p.getName().compareToIgnoreCase(name) == 0) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Will return number of players in game
 	 * @return int	number of players in game
 	 */
 	public int getNumPlayers() {
@@ -124,7 +126,7 @@ public abstract class Game {
 	 * that is protected.
 	 * @return Player[] protected players in round
 	 */
-	public Player[] getProtectedPlayersInThisRound() {
+	public Player[] getProtectedPlayersInRound() {
 		ArrayList<Player> playersProtectedInThisRound = new ArrayList<Player>();
 		for (Player p : players) {
 			if (p.isPlayerInThisRound() && p.isPlayerProtected()) {
@@ -193,62 +195,5 @@ public abstract class Game {
 		return winners.toArray( new Player[ winners.size() ] );
 	}
 	
-	/**
-	 * Get a player based on name
-	 * Returns null if no player with the name <i>name<i> is found
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public Player getPlayer(String name) {
-		for (Player p: players) {
-			if (p.getName().compareToIgnoreCase(name) == 0) {
-				return p;
-			}
-		}
-		return null;
-	}
-	
-	/**
-	 * Will return view of the game
-	 * For localGame this is the local players view,
-	 * but for remoteGame it's the remote player using that
-	 * remoteGames view.
-	 * @return View
-	 */
-	public final View getView() {
-		return view;
-	}
-	
-	/**
-	 * Will return current deck of game
-	 * @return Deck	is the deck being used in game
-	 */
-	public Deck getDeck() {
-		return deck;
-	}
-	
-	/**
-	 * Get the card that was set aside at start
-	 * @return Das card
-	 */
-	public Card getRemovedAtStart() {
-		return removedAtStart;
-	}
-	
-	public String getPlayerName() {
-		return playerName;
-	}
-	
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
-
-	public int getNumBotPlayers() {
-		return botPlayers;
-	}
-
-	public void setNumBotPlayers(int botPlayers) {
-		this.botPlayers = botPlayers;
-	}
+	/* STANDARD GETTERS AND SETTERS */
 }

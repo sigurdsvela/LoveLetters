@@ -1,6 +1,6 @@
 package deck.card;
 
-import game.Game;
+import game.Application;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -11,7 +11,7 @@ public class Baron extends Card {
 			private Player loosingPlayer, versusPlayer;
 			
 			@Override
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
 				
 				// If cardOwner chose itself cancel battle.
@@ -24,7 +24,7 @@ public class Baron extends Card {
 			}
 
 			@Override
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				// Run the epic battle of the history!
 				Card versusPlayerCard, cardOwnerCard;
 

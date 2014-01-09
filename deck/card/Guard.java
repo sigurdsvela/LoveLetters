@@ -1,7 +1,7 @@
 package deck.card;
 
 import player.Player;
-import game.Game;
+import game.Application;
 import deck.card.rule.CardRule;
 
 public class Guard extends Card{
@@ -10,7 +10,7 @@ public class Guard extends Card{
 		addRule(new CardRule() {
 			private Player affectedPlayer;
 			
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				affectedPlayer = cardOwner.askPlayerForPlayer("Choose a player to guess the card for.");
 				
 				// If cardOwner chose itself, do nothing
@@ -35,7 +35,7 @@ public class Guard extends Card{
 				}
 			}
 
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				affectedPlayer.setIsPlayerInThisRound(false);
 				game.getView().println("You guessed correctly, " + affectedPlayer.getName() + " is out of this round.");
 			}

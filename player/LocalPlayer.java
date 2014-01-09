@@ -1,6 +1,6 @@
 package player;
 
-import game.Game;
+import game.state.Game;
 import deck.card.Card;
 
 public class LocalPlayer extends Player {

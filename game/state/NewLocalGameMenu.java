@@ -3,20 +3,19 @@ package game.state;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import view.Window;
 import view.component.MenuButton;
 import view.component.MenuSlider;
 
-public class NewLocalGameMenu extends GameState{
+public class NewLocalGameMenu extends ApplicationState{
 	Window window;
 	MainMenuPanel mainMenuPanel;
 	
 	@Override
 	public void init() {
-		window = game().window();
+		window = application().window();
 		mainMenuPanel = new MainMenuPanel();
 		window.add(mainMenuPanel);
 		window.setVisible(true);
@@ -34,7 +33,7 @@ public class NewLocalGameMenu extends GameState{
 			add(new MenuButton("Back", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					game().setGameState(new MainMenu());
+					application().setApplicationState(new MainMenu());
 				}
 			}));
 			
@@ -43,8 +42,7 @@ public class NewLocalGameMenu extends GameState{
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("New Game");
 					// Let game setup players, then go to LocalGame game state
-					game().setNumBotPlayers(slider.getValue());
-					game().setGameState(new LocalGame());
+					application().setApplicationState(new LocalGame( slider.getValue() ));
 				}
 			}));
 			

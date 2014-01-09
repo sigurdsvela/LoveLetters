@@ -1,6 +1,6 @@
 package deck.card.custom;
 
-import game.Game;
+import game.Application;
 import player.Player;
 import deck.card.Card;
 import deck.card.Princess;
@@ -13,12 +13,12 @@ public class Jester extends Card {
 			Card princess = new Princess();
 			
 			@Override
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				return cardOwner.hasCard( princess.getName() );
 			}
 			
 			@Override
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				// Set players force play index to the index of Princess
 				cardOwner.setForceCardIndex( cardOwner.getCardIndex( princess.getName() ));
 			}

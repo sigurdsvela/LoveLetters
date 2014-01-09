@@ -16,6 +16,8 @@ import view.event.MessageEvent;
 import view.event.MessageEventListener;
 
 public class ChatPanel extends JPanel{
+	private static final long serialVersionUID = -9052458612149231453L;
+
 	private ArrayList<ChatItem> messages;
 	private JTextField textField;
 	private JTextArea textArea;

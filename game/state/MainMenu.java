@@ -9,13 +9,13 @@ import javax.swing.JPanel;
 import view.Window;
 import view.component.MenuLabel;
 
-public class MainMenu extends GameState{
+public class MainMenu extends ApplicationState{
 	Window window;
 	MainMenuPanel mainMenuPanel;
 	
 	@Override
 	public void init() {
-		window = game().window();
+		window = application().window();
 		mainMenuPanel = new MainMenuPanel();
 		window.add(mainMenuPanel);
 		window.setVisible(true);
@@ -26,15 +26,15 @@ public class MainMenu extends GameState{
 	}
 	
 	private class MainMenuPanel extends JPanel {
-		private static final long serialVersionUID = -4928674309987758601L;
-		
+		private static final long serialVersionUID = 1438992880048587417L;
+
 		public MainMenuPanel() {
-			add(new MenuLabel("Hello, " + game().getPlayerName() + "!" ));
+			add(new MenuLabel("Hello, " + application().getLocalHostPlayerName() + "!" ));
 			
 			add(new MainMenuButton("New Game", new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					game().setGameState(new NewLocalGameMenu());
+					application().setApplicationState(new NewLocalGameMenu());
 				}
 			}));
 			
@@ -54,6 +54,8 @@ public class MainMenu extends GameState{
 		}
 		
 		private class MainMenuButton extends JButton {
+			private static final long serialVersionUID = -2059376515943772258L;
+
 			public MainMenuButton(String text, ActionListener actionListener) {
 				setText(text);
 				addActionListener(actionListener);

@@ -11,8 +11,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -22,6 +20,7 @@ import javax.swing.Timer;
  */
 public class GamePanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 6118343586368646652L;
+	
 	private long start = -1;
 	private Timer timer;
 	private View rootView;

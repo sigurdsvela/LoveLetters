@@ -9,6 +9,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class MenuSlider extends JPanel{
+	private static final long serialVersionUID = -3918759413002071597L;
+
 	private JLabel label;
 	private JSlider slider;
 	

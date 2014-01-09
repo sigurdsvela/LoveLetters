@@ -1,6 +1,5 @@
 package view.event;
 
-import java.awt.event.ActionListener;
 
 /**
  * Recived when you got a message

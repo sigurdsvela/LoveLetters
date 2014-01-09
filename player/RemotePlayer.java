@@ -1,7 +1,6 @@
 package player;
 
-import game.Game;
-
+import game.state.Game;
 import deck.card.Card;
 
 /**
@@ -21,7 +20,6 @@ public class RemotePlayer extends Player{
 
 	@Override
 	public void drawCard(Card card) {
-		game.getView().println("You drew " + card.getName());
 		cards.add(card);
 	}
 

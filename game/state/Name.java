@@ -10,13 +10,13 @@ import view.component.MenuButton;
 import view.component.MenuLabel;
 import view.component.MenuTextField;
 
-public class Name extends GameState {
+public class Name extends ApplicationState {
 	private Window window;
 	private NamePanel namePanel;
 	
 	@Override
 	public void init() {
-		window = game().window();
+		window = application().window();
 		namePanel = new NamePanel();
 		window.add(namePanel);
 		window.pack();
@@ -29,6 +29,8 @@ public class Name extends GameState {
 	}
 	
 	private class NamePanel extends JPanel {
+		private static final long serialVersionUID = 3985825001704083964L;
+		
 		private MenuTextField menuTextfield;
 		private MenuLabel menuLabel;
 		
@@ -46,8 +48,8 @@ public class Name extends GameState {
 						menuLabel.setText("Name cannot be empty, please enter name:");
 						menuTextfield.setText("");
 					} else {
-						game().setPlayerName(menuTextfield.getText());
-						game().setGameState(new MainMenu());
+						application().setLocalHostPlayerName(menuTextfield.getText());
+						application().setApplicationState(new MainMenu());
 					}
 				}
 			}));

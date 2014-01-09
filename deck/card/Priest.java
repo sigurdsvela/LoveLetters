@@ -1,6 +1,6 @@
 package deck.card;
 
-import game.Game;
+import game.Application;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -10,7 +10,7 @@ public class Priest extends Card {
 		addRule(new CardRule() {
 			Player affectedPlayer;
 			
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to see the card(s) of?");
 				
 				if (affectedPlayer.compareTo(cardOwner) == 0) {
@@ -22,7 +22,7 @@ public class Priest extends Card {
 				}
 			}
 
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				// Loop over and show for cardOwner affectedPlayers card(s)
 				Card[] affectedPlayerCards = affectedPlayer.getCards();
 				cardOwner.getGame().getView().println(affectedPlayer.getName() + "  has the card(s) :");

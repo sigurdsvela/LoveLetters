@@ -1,6 +1,6 @@
 package deck.card;
 
-import game.Game;
+import game.Application;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -10,12 +10,12 @@ public class Handmaid extends Card {
 		addRule(new CardRule() {
 			
 			@Override
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				return true;
 			}
 			
 			@Override
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				// Protect the player!
 				cardOwner.setIsPlayerProtected(true);
 			}

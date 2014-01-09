@@ -1,7 +1,7 @@
 package deck.card.rule;
 
+import game.state.Game;
 import player.Player;
-import game.Game;
 
 public abstract class CardRule {
 	/**

@@ -1,6 +1,6 @@
 package deck.card.custom;
 
-import game.Game;
+import game.Application;
 import player.Player;
 import deck.card.Card;
 import deck.card.rule.CardRule;
@@ -16,7 +16,7 @@ public class PrinceOfDarkness extends Card{
 			}
 			
 			@Override
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				Player[] players = game.getPlayersInThisRound();
 				for (Player player : players) {
 					for (Player p : players) {
@@ -31,7 +31,7 @@ public class PrinceOfDarkness extends Card{
 			}
 			
 			@Override
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				return true;
 			}
 		});

@@ -1,6 +1,6 @@
 package deck.card;
 
-import game.Game;
+import game.Application;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -11,7 +11,7 @@ public class King extends Card {
 			private Player affectedPlayer;
 			
 			@Override
-			public boolean condition(Game game, Player cardOwner) {
+			public boolean condition(Application game, Player cardOwner) {
 				affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to switch hand with?");
 				
 				// If cardOwner chose itself, do nothing
@@ -24,7 +24,7 @@ public class King extends Card {
 			}
 			
 			@Override
-			public void run(Game game, Player cardOwner) {
+			public void run(Application game, Player cardOwner) {
 				// Do the switch of hands through two loops
 				Card[] tmpHand = cardOwner.getCards();
 				

@@ -12,28 +12,29 @@ public class PlayerView extends View {
 		TOP, BOTTOM, LEFT, RIGHT;
 	}
 	
-	private static PlayerPosition prevPosition;
+	private static PlayerPosition nextPosition;
 	
 	private static PlayerPosition nextPosition() {
-		if( prevPosition == null ) {
-			prevPosition = PlayerPosition.BOTTOM;
-			return prevPosition;
+		System.out.println("Position: " + nextPosition);
+		if( nextPosition == null ) {
+			nextPosition = PlayerPosition.BOTTOM;
+			return nextPosition;
 		}
 		
-		switch(prevPosition) {
+		switch(nextPosition) {
 		case BOTTOM:
-			prevPosition = PlayerPosition.TOP;
+			nextPosition = PlayerPosition.TOP;
 			break;
 		case TOP:
-			prevPosition = PlayerPosition.LEFT;
+			nextPosition = PlayerPosition.LEFT;
 			break;
 		case LEFT:
-			prevPosition = PlayerPosition.RIGHT;
+			nextPosition = PlayerPosition.RIGHT;
 			break;
 		case RIGHT:
-			prevPosition = PlayerPosition.BOTTOM;
+			nextPosition = PlayerPosition.BOTTOM;
 		}
-	return prevPosition;
+	return nextPosition;
 	}
 	
 	/* FIELDS AND METHODS TO PlayerView instances */
@@ -58,7 +59,7 @@ public class PlayerView extends View {
 		String label = sb.toString();
 
 		// Update position based on rootView (This will only change if window is resized)
-		calculatePosition(rootView(), label, canvas.getFontMetrics(), position);
+		calculateBounds(rootView(), label, canvas.getFontMetrics(), position);
 		
 		canvas.setColor(Color.BLACK);
 		
@@ -72,13 +73,13 @@ public class PlayerView extends View {
 	}
 	
 	/**
-	 * WIll calculate where to place (x,y) this player view on rootView
+	 * Will calculate where to place (x,y) this player view on rootView
 	 * @param parent	is the view to use as rootView
 	 * @param str	is the string to place on screen
 	 * @param fm	is the font metrics
 	 * @param position	is the player position
 	 */
-	public void calculatePosition(View parent, String str, FontMetrics fm, PlayerPosition position) {
+	public void calculateBounds(View parent, String str, FontMetrics fm, PlayerPosition position) {
 		// Can't calculate coordinates if we got now place to be, eh?
 		if (position == null ) return;
 		
