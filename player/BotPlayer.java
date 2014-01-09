@@ -36,7 +36,7 @@ public class BotPlayer extends Player{
 	 * @return
 	 */
 	private static String popRandomBotName() {
-		int index = (int) Math.random() * botNames.size();
+		int index = (int) (Math.random() * botNames.size());
 		String name = botNames.get(index);
 		botNames.remove(index);
 		return name;
