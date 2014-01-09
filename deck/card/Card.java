@@ -5,6 +5,8 @@ import game.state.Game;
 import java.util.ArrayList;
 
 import player.Player;
+import view.CardView;
+import view.View;
 import deck.card.rule.CardRule;
 
 public abstract class Card implements Comparable<Card> {
@@ -12,13 +14,31 @@ public abstract class Card implements Comparable<Card> {
 	private ArrayList<CardRule> onDiscardRules;
 	private ArrayList<CardRule> onPlayerDrewCardRules;
 	private ArrayList<CardRule> onDrawnRules;
+	private CardView cardView;
 	
-	
-	protected Card() {
+	protected Card(View view) {
 		onPlayRules = new ArrayList<CardRule>();
 		onDiscardRules = new ArrayList<CardRule>();
 		onPlayerDrewCardRules = new ArrayList<CardRule>();
 		onDrawnRules = new ArrayList<CardRule>();
+		cardView = new CardView(getName(), getDistance(), getDescription());
+		view.addSubView(cardView);
+	}
+	
+	public CardView getView() {
+		return cardView;
+	}
+	
+	public String getDescription() {
+		ArrayList<CardRule> rules = onPlayRules;
+		rules.addAll(onDiscardRules);
+		rules.addAll(onPlayerDrewCardRules);
+		rules.addAll(onDrawnRules);
+		String description = "";
+		for (CardRule rule : rules) {
+			description += rule.description();
+		}
+		return description;
 	}
 	
 	/**

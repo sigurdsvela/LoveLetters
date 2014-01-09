@@ -30,7 +30,7 @@ public class CardView extends View{
 	
 	private boolean isHidden = false;
 	
-	public CardView(String name, int distance, String description, double x, double y) {
+	public CardView(String name, byte distance, String description, double x, double y, double scale) {
 		super(x, y, 150, 209);
 		
 		Canvas canvas = new Canvas(); //To get font metrics
@@ -47,6 +47,18 @@ public class CardView extends View{
 		setBackgroundColor(new Color(175,135,73));
 		imageHeight = (int)(image.getHeight(null) * (getWidth()/image.getWidth(null)));
 		imageWidth = (int) getWidth();
+	}
+	
+	public CardView(String name, byte distance, String description, double x, double y) {
+		this(name, distance, description, x, y, 1);
+	}
+	
+	public CardView(String name, byte distance, String description, double scale) {
+		this(name, distance, description, 0, 0, 1);
+	}
+	
+	public CardView(String name, byte distance, String description) {
+		this(name, distance, description, 0, 0, 1);
 	}
 	
 	@Override
