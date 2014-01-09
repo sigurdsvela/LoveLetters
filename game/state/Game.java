@@ -62,7 +62,7 @@ public abstract class Game extends ApplicationState {
 		
 		// Return null or current player if number of players in round is 0 or 1
 		if (numPlayersInRound == 0) return null;
-		else if (numPlayersInRound == 1) return players.get(currentPlayerIndex);
+		else if (numPlayersInRound == 1) return getPlayersInThisRound()[0];
 		
 		// Update currentIndex pointer; increment by one
 		// AND set it to 0 if we exceeded number of players in game.
