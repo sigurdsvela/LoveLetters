@@ -28,6 +28,7 @@ public class NewLocalGameMenu extends GameState{
 	
 	private class MainMenuPanel extends JPanel {
 		private static final long serialVersionUID = -4928674309987758601L;
+		private MenuSlider slider;
 		
 		public MainMenuPanel() {
 			add(new MenuButton("Back", new ActionListener() {
@@ -41,11 +42,14 @@ public class NewLocalGameMenu extends GameState{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("New Game");
+					// Let game setup players, then go to LocalGame game state
+					game().setNumBotPlayers(slider.getValue());
 					game().setGameState(new LocalGame());
 				}
 			}));
 			
-			add(new MenuSlider());
+			slider = new MenuSlider();
+			add(slider);
 		}
 	}
 }
