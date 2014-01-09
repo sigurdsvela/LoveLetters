@@ -18,6 +18,7 @@ public abstract class Game {
 	protected Card removedAtStart;
 	protected int currentPlayerIndex;
 	protected int lettersDeliveredToWin;
+	protected int botPlayers;
 	protected boolean started;
 	protected Deck deck;
 	protected View view;
@@ -27,6 +28,7 @@ public abstract class Game {
 	public Game() {
 		started = false;
 		lettersDeliveredToWin = 4;
+		players = new ArrayList<Player>();
 		window = new Window();
 	}
 	
@@ -85,6 +87,23 @@ public abstract class Game {
 		if( players.get(currentPlayerIndex).isPlayerInThisRound() ) return players.get(currentPlayerIndex);
 		// else call nextPlayer() recursive.
 		else return nextPlayer();
+	}
+	
+	/**
+	 * Will return number of players in game,
+	 * wether or not active in current round.
+	 * @return int	number of players in game
+	 */
+	public int getNumPlayers() {
+		return players.size();
+	}
+	
+	/**
+	 * Will return players in game
+	 * @return Player[] players in game
+	 */
+	public Player[] getPlayers() {
+		return players.toArray( new Player[ players.size() ] );
 	}
 	
 	/**
@@ -175,15 +194,6 @@ public abstract class Game {
 	}
 	
 	/**
-	 * Will return number of players in game,
-	 * wether or not active in current round.
-	 * @return int	number of players in game
-	 */
-	public int getNumPlayers() {
-		return players.size();
-	}
-	
-	/**
 	 * Get a player based on name
 	 * Returns null if no player with the name <i>name<i> is found
 	 * 
@@ -198,7 +208,7 @@ public abstract class Game {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Will return view of the game
 	 * For localGame this is the local players view,
@@ -232,5 +242,13 @@ public abstract class Game {
 	
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
+	}
+
+	public int getNumBotPlayers() {
+		return botPlayers;
+	}
+
+	public void setNumBotPlayers(int botPlayers) {
+		this.botPlayers = botPlayers;
 	}
 }
