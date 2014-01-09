@@ -165,13 +165,23 @@ public class StringUtils {
   }
   
   /**
-   * Will return the width in pixels of a given string
+   * Will return the width in pixels of a given string.
+   * If the string contains newlines (\r\n) this method returns
+   * width of longest line.
    * @param str is the string to find width of
    * @param fm is the font metrics used with string
    * @return int 	number of pixels
    */
   public static int getStringWidth(String str, FontMetrics fm) {
-	  return fm.stringWidth(str);
+	  String[] lines = str.split("\r\n|\r|\n");
+	  String line = "";
+	  
+	  // Get longest line
+	  for (String tmp : lines) {
+		  if(tmp.length() > line.length()) line = tmp;
+	  }
+	  
+	  return fm.stringWidth(line);
   }
   
   /** Will return the height in pixels of a given string
@@ -180,13 +190,12 @@ public class StringUtils {
   * @return int 	number of pixels
   */
   public static int getStringHeight(String str, FontMetrics fm) {
-	  int fontHeight = fm.getMaxAscent() + fm.getMaxDescent() + fm.getLeading();
-	  int numLines = getNewLines(str);
-	  return numLines * fontHeight;
+	  int numLines = countLines(str);
+	  return numLines * fm.getHeight();
 	  
   }
   
-  public static int getNewLines(String str) {
+  public static int countLines(String str) {
 	  String[] lines = str.split("\r\n|\r|\n");
 	  return  lines.length;
   }
