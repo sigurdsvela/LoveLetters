@@ -43,7 +43,7 @@ public class CardView extends View{
 		this.distance = distance;
 		this.description = StringUtils.wrap(description, canvas.getFontMetrics(descriptionFont), 130);
 		
-		image = new ImageIcon(ResourceLoader.getResourceURL("image/card/guard.jpg")).getImage();
+		image = new ImageIcon(ResourceLoader.getResourceURL("image/card/" + name.replace(" ", "-"))).getImage();
 		setBackgroundColor(new Color(175,135,73));
 		imageHeight = (int)(image.getHeight(null) * (getWidth()/image.getWidth(null)));
 		imageWidth = (int) getWidth();
