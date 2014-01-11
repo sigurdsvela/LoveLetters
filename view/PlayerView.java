@@ -90,8 +90,8 @@ public class PlayerView extends View {
 		double parentHeight = parent.getHeight();
 
 		// Update according to String
-		setWidth(stringWidth);
-		setHeight(stringHeight);
+		setMinWidth(stringWidth);
+		setMinHeight(stringHeight);
 		
 		// Update according to Player Position
 		switch(position) {
