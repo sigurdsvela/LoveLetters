@@ -3,10 +3,28 @@ package game.state;
 import java.util.ArrayList;
 
 import player.Player;
+import view.ChatPanel;
+import view.GamePanel;
+import view.Window;
 import deck.Deck;
 import deck.card.Card;
 
 public abstract class Game extends ApplicationState {
+	
+	/**
+	 * The game panel used for this game
+	 */
+	protected GamePanel gamePanel;
+	
+	/**
+	 * The chat panel used for this game
+	 */
+	protected ChatPanel chatPanel;
+	
+	/**
+	 * The game window used for this game
+	 */
+	protected Window gameWindow;
 	
 	/**
 	 * Holds the players in this game
@@ -194,6 +212,39 @@ public abstract class Game extends ApplicationState {
 		// Convert back from linked list to Player array and return it
 		return winners.toArray( new Player[ winners.size() ] );
 	}
-	
+
 	/* STANDARD GETTERS AND SETTERS */
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+	
+	public GamePanel getGamePanel() {
+		return gamePanel;
+	}
+
+	public void setGamePanel(GamePanel gamePanel) {
+		this.gamePanel = gamePanel;
+	}
+
+	public ChatPanel getChatPanel() {
+		return chatPanel;
+	}
+
+	public void setChatPanel(ChatPanel chatPanel) {
+		this.chatPanel = chatPanel;
+	}
+
+	public Window getGameWindow() {
+		return gameWindow;
+	}
+
+	public void setGameWindow(Window gameWindow) {
+		this.gameWindow = gameWindow;
+	}
+	
 }
