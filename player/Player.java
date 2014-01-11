@@ -66,7 +66,7 @@ public abstract class Player implements Comparable<Player> {
 	/* ABSTRACT METHODS */
 	
 	/**
-	/* Play a card from players hand
+	/* Tells the player that it should play a card
 	 * This method is implemented in individually in all subclasses
 	 */
 	public abstract Card playCard();
