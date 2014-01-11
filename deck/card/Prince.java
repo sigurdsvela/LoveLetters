@@ -1,6 +1,6 @@
 package deck.card;
 
-import game.Application;
+import game.state.Game;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -10,14 +10,14 @@ public class Prince extends Card {
 		addRule(new CardRule() {
 			
 			@Override
-			public boolean condition(Application game, Player cardOwner) {
+			public boolean condition(Game game, Player cardOwner) {
 				return true;
 			}
 			
 			@Override
-			public void run(Application game, Player cardOwner) {
+			public void run(Game game, Player cardOwner) {
 				Player affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to discard their hand?");
-				game.getView().println(affectedPlayer.getName() + " must discard their hand:");
+				//game.getView().println(affectedPlayer.getName() + " must discard their hand:");
 				affectedPlayer.showCards(false);
 				
 				// Discard cards in hand

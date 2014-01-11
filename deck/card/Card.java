@@ -16,17 +16,20 @@ public abstract class Card implements Comparable<Card> {
 	private ArrayList<CardRule> onDrawnRules;
 	private CardView cardView;
 	
-	protected Card(View view) {
+	protected Card() {
 		onPlayRules = new ArrayList<CardRule>();
 		onDiscardRules = new ArrayList<CardRule>();
 		onPlayerDrewCardRules = new ArrayList<CardRule>();
 		onDrawnRules = new ArrayList<CardRule>();
 		cardView = new CardView(getName(), getDistance(), getDescription());
-		view.addSubView(cardView);
 	}
 	
 	public CardView getView() {
 		return cardView;
+	}
+	
+	public void addToView(View view) {
+		view.addSubView(getView());
 	}
 	
 	public String getDescription() {

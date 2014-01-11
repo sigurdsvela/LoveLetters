@@ -214,6 +214,10 @@ public abstract class Game extends ApplicationState {
 	}
 
 	/* STANDARD GETTERS AND SETTERS */
+	
+	public Card getRemovedAtStart() {
+		return removedAtStart;
+	}
 
 	public Deck getDeck() {
 		return deck;

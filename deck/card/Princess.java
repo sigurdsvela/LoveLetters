@@ -1,6 +1,6 @@
-package deck.card;
+ package deck.card;
 
-import game.Application;
+import game.state.Game;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -10,14 +10,14 @@ public class Princess extends Card {
 		addRule(new CardRule() {
 			
 			@Override
-			public boolean condition(Application game, Player cardOwner) {
+			public boolean condition(Game game, Player cardOwner) {
 				return true;
 			}
 			
 			@Override
-			public void run(Application game, Player cardOwner) {
+			public void run(Game game, Player cardOwner) {
 				cardOwner.setIsPlayerInThisRound(false);
-				game.getView().println(cardOwner.getName() + " put down " + getName() + " and is therefore out of round.");
+				//game.getView().println(cardOwner.getName() + " put down " + getName() + " and is therefore out of round.");
 			}
 			
 			@Override
