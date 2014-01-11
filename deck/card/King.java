@@ -55,8 +55,8 @@ public class King extends Card {
 			public String description() {
 				return "When you play king, switch hand with another player of your choice.";
 			}
-
 		});
+		makeCardView();
 	}
 	
 	@Override

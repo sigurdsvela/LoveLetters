@@ -48,6 +48,7 @@ public class Prince extends Card {
 			}
 
 		});
+		makeCardView();
 	}
 	
 	@Override

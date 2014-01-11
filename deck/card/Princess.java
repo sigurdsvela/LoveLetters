@@ -29,6 +29,7 @@ public class Princess extends Card {
 				return "If you either play Princess or is forced to discard it, you're out of the round.";
 			}
 		});
+		makeCardView();
 	}
 	
 	@Override

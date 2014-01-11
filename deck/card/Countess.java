@@ -29,6 +29,7 @@ public class Countess extends Card {
 						"you must play contess";
 			}
 		});
+		makeCardView();
 	}
 	
 	@Override

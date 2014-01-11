@@ -53,6 +53,7 @@ public class Guard extends Card{
 			}
 			
 		});
+		makeCardView();
 	}
 	
 	@Override

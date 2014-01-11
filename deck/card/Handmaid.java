@@ -30,6 +30,7 @@ public class Handmaid extends Card {
 				return "When handmaid is played, the player who played her is protected until their next turn.";
 			}
 		});
+		makeCardView();
 	}
 	
 	@Override

@@ -32,6 +32,10 @@ public abstract class Card implements Comparable<Card> {
 		view.addSubView(getView());
 	}
 	
+	protected void makeCardView() {
+		cardView = new CardView(getName(), getDistance(), getDescription());
+	}
+	
 	public String getDescription() {
 		ArrayList<CardRule> rules = new ArrayList<CardRule>();
 		rules.addAll(onPlayRules);

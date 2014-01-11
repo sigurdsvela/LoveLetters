@@ -66,6 +66,7 @@ public class Baron extends Card {
 			}
 			
 		});
+		makeCardView();
 	}
 	
 	@Override
