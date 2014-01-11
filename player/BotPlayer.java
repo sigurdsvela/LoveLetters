@@ -4,7 +4,6 @@ import game.state.Game;
 
 import java.util.ArrayList;
 
-import view.View;
 import deck.card.Card;
 
 public class BotPlayer extends Player{
@@ -59,8 +58,6 @@ public class BotPlayer extends Player{
 	
 	@Override
 	public Player askPlayerForPlayer(String message) {
-		View view = game.getView();
-		view.println(message);
 		Player playerToChoose;
 		Player[] playersInRound = game.getPlayersInThisRound();
 		
@@ -68,7 +65,6 @@ public class BotPlayer extends Player{
 		if ( game.getNumPlayersInRound() == (game.getNumProtectedPlayersInRound() + 1)) {
 			// All but bot is protected
 			playerToChoose = this;
-			view.println(getName() + " chose himself/herself. All other players are protected!\n");
 		} else {
 			while (true) {
 				int playerIndex = (int) (Math.random() * playersInRound.length);
@@ -77,7 +73,6 @@ public class BotPlayer extends Player{
 					break;
 				}
 			}
-			view.println(getName() + " chose " + playerToChoose.getName() + ".\n");
 		}
 		
 		return playerToChoose;
@@ -90,14 +85,11 @@ public class BotPlayer extends Player{
 	
 	@Override
 	public Card askPlayerForCard(String message) {
-		View view = game.getView();
-		view.println(message);
 		Card cardToChoose;
 		Card[] cardsToChooseFrom = game.getDeck().getCardTypes();
 	
 		int cardIndex = (int) (Math.random() * cardsToChooseFrom.length);
 		cardToChoose = cardsToChooseFrom[cardIndex];
-		view.println(getName() + " chose " + cardToChoose.getName() + ".\n");
 		return cardToChoose;
 	}
 	
