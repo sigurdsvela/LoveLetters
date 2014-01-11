@@ -62,7 +62,12 @@ public class Baron extends Card {
 
 			@Override
 			public String description() {
-				return null;
+				return "When played, choose one other "
+						+ "player still in the round. You and "
+						+ "that player secretly compare your "
+						+ "hands. The player with the lower "
+						+ "rank is knocked out of the round. "
+						+ "In case of a tie, nothing happens";
 			}
 			
 		});
