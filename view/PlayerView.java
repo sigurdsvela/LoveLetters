@@ -93,23 +93,23 @@ public class PlayerView extends View {
 		setMinWidth(stringWidth);
 		setMinHeight(stringHeight);
 		
-		// Update according to Player Position
+		// Update according to Player Position and it's width and height.
 		switch(position) {
 		case BOTTOM:
-			setX( (parentWidth / 2) - (stringWidth / 2 ) );
-			setY( parentHeight - stringHeight );
+			setX( (parentWidth / 2) - (getWidth() / 2 ) );
+			setY( parentHeight - getHeight() );
 			break;
 		case TOP:
-			setX( (parentWidth / 2) - (stringWidth / 2) );
+			setX( (parentWidth / 2) - (getWidth() / 2) );
 			setY( 0 );
 			break;
 		case LEFT:
 			setX( 0 );
-			setY( (parentHeight / 2) - (stringHeight / 2) );
+			setY( (parentHeight / 2) - (getHeight() / 2) );
 			break;
 		case RIGHT:
-			setX( parentWidth - stringWidth );
-			setY( (parentHeight / 2) - (stringHeight / 2) );
+			setX( parentWidth - getWidth() );
+			setY( (parentHeight / 2) - (getHeight() / 2) );
 			break;
 		}
 	}
