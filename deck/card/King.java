@@ -1,6 +1,6 @@
 package deck.card;
 
-import game.Application;
+import game.state.Game;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -11,12 +11,12 @@ public class King extends Card {
 			private Player affectedPlayer;
 			
 			@Override
-			public boolean condition(Application game, Player cardOwner) {
+			public boolean condition(Game game, Player cardOwner) {
 				affectedPlayer = cardOwner.askPlayerForPlayer("Which player do you want to switch hand with?");
 				
 				// If cardOwner chose itself, do nothing
 				if (affectedPlayer.compareTo(cardOwner) == 0) {
-					game.getView().println("Nothing happened because" + cardOwner.getName() + " chose himself/herself.");
+					//game.getView().println("Nothing happened because" + cardOwner.getName() + " chose himself/herself.");
 					return false;
 				}
 				
@@ -24,7 +24,7 @@ public class King extends Card {
 			}
 			
 			@Override
-			public void run(Application game, Player cardOwner) {
+			public void run(Game game, Player cardOwner) {
 				// Do the switch of hands through two loops
 				Card[] tmpHand = cardOwner.getCards();
 				
@@ -39,9 +39,9 @@ public class King extends Card {
 				}
 				
 				// "Reveal the cards"
-				game.getView().println(cardOwner.getName() + "'s new hand:");
+				//game.getView().println(cardOwner.getName() + "'s new hand:");
 				cardOwner.showCards(true);
-				game.getView().println(affectedPlayer.getName() + "'s new hand:");
+				//game.getView().println(affectedPlayer.getName() + "'s new hand:");
 				affectedPlayer.showCards(true);
 				
 			}

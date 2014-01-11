@@ -1,6 +1,6 @@
 package deck.card;
 
-import game.Application;
+import game.state.Game;
 import player.Player;
 import deck.card.rule.CardRule;
 
@@ -11,12 +11,12 @@ public class Baron extends Card {
 			private Player loosingPlayer, versusPlayer;
 			
 			@Override
-			public boolean condition(Application game, Player cardOwner) {
+			public boolean condition(Game game, Player cardOwner) {
 				versusPlayer = cardOwner.askPlayerForPlayer("Who do you want to battle?");
 				
 				// If cardOwner chose itself cancel battle.
 				if (versusPlayer.compareTo(cardOwner) == 0) {
-					game.getView().println("Battle is cancelled due to lack of opponent.");
+					//game.getView().println("Battle is cancelled due to lack of opponent.");
 					return false;
 				} else {
 					return true;
@@ -24,7 +24,7 @@ public class Baron extends Card {
 			}
 
 			@Override
-			public void run(Application game, Player cardOwner) {
+			public void run(Game game, Player cardOwner) {
 				// Run the epic battle of the history!
 				Card versusPlayerCard, cardOwnerCard;
 
@@ -52,7 +52,7 @@ public class Baron extends Card {
 						msg += c.toString();
 					}
 				}
-				game.getView().println(msg);
+				//game.getView().println(msg);
 			}
 
 			@Override

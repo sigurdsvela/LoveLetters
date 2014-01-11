@@ -1,19 +1,19 @@
 package deck.card;
 
+import game.state.Game;
 import player.Player;
-import game.Application;
 import deck.card.rule.CardRule;
 
 public class Countess extends Card {
 
 	public Countess() {
 		addRule(new CardRule() {
-
-			public boolean condition(Application game, Player cardOwner) {
-				return cardOwner.hasCard( new King() ) || cardOwner.hasCard( new Prince() );
+			
+			public boolean condition(Game game, Player cardOwner) {
+				return cardOwner.hasCard( "King" ) || cardOwner.hasCard( "Prince" );
 			}
 
-			public void run(Application game, Player cardOwner) {
+			public void run(Game game, Player cardOwner) {
 				// Set players force play index to the index of Countess
 				cardOwner.setForceCardIndex( cardOwner.getCardIndex(getName()) );
 			}
