@@ -16,8 +16,13 @@ public class View {
 	private ArrayList<MouseAdapter> mouseAdapters;
 	private double x;
 	private double y;
+	
 	private double width;
 	private double height;
+	
+	private double minWidth;
+	private double minHeight;
+	
 	private Color backgroundColor;
 	private View superView;
 	
@@ -243,7 +248,11 @@ public class View {
 	}
 
 	public void setWidth(double width) {
-		this.width = width;
+		if (width < minWidth) {
+			width = minWidth;
+		} else {
+			this.width = width;
+		}
 	}
 
 	public double getHeight() {
@@ -251,7 +260,19 @@ public class View {
 	}
 
 	public void setHeight(double height) {
-		this.height = height;
+		if (height < minHeight) {
+			height = minHeight;
+		} else {
+			this.height = height;
+		}
+	}
+	
+	protected void setMinWidth(double minWidth) {
+		this.minWidth = minWidth;
+	}
+	
+	protected void setMinHeight(double minHeight) {
+		this.minHeight = minHeight;
 	}
 	
 	/**
