@@ -16,20 +16,6 @@ import deck.Deck;
 
 
 public class LocalGame extends Game{
-	/**
-	 * The game panel used for this game
-	 */
-	private GamePanel gamePanel;
-	
-	/**
-	 * The chat panel used for this game
-	 */
-	private ChatPanel chatPanel;
-	
-	/**
-	 * The game window used for this game
-	 */
-	private Window gameWindow;
 	
 	/**
 	 * Number of Bot Players used in this game
@@ -89,7 +75,6 @@ public class LocalGame extends Game{
 		ChatItem.ItemType dealerItem = ChatItem.ItemType.DEALER_MESSAGE;
 		String dealerString = "Dealer";
 		
-		// Load in game in namespace due to used a lot
 		Player currentPlayer;
 		Player[] winners;
 		
@@ -181,5 +166,7 @@ public class LocalGame extends Game{
         players.add(player);
         return true;
 	}
+
+	/* STANDARD GETTERS AND SETTERS */
 
 }
