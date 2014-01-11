@@ -107,7 +107,7 @@ public abstract class Player implements Comparable<Player> {
 	 * @param card	is card to be drawn
 	 */
 	public void drawCard(Card card) {
-		cards.add(card);
+		addCard(card);
 		
 		// Trigger effect of "on drawn rule" for card AND player "drew a card" for cards in players hand.
 		card.triggerCardWasDrawn(game, this);
@@ -123,6 +123,31 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	public void addCard(Card card) {
 		cards.add(card);
+		playerView.addSubView(card.getView());
+		updateLayout();
+	}
+	
+	/**
+	 * Update the positioning of the card. This must be done whenever you
+	 * add card to 
+	 */
+	private void updateLayout() {
+		int width;
+		int topPadding = 50; //TODO HardCoding is bad coding
+		
+		if (cards.size() > 0) {
+			width = (int)cards.get(0).getView().getWidth();
+			playerView.setWidth(cards.size() * width);
+			playerView.setHeight(topPadding + cards.get(0).getView().getHeight());
+			for (int i = 0; i < cards.size(); i++) {
+				cards.get(i).getView().setX(i * width);
+				cards.get(i).getView().setY(topPadding);
+			}
+		} else {
+			playerView.setWidth(0); //Will be corrected my minHeight
+			playerView.setHeight(0); //Will be corrected my minHeight
+		}
+		
 	}
 	
 	/**
