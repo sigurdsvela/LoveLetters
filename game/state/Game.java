@@ -195,5 +195,13 @@ public abstract class Game extends ApplicationState {
 		return winners.toArray( new Player[ winners.size() ] );
 	}
 	
+	public Deck getDeck() {
+		return deck;
+	}
+	
+	public Card getRemovedAtStart() {
+		return removedAtStart;
+	}
+	
 	/* STANDARD GETTERS AND SETTERS */
 }
