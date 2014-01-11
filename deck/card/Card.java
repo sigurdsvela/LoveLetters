@@ -33,7 +33,8 @@ public abstract class Card implements Comparable<Card> {
 	}
 	
 	public String getDescription() {
-		ArrayList<CardRule> rules = onPlayRules;
+		ArrayList<CardRule> rules = new ArrayList<CardRule>();
+		rules.addAll(onPlayRules);
 		rules.addAll(onDiscardRules);
 		rules.addAll(onPlayerDrewCardRules);
 		rules.addAll(onDrawnRules);
