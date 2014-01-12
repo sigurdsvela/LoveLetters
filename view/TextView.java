@@ -32,8 +32,7 @@ public class TextView extends View{
 		setWrapping(wrapping); //TODO Could be done a bit smarter
 		canvas.setColor(Color.BLACK);
 		for (int i = 0; i < wrappedText.size(); i++) {
-			System.out.println("Drawing string at Y:" + (i * lineHeight));
-			canvas.drawString(wrappedText.get(i), 0, i * lineHeight);
+			canvas.drawString(wrappedText.get(i), 0, (i + 1) * lineHeight);
 		}
 	}
 	
