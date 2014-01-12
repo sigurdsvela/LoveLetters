@@ -85,6 +85,10 @@ public class CardView extends View{
 		}
 	}
 	
+	public boolean isHidden() {
+		return isHidden;
+	}
+	
 	public void hide() {
 		isHidden = true;
 	}
