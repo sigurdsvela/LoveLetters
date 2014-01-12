@@ -151,17 +151,6 @@ public abstract class Player implements Comparable<Player> {
 	}
 	
 	/**
-	 * Will print out the cards in players hand.
-	 * If useIndividual is true, it will print the cards
-	 * based on the subclasses showCard() method.
-	 * 
-	 * @param useIndividual		is a boolean flag
-	 */
-	public void showCards(boolean useIndividual) {
-		
-	}
-	
-	/**
 	 * Will be called from playCard();
 	 * Actually play the card at cardIndex, trigger its effect if any and remove it from hand.
 	 * UNLESS the forceCardIndex is set, then play this card instead.
@@ -192,7 +181,7 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	public final void emptyHand(boolean showFirst) {
 		if (showFirst) {
-			showCards(false);
+			//Implement show cards before emptying the hand
 		}
 		cards.clear();
 	}

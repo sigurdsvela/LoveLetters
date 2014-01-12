@@ -110,7 +110,6 @@ public class LocalGame extends Game{
                 chatPanel.addChatMessage(dealerString, "=== " + currentPlayer.getName() + "'s turn ===", dealerItem);
                 currentPlayer.setIsPlayerProtected(false);
                 currentPlayer.drawCard(deck.draw());
-                currentPlayer.showCards(true);
                 
                 // Let current player play a card
                 currentPlayer.playCard();
