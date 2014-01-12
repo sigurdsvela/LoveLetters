@@ -284,6 +284,7 @@ public class View {
 			View view;
 			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
 				view = viewRep.view();
+				e.setSource(view);
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mouseClicked(e);
 				}
@@ -295,6 +296,7 @@ public class View {
 			View view;
 			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
 				view = viewRep.view();
+				e.setSource(view);
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mousePressed(e);
 				}
@@ -306,6 +308,7 @@ public class View {
 			View view;
 			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
 				view = viewRep.view();
+				e.setSource(view);
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mouseReleased(e);
 				}
@@ -317,6 +320,7 @@ public class View {
 			View view;
 			for (ViewRep viewRep : getIntersectingViewReps(e.getX()-(int)getRealX(), e.getY()-(int)getRealY())) {
 				view = viewRep.view();
+				e.setSource(view);
 				for (MouseAdapter ma : view.getMouseAdapters()) {
 					ma.mouseDragged(e);
 				}
@@ -332,6 +336,7 @@ public class View {
 			
 			for (ViewRep viewRep : viewReps.getIntersecting()) {
 				view = viewRep.view();
+				e.setSource(view);
 				if (!viewRep.getHasEntered()) { //Call Mouse Entered
 					viewRep.setHasEntered(true);
 					for (MouseAdapter a : view.getMouseAdapters()) {
@@ -345,6 +350,7 @@ public class View {
 			
 			for (ViewRep viewRep : viewReps.getNonIntersecting()) { //Call Mouse Exited
 				view = viewRep.view();
+				e.setSource(view);
 				if (viewRep.getHasEntered()) {
 					viewRep.setHasEntered(false);
 					for (MouseAdapter a : view.getMouseAdapters()) {
