@@ -1,6 +1,11 @@
 package player;
 
 import game.state.Game;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import view.CardView;
 import deck.card.Card;
 
 public class LocalPlayer extends Player {
@@ -68,5 +73,14 @@ public class LocalPlayer extends Player {
 		@Override
 		public String showCard(Card card) {
 			return card.toString();
+		}
+		
+		@Override
+		public void addCard(Card card) {
+			super.addCard(card);
+			card.getView().addMouseAdapter(new CardListener());
+		}
+		
+		public class CardListener extends MouseAdapter {
 		}
 }
