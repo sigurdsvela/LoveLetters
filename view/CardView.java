@@ -28,6 +28,8 @@ public class CardView extends View{
 	private Font nameFont;
 	private Font descriptionFont;
 	
+	private int textPadding = 10;
+	
 	private boolean isHidden = false;
 	
 	public CardView(String name, byte distance, String description, double x, double y, double scale) {
@@ -41,7 +43,7 @@ public class CardView extends View{
 		
 		this.name = StringUtils.wrap(name, canvas.getFontMetrics(nameFont), 130);
 		this.distance = distance;
-		this.description = StringUtils.wrap(description, canvas.getFontMetrics(descriptionFont), 130);
+		this.description = StringUtils.wrap(description, canvas.getFontMetrics(descriptionFont), 150 - 2*textPadding);
 		
 		image = new ImageIcon(ResourceLoader.getResourceURL("image/card/" + name.replace(" ", "-") + ".jpg")).getImage();
 		setBackgroundColor(new Color(175,135,73));
@@ -73,12 +75,12 @@ public class CardView extends View{
 			}
 			
 			canvas.setFont(distanceFont);
-			canvas.drawString("" + distance, 15, 40);
+			canvas.drawString("" + distance, textPadding, 40);
 			
 			
 			canvas.setFont(descriptionFont);
 			for (int i = 0; i < description.size(); i++) {
-				canvas.drawString(description.get(i), 15, 150 + (i * 10));
+				canvas.drawString(description.get(i), textPadding, 150 + (i * 10));
 			}
 		}
 	}
@@ -90,6 +92,5 @@ public class CardView extends View{
 	public void show() {
 		isHidden = false;
 	}
-	
 	
 }
