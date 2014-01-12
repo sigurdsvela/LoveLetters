@@ -42,9 +42,4 @@ public class RemotePlayer extends Player{
 	public Card askPlayerForCard() {
 		return null;
 	}
-
-	@Override
-	public String showCard(Card card) {
-		return null;
-	}
 }

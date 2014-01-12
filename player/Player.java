@@ -71,13 +71,6 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	public abstract Card playCard();
 	
-	/** 
-	 * Show a card for the player
-	 * @param card	the card to be shown
-	 * @return String	is the card to string 
-	 */
-	public abstract String showCard(Card card);
-	
 	public abstract Player askPlayerForPlayer(String message);
 	public abstract Player askPlayerForPlayer();
 	public abstract Card askPlayerForCard(String message);

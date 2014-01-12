@@ -69,11 +69,6 @@ public class LocalPlayer extends Player {
 		public Card askPlayerForCard() {
 			return askPlayerForCard("Choose a card:");
 		}
-
-		@Override
-		public String showCard(Card card) {
-			return card.toString();
-		}
 		
 		@Override
 		public void addCard(Card card) {
