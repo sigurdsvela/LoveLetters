@@ -54,20 +54,20 @@ public class LocalGame extends Game{
 		
 		
 		// Add on players to game
-        playerJoin( new LocalPlayer(application().getLocalHostPlayerName(), this) );
-        
-        // Add wished number of BOTs to the game
-        int c = 0;
-        while(c < botOpponents) {
-        	if(playerJoin( new BotPlayer(this) )) c++;
-        }
-        
-        // Add on playerView to gamePanel
-        for(Player player : getPlayers()) {
-        	gamePanel.addView(player.getPlayerView());
-        }
+		playerJoin( new LocalPlayer(application().getLocalHostPlayerName(), this) );
+		
+		// Add wished number of BOTs to the game
+		int c = 0;
+		while(c < botOpponents) {
+			if(playerJoin( new BotPlayer(this) )) c++;
+		}
+		
+		// Add on playerView to gamePanel
+		for(Player player : getPlayers()) {
+			gamePanel.addView(player.getPlayerView());
+		}
 	}
-	
+
 	@Override
 	public void end() {
 		
@@ -75,9 +75,9 @@ public class LocalGame extends Game{
 
 	@Override
 	public boolean playerJoin(Player player) {
-        if (getPlayer( player.getName() ) != null) return false;
-        players.add(player);
-        return true;
+		if (getPlayer( player.getName() ) != null) return false;
+		players.add(player);
+		return true;
 	}
 
 	/* STANDARD GETTERS AND SETTERS */
