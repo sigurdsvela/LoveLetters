@@ -26,7 +26,7 @@ public class Princess extends Card {
 			}
 			@Override
 			public String description() {
-				return "If you either play Princess or is forced to discard it, you're out of the round.";
+				return "You loose the round if you play Princess.";
 			}
 		});
 		makeCardView();

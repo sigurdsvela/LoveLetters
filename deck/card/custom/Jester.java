@@ -34,6 +34,7 @@ public class Jester extends Card {
 			}
 			
 		});
+		makeCardView();
 	}
 	
 	@Override

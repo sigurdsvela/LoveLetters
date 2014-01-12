@@ -24,9 +24,7 @@ public class Countess extends Card {
 
 			@Override
 			public String description() {
-				return "If you have this card on your hand whilest" +
-						"also the King or the Prince" +
-						"you must play contess";
+				return "Must be discarded if caught with King or Prince.";
 			}
 		});
 		makeCardView();

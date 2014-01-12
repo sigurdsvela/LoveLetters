@@ -35,6 +35,7 @@ public class PrinceOfDarkness extends Card{
 				return true;
 			}
 		});
+		makeCardView();
 	}
 	
 	@Override
