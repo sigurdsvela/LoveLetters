@@ -40,9 +40,7 @@ public class King extends Card {
 				
 				// "Reveal the cards"
 				//game.getView().println(cardOwner.getName() + "'s new hand:");
-				cardOwner.showCards(true);
 				//game.getView().println(affectedPlayer.getName() + "'s new hand:");
-				affectedPlayer.showCards(true);
 				
 			}
 			
