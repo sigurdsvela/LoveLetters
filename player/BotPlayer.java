@@ -102,5 +102,13 @@ public class BotPlayer extends Player{
 	public String showCard(Card card) {
 		return "Hidden Card";
 	}
+	
+	@Override
+	public void addCard(Card card) {
+		// A BotPlayers hand will be hidden
+		card.getView().hide();
+		super.addCard(card);
+	}
+	
 
 }
