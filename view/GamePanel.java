@@ -80,8 +80,8 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
