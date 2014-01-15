@@ -85,6 +85,15 @@ public class View {
 		subviews.add(new ViewRep(subView));
 		subView.superView = this;
 	}
+
+	public void removeSubView(View view) {
+		for (ViewRep subViewRep : subviews) {
+			if (subViewRep.view() == view) {
+				subviews.remove(subViewRep);
+				break;
+			}
+		}
+	}
 	
 	public void setBackgroundColor(Color backgroundColor) {
 		this.backgroundColor = backgroundColor;

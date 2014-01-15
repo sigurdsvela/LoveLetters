@@ -9,25 +9,26 @@ import view.CardView;
 import deck.card.Card;
 
 public class LocalPlayer extends Player {
+		private boolean isThisPlayersTurn = false;
+	
 		public LocalPlayer(String name, Game game) {
 			super(name, game);
 		}
-
+		
 		@Override
-		public Card playCard() {
-			int cardToPlay = -1, forCardIndex = getForceCardIndex();
-			
-			if (forceCardIndex == -1) {
-				// Get a card selected from local player
-				
-				//cardToPlay = getCardIndex(card);
-			} else {
-				// Tell local player that they have a card they MUST play
-				cardToPlay = forCardIndex;
-				setForceCardIndex(-1);
+		public void doTurn() {
+			super.doTurn();
+			isThisPlayersTurn = true;
+			if (getCardToPlay() != null) { //If the player has allready chosen a card
+				turnDone();
 			}
 			
-			return playCard(cardToPlay);
+		}
+
+		@Override
+		protected void turnDone() {
+			super.turnDone();
+			isThisPlayersTurn = false;
 		}
 
 		@Override
@@ -73,9 +74,16 @@ public class LocalPlayer extends Player {
 		@Override
 		public void addCard(Card card) {
 			super.addCard(card);
-			card.getView().addMouseAdapter(new CardListener());
+			card.addMouseAdapter(new CardListener());
 		}
 		
 		public class CardListener extends MouseAdapter {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setCardToPlay(getCardIndex(((Card)e.getSource()).getName()));
+				if (isThisPlayersTurn) {
+					turnDone();
+				}
+			}
 		}
 }

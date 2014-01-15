@@ -2,6 +2,9 @@ package deck.card;
 
 import game.state.Game;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 
 import player.Player;
@@ -14,6 +17,8 @@ public abstract class Card implements Comparable<Card> {
 	private ArrayList<CardRule> onDiscardRules;
 	private ArrayList<CardRule> onPlayerDrewCardRules;
 	private ArrayList<CardRule> onDrawnRules;
+	private ArrayList<MouseAdapter> mouseAdapters;
+	
 	private CardView cardView;
 	
 	protected Card() {
@@ -21,7 +26,7 @@ public abstract class Card implements Comparable<Card> {
 		onDiscardRules = new ArrayList<CardRule>();
 		onPlayerDrewCardRules = new ArrayList<CardRule>();
 		onDrawnRules = new ArrayList<CardRule>();
-		cardView = new CardView(getName(), getDistance(), getDescription());
+		mouseAdapters = new ArrayList<MouseAdapter>();
 	}
 	
 	public CardView getView() {
@@ -34,6 +39,11 @@ public abstract class Card implements Comparable<Card> {
 	
 	protected void makeCardView() {
 		cardView = new CardView(getName(), getDistance(), getDescription());
+		cardView.addMouseAdapter(new StdMouseAdapter(this));
+	}
+	
+	public void addMouseAdapter(MouseAdapter adapter) {
+		mouseAdapters.add(adapter);
 	}
 	
 	public String getDescription() {
@@ -128,5 +138,77 @@ public abstract class Card implements Comparable<Card> {
 	@Override
 	public int compareTo(Card other) {
 		return getName().compareToIgnoreCase(other.getName());
+	}
+	
+	private class StdMouseAdapter extends MouseAdapter {
+		private Card card;
+		public StdMouseAdapter(Card card) {
+			this.card = card;
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mouseClicked(e);
+			}
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mouseDragged(e);
+			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mouseEntered(e);
+			}
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mouseExited(e);
+			}
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mouseMoved(e);
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mousePressed(e);
+			}
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mouseReleased(e);
+			}
+		}
+
+		@Override
+		public void mouseWheelMoved(MouseWheelEvent e) {
+			e.setSource(card);
+			for (MouseAdapter adapter : mouseAdapters) {
+				adapter.mouseWheelMoved(e);
+			}
+		}
+		
 	}
 }

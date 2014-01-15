@@ -42,8 +42,7 @@ public class BotPlayer extends Player{
 	}
 	
 	
-	@Override
-	public Card playCard() {
+	public int playCard() {
 		int cardToPlayIndex;
 		
 		// Choose a random card OR if set, the forced cards index
@@ -53,8 +52,15 @@ public class BotPlayer extends Player{
 			cardToPlayIndex = getForceCardIndex();
 			setForceCardIndex(-1);
 		}
-		return playCard(cardToPlayIndex);
+		return cardToPlayIndex;
 	}
+	
+	public void doTurn() {
+		super.doTurn();
+		setCardToPlay(playCard());
+		turnDone();
+	}
+	
 	
 	@Override
 	public Player askPlayerForPlayer(String message) {

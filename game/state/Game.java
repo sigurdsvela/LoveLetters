@@ -94,6 +94,15 @@ public abstract class Game extends ApplicationState {
 	}
 	
 	/* CUSTOM GETTERS AND SETTERS */
+	
+	/**
+	 * Gets the current player, duhhhhh!
+	 * @return
+	 */
+	public Player getCurrentPlayer() {
+		return players.get(currentPlayerIndex);
+	}
+	
 	/**
 	 * Get a player based on name
 	 * Returns null if no player with the name <i>name<i> is found

@@ -2,6 +2,8 @@ package game.state;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import player.BotPlayer;
 import player.LocalPlayer;
@@ -13,6 +15,7 @@ import view.Window;
 import view.event.MessageEvent;
 import view.event.MessageEventListener;
 import deck.Deck;
+import deck.card.Card;
 
 
 public class LocalGame extends Game{
@@ -52,6 +55,10 @@ public class LocalGame extends Game{
 		gameWindow.pack();
 		gameWindow.setVisible(true);
 		
+		deck = new Deck();
+		deck.shuffle(10000);
+		
+		removedAtStart = deck.draw();
 		
 		// Add on players to game
 		playerJoin( new LocalPlayer(application().getLocalHostPlayerName(), this) );
@@ -62,10 +69,16 @@ public class LocalGame extends Game{
 			if(playerJoin( new BotPlayer(this) )) c++;
 		}
 		
+		
 		// Add on playerView to gamePanel
 		for(Player player : getPlayers()) {
 			gamePanel.addView(player.getPlayerView());
+			player.addTurnDoneListener(new PlayerDoneListener(this));
+			player.drawCard(deck.draw());
 		}
+		
+		players.get(0).doTurn();
+		players.get(0).drawCard(deck.draw());
 	}
 
 	@Override
@@ -81,5 +94,21 @@ public class LocalGame extends Game{
 	}
 
 	/* STANDARD GETTERS AND SETTERS */
-
+	
+	public class PlayerDoneListener implements ActionListener {
+		private Game game;
+		
+		public PlayerDoneListener(Game game) {
+			this.game = game;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			Card card = getCurrentPlayer().popCardToPlay();
+			//card.triggerPlay(game, getCurrentPlayer());
+			nextPlayer();
+			getCurrentPlayer().drawCard(deck.draw());
+			getCurrentPlayer().doTurn();
+		}
+	}
 }

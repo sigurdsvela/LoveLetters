@@ -2,6 +2,8 @@ package player;
 
 import game.state.Game;
 
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import view.PlayerView;
@@ -48,6 +50,15 @@ public abstract class Player implements Comparable<Player> {
 	 */
 	protected boolean inThisRound;
 	
+	private boolean isThisPlayersTurn;
+	
+	/**
+	 * The index of the card that this player want to play
+	 */
+	private int cardToPlay;
+	
+	private ArrayList<ActionListener> turnDoneListeners;
+	
 	/**
 	 * This players name
 	 */
@@ -61,15 +72,29 @@ public abstract class Player implements Comparable<Player> {
 		lettersDelivered = 0;
 		forceCardIndex = -1;
 		inThisRound = true;
+		cardToPlay = -1;
+		turnDoneListeners = new ArrayList<ActionListener>();
+	}
+	
+	/**
+	 * Notify this player that it should do its turn.
+	 */
+	public void doTurn() {
+		System.out.println("Do turn:" + getName());
+	}
+	
+	/**
+	 * Fires the turnDoneListeners.
+	 * And resets the players chosen card
+	 */
+	protected void turnDone() {
+		System.out.println("Turn done: " + getName());
+		for (ActionListener listener : turnDoneListeners) {
+			listener.actionPerformed(null);
+		}
 	}
 	
 	/* ABSTRACT METHODS */
-	
-	/**
-	/* Tells the player that it should play a card
-	 * This method is implemented in individually in all subclasses
-	 */
-	public abstract Card playCard();
 	
 	public abstract Player askPlayerForPlayer(String message);
 	public abstract Player askPlayerForPlayer();
@@ -320,5 +345,40 @@ public abstract class Player implements Comparable<Player> {
 	@Override
 	public int compareTo(Player other) {
 		return name.compareToIgnoreCase(other.getName());
+	}
+	
+	/**
+	 * Get the card that this player want to play, and remove it
+	 * from its hand.
+	 * If the player has not chosen a card yet, no cards will be removed
+	 * and the method will return null.
+	 * @return
+	 */
+	public Card popCardToPlay() {
+		if (cardToPlay == -1) return null;
+		Card card = cards.get(cardToPlay);
+		cards.remove(cardToPlay);
+		cardToPlay = -1;
+		playerView.removeSubView(card.getView());
+		updateLayout();
+		return card;
+	}
+	
+	/**
+	 * returns the card that the player would like to play
+	 * if the player has not chosen a card, it will return null
+	 * @return
+	 */
+	protected Card getCardToPlay() {
+		if (cardToPlay == -1) return null;
+		return cards.get(cardToPlay);
+	}
+	
+	protected void setCardToPlay(int cardToPlay) {
+		this.cardToPlay = cardToPlay;
+	}
+	
+	public void addTurnDoneListener(ActionListener a) {
+		turnDoneListeners.add(a);
 	}
 }
