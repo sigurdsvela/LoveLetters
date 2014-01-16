@@ -27,8 +27,8 @@ public class LocalPlayer extends Player {
 
 		@Override
 		protected void turnDone() {
-			super.turnDone();
 			isThisPlayersTurn = false;
+			super.turnDone();
 		}
 
 		@Override
