@@ -106,7 +106,9 @@ public class LocalGame extends Game{
 		public void actionPerformed(ActionEvent arg0) {
 			Card card = getCurrentPlayer().popCardToPlay();
 			//card.triggerPlay(game, getCurrentPlayer());
+			chatPanel.addChatMessage("Dealer", getCurrentPlayer().getName() + " played " + card, ChatPanel.ChatItem.ItemType.DEALER_MESSAGE);
 			nextPlayer();
+			chatPanel.addChatMessage("Dealer", getCurrentPlayer().getName() + "'s turn", ChatPanel.ChatItem.ItemType.DEALER_MESSAGE);
 			getCurrentPlayer().drawCard(deck.draw());
 			getCurrentPlayer().doTurn();
 		}
