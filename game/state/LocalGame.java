@@ -104,12 +104,11 @@ public class LocalGame extends Game{
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			Player currentPlayer = getCurrentPlayer();
-			Card card = currentPlayer.popCardToPlay();
+			Card card = getCurrentPlayer().popCardToPlay();
 			//card.triggerPlay(game, getCurrentPlayer());
 			nextPlayer();
-			currentPlayer.drawCard(deck.draw());
-			currentPlayer.doTurn();
+			getCurrentPlayer().drawCard(deck.draw());
+			getCurrentPlayer().doTurn();
 		}
 	}
 }
