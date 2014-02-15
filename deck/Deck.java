@@ -44,18 +44,22 @@ public class Deck {
 	 * Shuffle a deck by looping n times
 	 * and for each time swapping place of two cards
 	 */
-	public void shuffle(int n) {
-		int i, j, k;
-		for (k = 0; k < n; k++) {
-			// Generate two random numbers in between 0 <= j, i <= NCARDS
-			i = (int) ( cards.size() * Math.random() );
-			j = (int) ( cards.size() * Math.random() );
-			
-			// Swap the cards
-			Card tmp = cards.get(i);
+	public void shuffle() {
+		for (int i = 0; i < cards.size(); i++) {
+			int j = (int) ( (i+1) * Math.random() );
+			Card temp = cards.get(i);
 			cards.set(i, cards.get(j));
-			cards.set(j, tmp);
+			cards.set(j, temp);
 		}
+	}
+
+	/**
+	 * @deprecated Did not produce a uniform shuffer, the new one does, and does not require
+	 *	an int
+	 */
+	@Deprecated
+	public void shuffle(int i) {
+		shuffle();
 	}
 	
 	
