@@ -2,11 +2,13 @@ package player;
 
 import game.state.Game;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 import view.PlayerView;
+import view.View;
 import deck.card.Card;
 
 /**
@@ -68,6 +70,7 @@ public abstract class Player implements Comparable<Player> {
 		this.name = name;
 		this.game = game;
 		playerView = new PlayerView(name, 100, 100);
+		playerView.setBackgroundColor(Color.CYAN);
 		cards = new LinkedList<Card>();
 		lettersDelivered = 0;
 		forceCardIndex = -1;
@@ -357,6 +360,7 @@ public abstract class Player implements Comparable<Player> {
 	public Card popCardToPlay() {
 		if (cardToPlay == -1) return null;
 		Card card = cards.get(cardToPlay);
+		playerView.setCardStackCard(card);
 		cards.remove(cardToPlay);
 		cardToPlay = -1;
 		playerView.removeSubView(card.getView());

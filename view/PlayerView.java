@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 
 import libs.StringUtils;
+import deck.card.Card;
 
 public class PlayerView extends View {
 	/* STATIC FIELDS AND METHODS TO PlayerView class */
@@ -41,6 +42,7 @@ public class PlayerView extends View {
 	private PlayerPosition position;
 	private String playerName;
 	private int numLettersDelivered;
+	private CardView cardStackCard;
 
 	public PlayerView(String playerName, int width, int height) {
 		this.playerName = playerName;
@@ -52,6 +54,7 @@ public class PlayerView extends View {
 	
 	@Override
 	protected void draw(double delta, Graphics2D canvas) {
+		System.out.println(getHeight());
 		// Build string to draw on screen
 		StringBuilder sb = new StringBuilder();
 		sb.append("Player: " + playerName + "\n");
@@ -72,6 +75,17 @@ public class PlayerView extends View {
 		}
 	}
 	
+	public void setCardStackCard(CardView card) {
+		removeSubView(cardStackCard); //Remove the prevoius card
+		cardStackCard = card; //Update our pointer
+		addSubView(cardStackCard); //Add the new subview
+	}
+	
+	public void setCardStackCard(Card card) {
+		setCardStackCard(card.getView());
+	}
+
+	
 	/**
 	 * Will calculate where to place (x,y) this player view on rootView
 	 * @param parent	is the view to use as rootView
@@ -91,7 +105,7 @@ public class PlayerView extends View {
 
 		// Update according to String
 		setMinWidth(stringWidth);
-		setMinHeight(stringHeight);
+		setMinHeight(stringHeight+100); //Plus the card stack
 		
 		// Update according to Player Position and it's width and height.
 		switch(position) {
